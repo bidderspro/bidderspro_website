@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
 import { useRef, useEffect } from "react";
+
+import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+
 export default function ComingSoon() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -94,7 +97,7 @@ export default function ComingSoon() {
   }, []);
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-gray-900">
+    <div className="relative flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-900 px-4">
       <Head>
         <title>BiddersPro - Coming Soon</title>
         <meta
@@ -107,21 +110,50 @@ export default function ComingSoon() {
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0" />
 
       {/* Content */}
-      <div className="flex  items-center space-x-64 z-10">
-        <div className="z-10">
+      <div className="flex flex-col md:flex-row items-center justify-between max-w-6xl w-full space-y-12 md:space-y-0 md:space-x-12 z-10">
+        {/* Logo Section */}
+        <div className="flex justify-center md:justify-start">
           <Image
             src="/assets/images/BP_logo.png"
-            width={300}
-            height={300}
+            width={250}
+            height={250}
             alt="BiddersPro Logo"
+            className="w-48 md:w-64 lg:w-72"
           />
         </div>
 
-        <div className="text-7xl md:text-6xl font-bold mb-6  text-white">
-          <h1>Launching Soon</h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-6">
+        {/* Text Section */}
+        <div className="text-center md:text-left">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white">
+            Launching Soon
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mt-4">
             We are launching soon. Stay tuned!
           </p>
+        </div>
+        {/* Social Media Links */}
+        <div className="flex flex-row md:flex-col justify-center gap-8 md:gap-12 mt-8 md:mt-0">
+          <a
+            href="https://www.facebook.com/people/Bidders-Pro/61552679236200/"
+            className="text-3xl md:text-4xl text-white hover:text-blue-500 transition"
+            target="_blank"
+          >
+            <FaFacebook />
+          </a>
+          <a
+            href="https://www.linkedin.com/company/83505748/admin/dashboard/"
+            className="text-3xl md:text-4xl text-white hover:text-blue-500 transition"
+            target="_blank"
+          >
+            <FaLinkedin />
+          </a>
+          <a
+            href="https://www.instagram.com/bidderspro/"
+            className="text-3xl md:text-4xl text-white hover:text-pink-500 transition"
+            target="_blank"
+          >
+            <FaInstagram />
+          </a>
         </div>
       </div>
     </div>
