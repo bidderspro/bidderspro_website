@@ -125,7 +125,7 @@ export default function ComingSoon() {
         {/* Text Section */}
         <div className="text-center md:text-left">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white">
-            Launching Soon
+            Launching Soon...
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mt-4">
             We are launching soon. Stay tuned!
