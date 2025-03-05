@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
 import { useRef, useEffect } from "react";
+import logo from "../public/assets/images/BP_logo.png";
 
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 
@@ -114,7 +115,7 @@ export default function ComingSoon() {
         {/* Logo Section */}
         <div className="flex justify-center md:justify-start">
           <Image
-            src="/assets/images/BP_logo.png"
+            src={logo}
             width={250}
             height={250}
             alt="BiddersPro Logo"
