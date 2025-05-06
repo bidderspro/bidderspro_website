@@ -1,15 +1,17 @@
 "use client";
 
 import React from 'react'
-import { TestimonalSliderDemo } from '@/sections/Testimonial'
 import HeroSection from '@/sections/HeroSection'
-import { Globe } from '@/components/magicui/globe'
+import MarqueeSection from '@/sections/Marquee'
+import AboutSection from '@/sections/AboutSection'
+
 const page = () => {
   return (
     <>
-     
       <HeroSection />
-      <TestimonalSliderDemo />
+      <MarqueeSection />
+      <AboutSection />
+    
     </>
   )
 }

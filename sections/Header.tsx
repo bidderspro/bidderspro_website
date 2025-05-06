@@ -19,11 +19,11 @@ const navItems = [
   },
   {
     name: "About",
-    link: "/about",
+    link: "/About",
   },
   {
     name: "Contact",
-    link: "/contact",
+    link: "/Contact",
   },
 ];
 
@@ -31,19 +31,19 @@ export default function Header() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
-    <Navbar className="fixed top-0 left-0 right-0 z-50">
-      <NavBody>
+    <Navbar className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md">
+      <NavBody className="!py-2">
         <NavbarLogo />
         <NavItems items={navItems} />
         <div className="relative z-20 flex items-center space-x-4">
-          <NavbarButton href="/login" variant="primary" className="bg-white text-black hover:bg-violet-700 hover:text-white">
+          <NavbarButton href="/Contact" variant="primary" className="bg-white text-black hover:bg-violet-700 hover:text-white">
            Talk to us
           </NavbarButton>
          
         </div>
       </NavBody>
 
-      <MobileNav>
+      <MobileNav className="!py-2">
         <MobileNavHeader>
           <NavbarLogo />
           <MobileNavToggle
@@ -63,7 +63,7 @@ export default function Header() {
             </a>
           ))}
           <div className="flex w-full flex-col gap-2">
-            <NavbarButton href="/login" variant="primary" className="w-full bg-white text-black hover:bg-violet-700 hover:text-white">
+            <NavbarButton href="/Contact" variant="primary" className="w-full bg-white text-black hover:bg-violet-700 hover:text-white">
               Talk to us
             </NavbarButton>
           </div>
