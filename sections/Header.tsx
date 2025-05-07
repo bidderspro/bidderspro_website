@@ -63,7 +63,7 @@ export default function Header() {
             </a>
           ))}
           <div className="flex w-full flex-col gap-2">
-            <NavbarButton href="/Contact" variant="primary" className="w-full bg-white text-black hover:bg-violet-700 hover:text-white">
+            <NavbarButton href="/Contact"  variant="primary" className="w-full bg-white text-black hover:bg-violet-700 hover:text-white rounded-3xl">
               Talk to us
             </NavbarButton>
           </div>
