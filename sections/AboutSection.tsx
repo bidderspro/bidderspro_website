@@ -1,4 +1,3 @@
-import HeroVideoDialog from "@/components/magicui/hero-video-dialog";
 import { TextAnimate } from "@/components/magicui/text-animate";
 
 export default function AboutSection() {

@@ -35,7 +35,7 @@ export default function Header() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
-    <Navbar className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md">
+    <Navbar className="fixed top-0 left-0 right-0 z-50 bg-transparent ">
       <NavBody className="!py-2">
         <NavbarLogo />
         <NavItems items={navItems} />
@@ -67,7 +67,7 @@ export default function Header() {
             </a>
           ))}
           <div className="flex w-full flex-col gap-2">
-            <NavbarButton href="#contact" variant="primary" className="w-full bg-white text-black hover:bg-violet-700 hover:text-white rounded-3xl">
+            <NavbarButton href="#contact" variant="primary" className="w-full bg-white text-black hover:bg-violet-700 hover:text-white rounded-3xl uppercase">
               Talk to us
             </NavbarButton>
           </div>
