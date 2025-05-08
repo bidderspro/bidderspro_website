@@ -5,7 +5,7 @@ import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-b
 export default function HeroSection() {
   return (
     <BackgroundBeamsWithCollision>
-      <div className="z-10 flex flex-col items-center space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 px-4 sm:px-6 lg:px-8 xl:px-12 py-8 sm:py-12 md:py-16 lg:py-20">
+      <div id="home" className="z-10 flex flex-col items-center space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 px-4 sm:px-6 lg:px-8 xl:px-12 py-8 sm:py-12 md:py-16 lg:py-20">
         <div className="flex flex-row sm:flex-row gap-4 sm:gap-6 lg:gap-12 xl:gap-16 text-neutral-300/50">
           <div className="flex flex-row sm:flex-row items-center gap-2 sm:gap-3 lg:gap-4 xl:gap-6 ">
             <img src="/assets/images/star-icon.svg" alt="star-icon" className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8" />

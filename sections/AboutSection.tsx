@@ -3,7 +3,7 @@ import { TextAnimate } from "@/components/magicui/text-animate";
 
 export default function AboutSection() {
   return (
-    <div className="flex flex-col md:flex-row items-center p-4 md:p-8 lg:p-16 gap-8 md:gap- lg:gap-16">
+    <div id="about" className="flex flex-col md:flex-row items-center p-4 md:p-8 lg:p-16 gap-8 md:gap- lg:gap-16">
       <div className="w-full md:w-1/2 flex flex-col items-center justify-center">
         <img 
           src="/assets/images/about-us.jpg" 

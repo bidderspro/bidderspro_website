@@ -6,9 +6,12 @@ import MarqueeSection from '@/sections/Marquee'
 import AboutSection from '@/sections/AboutSection'
 import { TestimonialSection } from '@/sections/TestimonialSection'
 import ContactSection from '@/sections/ContactSection';
+import Header from '@/sections/Header';
+
 const page = () => {
   return (
     <>
+      <Header />
       <HeroSection />
       <MarqueeSection />
       <AboutSection />

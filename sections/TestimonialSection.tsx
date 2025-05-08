@@ -43,7 +43,7 @@ export function TestimonialSection() {
   ];
 
   return (
-    <div className="relative w-full">
+    <div id="testimonials" className="relative w-full">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 space-y-4 sm:space-y-6 md:space-y-8">
         <TextAnimate 
           animate='blurIn' 

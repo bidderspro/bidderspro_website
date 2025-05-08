@@ -15,15 +15,19 @@ import {
 const navItems = [
   {
     name: "Home",
-    link: "/",
+    link: "#home",
   },
   {
     name: "About",
-    link: "/About",
+    link: "#about",
+  },
+  {
+    name: "Testimonials",
+    link: "#testimonials",
   },
   {
     name: "Contact",
-    link: "/Contact",
+    link: "#contact",
   },
 ];
 
@@ -36,7 +40,7 @@ export default function Header() {
         <NavbarLogo />
         <NavItems items={navItems} />
         <div className="relative z-20 flex items-center space-x-4">
-          <NavbarButton href="/Contact" variant="primary" className="bg-white text-black hover:bg-violet-700 hover:text-white">
+          <NavbarButton href="#contact" variant="primary" className="bg-white text-black hover:bg-violet-700 hover:text-white">
            Talk to us
           </NavbarButton>
          
@@ -63,7 +67,7 @@ export default function Header() {
             </a>
           ))}
           <div className="flex w-full flex-col gap-2">
-            <NavbarButton href="/Contact"  variant="primary" className="w-full bg-white text-black hover:bg-violet-700 hover:text-white rounded-3xl">
+            <NavbarButton href="#contact" variant="primary" className="w-full bg-white text-black hover:bg-violet-700 hover:text-white rounded-3xl">
               Talk to us
             </NavbarButton>
           </div>
