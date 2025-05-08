@@ -44,13 +44,25 @@ export function TestimonialSection() {
 
   return (
     <div className="relative w-full">
-    <div className="container mx-auto px-4 py-16 space-y-4">
-      <TextAnimate animate='blurIn' as={'h1'} className="text-center text-6xl font-bold uppercase text-violet-600">What Our Clients Say</TextAnimate>
-      <TextAnimate animate='blurIn' as={'p'} className="text-center text-gray-100 dark:text-neutral-100 uppercase font-bold">
-      We don’t talk about success — we automate it.
-      </TextAnimate>
-    </div>
-      <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 space-y-4 sm:space-y-6 md:space-y-8">
+        <TextAnimate 
+          animate='blurIn' 
+          as={'h1'} 
+          className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-violet-600"
+        >
+          What Our Clients Say
+        </TextAnimate>
+        <TextAnimate 
+          animate='blurIn' 
+          as={'p'} 
+          className="text-center text-sm sm:text-base md:text-lg lg:text-xl text-gray-100 dark:text-neutral-100 uppercase font-bold"
+        >
+          We don't talk about success — we automate it.
+        </TextAnimate>
+      </div>
+      <div className="px-2 sm:px-4 md:px-6 lg:px-8">
+        <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
+      </div>
     </div>
   );
 }
