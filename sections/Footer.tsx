@@ -1,3 +1,5 @@
+import BP_logo from "@/public/assets/images/BP_logo.png";
+
 export default function Footer() {
   return (
     <footer className="relative bg-gradient-to-b bg-transparent text-white">

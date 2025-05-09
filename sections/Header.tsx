@@ -22,6 +22,10 @@ const navItems = [
     link: "#about",
   },
   {
+    name: "Upwork Automation",
+    link: "/automation",
+  },
+  {
     name: "Testimonials",
     link: "#testimonials",
   },
