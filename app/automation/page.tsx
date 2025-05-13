@@ -5,6 +5,7 @@ import { TextAnimate } from "@/components/magicui/text-animate";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { BackgroundBeamsWithCollision } from "@/components/ui/Background";
 import AutomationHeroSection from "@/sections/automationSection/automationHeroSection";
+import CompareSection from "@/sections/automationSection/CampareSection";
 export default function AutomationPage() {
   
 
@@ -12,6 +13,7 @@ export default function AutomationPage() {
     <>
      
           <AutomationHeroSection />
+          <CompareSection />
       
     </>
   );
