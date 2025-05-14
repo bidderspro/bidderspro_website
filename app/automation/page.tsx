@@ -7,12 +7,19 @@ import { BackgroundBeamsWithCollision } from "@/components/ui/Background";
 import AutomationHeroSection from "@/sections/automationSection/automationHeroSection";
 import WhyAutomationSection from "@/sections/automationSection/WhyAutomationSection";
 import CompareSection from "@/sections/automationSection/CampareSection";
+import MoneyMachineSection from "@/sections/automationSection/MoneyMachineSection";
+import AutomationShiftSection from "@/sections/automationSection/AutomationShiftSection";
+import WhoIsThisForSection from "@/sections/automationSection/WhoIsThisForSection";
+
 export default function AutomationPage() {
   return (
     <>
       <AutomationHeroSection />
       <WhyAutomationSection />
       <CompareSection />
+      <AutomationShiftSection />
+      <WhoIsThisForSection />
+      <MoneyMachineSection />
     </>
   );
 }
