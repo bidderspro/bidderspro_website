@@ -10,6 +10,7 @@ import CompareSection from "@/sections/automationSection/CampareSection";
 import MoneyMachineSection from "@/sections/automationSection/MoneyMachineSection";
 import AutomationShiftSection from "@/sections/automationSection/AutomationShiftSection";
 import WhoIsThisForSection from "@/sections/automationSection/WhoIsThisForSection";
+import PricingSection from "@/sections/automationSection/PricingSection";
 
 export default function AutomationPage() {
   return (
@@ -20,6 +21,7 @@ export default function AutomationPage() {
       <AutomationShiftSection />
       <WhoIsThisForSection />
       <MoneyMachineSection />
+      <PricingSection />
     </>
   );
 }
