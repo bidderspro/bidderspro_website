@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const WhyAutomationSection = () => {
   return (
-    <section className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 relative overflow-hidden">
+    <section className="pt-0 pb-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 relative overflow-hidden">
       
       {/* Content container */}
       <div className="container items-center justify-center mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
