@@ -1,37 +1,65 @@
+"use client";
+
 import React from 'react';
 import { motion } from 'framer-motion';
-import { InteractiveHoverButton } from '@/components/magicui/interactive-hover-button';
-
-const FeatureItem = ({ icon, title, delay }: { icon: string; title: string; delay: number }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay }}
-      viewport={{ once: true }}
-      className="flex items-start gap-4 p-4 sm:p-5 md:p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-[#E0E0FF]/30 transition-all duration-300"
-    >
-      <div className="text-[#E0E0FF] text-2xl sm:text-3xl">{icon}</div>
-      <div className="text-gray-200 text-sm sm:text-base md:text-lg">{title}</div>
-    </motion.div>
-  );
-};
+import { Check, Sparkles, BarChart3, CheckCircle, Gem, Video } from 'lucide-react';
+import { WobbleCard } from "@/components/ui/wobble-card";
 
 const MoneyMachineSection = () => {
+  const features = [
+    {
+      id: 1,
+      title: "Revamped, SEO-optimized Profile",
+      icon: <CheckCircle className="h-5 w-5 text-[#E0E0FF]" />,
+      description: "Transform your profile into a client magnet with our expert SEO optimization."
+    },
+    {
+      id: 2,
+      title: "High-Ticket Niche Research",
+      icon: <BarChart3 className="h-5 w-5 text-[#E0E0FF]" />,
+      description: "We identify the most profitable niches where clients are willing to pay premium rates."
+    },
+    {
+      id: 3,
+      title: "5 Proof-Driven Portfolio Projects",
+      icon: <Gem className="h-5 w-5 text-[#E0E0FF]" />,
+      description: "Showcase your expertise with carefully crafted portfolio pieces that convert browsers to clients."
+    },
+    {
+      id: 4,
+      title: "3 Ready-to-Sell Project Catalogs",
+      icon: <Check className="h-5 w-5 text-[#E0E0FF]" />,
+      description: "Launch with pre-made service packages designed to attract high-paying clients instantly."
+    },
+    {
+      id: 5,
+      title: "Video Introduction (Script + Editing)",
+      icon: <Video className="h-5 w-5 text-[#E0E0FF]" />,
+      description: "Stand out with a professional video that builds trust and showcases your personality."
+    },
+    {
+      id: 6,
+      title: "Profile Optimization for Visibility & Conversion",
+      icon: <Sparkles className="h-5 w-5 text-[#E0E0FF]" />,
+      description: "Every element of your profile is crafted to maximize Upwork's algorithm and client conversion."
+    }
+  ];
+
+  const handleBookConsultation = () => {
+    window.open("https://calendly.com/usamaashraf558/15min", "_blank", "noopener,noreferrer");
+  };
+
   return (
-    <section className="py-16 sm:py-20 md:py-24 relative overflow-hidden">
-      {/* Background glow effect */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-2/3 h-32 bg-purple-500/20 blur-[100px] rounded-full"></div>
-      
+    <section className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Heading */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-8 sm:mb-12"
+            className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 uppercase">
               Turn On the <span className="text-[#E0E0FF]">Money Machine</span>
@@ -41,80 +69,65 @@ const MoneyMachineSection = () => {
             </p>
           </motion.div>
           
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="mb-8 text-center"
-          >
-            <h3 className="text-xl sm:text-2xl text-white mb-8">
-              Here's what's included in your Upwork Automation Package:
-            </h3>
-          </motion.div>
-          
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6 mb-12 sm:mb-16">
-            <FeatureItem icon="✅" title="Revamped, SEO-optimized Profile" delay={0.3} />
-            <FeatureItem icon="✅" title="High-Ticket Niche Research" delay={0.4} />
-            <FeatureItem icon="✅" title="5 Proof-Driven Portfolio Projects" delay={0.5} />
-            <FeatureItem icon="✅" title="3 Ready-to-Sell Project Catalogs" delay={0.6} />
-            <FeatureItem icon="✅" title="Video Introduction (Script + Editing)" delay={0.7} />
-            <FeatureItem icon="✅" title="Profile Optimization for Visibility & Conversion" delay={0.8} />
+          {/* WobbleCards Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full mb-16">
+            {/* Main Feature Card */}
+            <WobbleCard
+              containerClassName="col-span-1 lg:col-span-2 h-full bg-violet-900 min-h-[300px] lg:min-h-[300px]"
+            >
+              <div className="max-w-md">
+                <h2 className="text-left text-balance text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                  Here's what's included in your Upwork Automation Package:
+                </h2>
+                <p className="mt-4 text-left text-base/6 text-neutral-200">
+                  Everything you need to transform your Upwork profile into a client-attracting machine that generates invites 24/7.
+                </p>
+              </div>
+              
+              <div className="absolute -right-10 -bottom-10 transform rotate-6 opacity-10">
+                <svg width="300" height="300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 3V21M17 6H4.5M19.5 12H7M17 18H4.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </WobbleCard>
+            
+            {/* CTA Card */}
+            <WobbleCard 
+              containerClassName="col-span-1 min-h-[300px] bg-gradient-to-br from-indigo-800 to-violet-900"
+            >
+              <h2 className="max-w-80 text-left text-balance text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                🔥 Be in the Top 5%
+              </h2>
+              <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
+                Join the elite group of freelancers who earn consistently through client invitations rather than endless proposals.
+              </p>
+              <div className="mt-8 z-50 relative">
+                <button
+                  type="button"
+                  onClick={handleBookConsultation}
+                  className="relative z-50 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white px-6 py-3 rounded-full text-base font-semibold inline-flex items-center gap-2 shadow-lg shadow-indigo-900/30 transition-all duration-300 cursor-pointer"
+                >
+                  Book a Free Consultation
+                </button>
+              </div>
+            </WobbleCard>
           </div>
           
-          {/* Illustrations */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            viewport={{ once: true }}
-            className="flex justify-center items-center mb-12 sm:mb-16"
-          >
-            <div className="grid grid-cols-3 gap-6">
-              <div className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 bg-gradient-to-br from-violet-500/20 to-violet-500/10 rounded-2xl flex items-center justify-center border border-white/10">
-                <svg className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 text-[#E0E0FF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 7h-9"></path>
-                  <path d="M14 17H5"></path>
-                  <circle cx="17" cy="17" r="3"></circle>
-                  <circle cx="7" cy="7" r="3"></circle>
-                </svg>
-              </div>
-              <div className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 bg-gradient-to-br from-blue-500/20 to-blue-500/10 rounded-2xl flex items-center justify-center border border-white/10">
-                <svg className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 text-[#E0E0FF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 6v12"></path>
-                  <path d="M17 18v-6"></path>
-                  <path d="M7 12v6"></path>
-                  <path d="M3 6v6"></path>
-                  <path d="M21 18v-6"></path>
-                </svg>
-              </div>
-              <div className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 bg-gradient-to-br from-indigo-500/20 to-indigo-500/10 rounded-2xl flex items-center justify-center border border-white/10">
-                <svg className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 text-[#E0E0FF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
-                  <path d="M12 12v9"></path>
-                  <path d="m8 17 4 4 4-4"></path>
-                </svg>
-              </div>
-            </div>
-          </motion.div>
-          
-          {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <InteractiveHoverButton
-              className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-semibold inline-flex items-center gap-2 mx-auto transition-all duration-300 shadow-lg shadow-violet-500/20"
-              onClick={() => window.open("https://calendly.com/usamaashraf558/15min", "_blank")}
-            >
-              Be in the Top 5%
-            </InteractiveHoverButton>
-          </motion.div>
+          {/* Feature Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {features.map((feature) => (
+              <WobbleCard 
+                key={feature.id} 
+                containerClassName="bg-gray-800/40 backdrop-blur min-h-[220px]"
+              >
+                <div className="w-fit rounded-full bg-[#E0E0FF]/10 p-3 mb-4">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-gray-300">{feature.description}</p>
+              </WobbleCard>
+            ))}
+          </div>
         </div>
       </div>
     </section>
