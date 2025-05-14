@@ -1,4 +1,4 @@
-import BP_logo from "@/public/assets/images/BP_logo.png";
+import BP_logo from "@/public/assets/images/BP_Logo.png";
 
 export default function Footer() {
   return (
@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="col-span-1 lg:col-span-2 space-y-4 text-center md:text-left">
             <div className="flex items-center gap-3 justify-center md:justify-start">
               <img 
-                src="/assets/images/BP_Logo.png" 
+                src={BP_logo.src} 
                 alt="BiddersPro Logo"
                 className="w-10 h-10 object-contain"
               />
