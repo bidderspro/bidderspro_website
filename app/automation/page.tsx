@@ -11,6 +11,8 @@ import MoneyMachineSection from "@/sections/automationSection/MoneyMachineSectio
 import AutomationShiftSection from "@/sections/automationSection/AutomationShiftSection";
 import WhoIsThisForSection from "@/sections/automationSection/WhoIsThisForSection";
 import PricingSection from "@/sections/automationSection/PricingSection";
+import VSLSection from "@/sections/automationSection/VSLSection";
+import FinalCTASection from "@/sections/automationSection/FinalCTASection";
 
 export default function AutomationPage() {
   return (
@@ -21,7 +23,9 @@ export default function AutomationPage() {
       <AutomationShiftSection />
       <WhoIsThisForSection />
       <MoneyMachineSection />
+      <VSLSection />
       <PricingSection />
+      <FinalCTASection />
     </>
   );
 }
