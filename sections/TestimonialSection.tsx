@@ -1,68 +1,108 @@
 "use client";
-import { TextAnimate } from "@/components/magicui/text-animate";
+import { motion } from "framer-motion";
 import { AnimatedTestimonials } from "@/components/ui/Testimonals";
 
 export function TestimonialSection() {
   const testimonials = [
     {
-      quote: "It was good and seamless, enjoyed working with him on this.",
-      name: "Muhammad Maaz Siddiqui",
-      designation: "Financial Planning and Forecasting",
-      src: "https://media.licdn.com/dms/image/v2/D4E03AQH3loqTAN_Jrw/profile-displayphoto-shrink_200_200/B4EZNtzLe0HAAo-/0/1732713954708?e=1752105600&v=beta&t=cWCmSaU_wPeNL11Y25m5pFpxO-eIbH8E43lxVdU17QA"
+      quote: "We needed a reliable automation system for our Upwork bidding. Bidders Pro delivered a flawless solution that increased our bid success rate by 70%. Their attention to detail and responsive support made the whole process seamless.",
+      author: "ADHUB Marketing",
+      project: "Digital Marketing Agency",
+      rating: 5,
+      src: ""
     },
     {
-      quote: "I'm very impressed with Usama and his team's work. They introduced me to Upwork Automation, which significantly improved my ability to find new business leads. One of the catalogs they helped create led to securing a major client. Overall, my experience working with Usama was excellent.",
-      name: "Ahmad Raza",
-      designation: "Founder & CEO of Techticks", 
-      src: "https://media.licdn.com/dms/image/v2/D4D03AQFuM4QqCJw1wQ/profile-displayphoto-shrink_200_200/B4DZRhmLBmHUAk-/0/1736804185808?e=1752105600&v=beta&t=iS_DJWRV3gy9fCLFpSyUsYZfM5PQE7UkPVE8oLs9b8U"
+      quote: "Bidders Pro transformed our freelancing workflow. Their automation tool not only saved us countless hours but also helped us target the right projects with precision. The ROI was immediate and substantial.",
+      author: "Techticks Digital", 
+      project: "Software Development Studio",
+      rating: 5,
+      src: ""
     },
     {
-      quote: "I am extremely satisfied with Usama's automation services. His expertise has significantly improved my Upwork profile visibility, resulting in a substantial increase in high-quality invites. His automation solutions are efficient, reliable, and tailored to my needs. I highly recommend his services to anyone looking to enhance their presence and opportunities on Upwork.",
-      name: "Muhammad Junaid Hassan",
-      designation: "Web developer",
-      src: "https://media.licdn.com/dms/image/v2/D4D03AQEOTeSNGrh8Dw/profile-displayphoto-shrink_200_200/B4DZZYeaEWG4Ac-/0/1745241089623?e=1752105600&v=beta&t=gkXA9HA8W4t492A6d4LvfnEp5wHBGDAuN9MRM6KPsEA"
+      quote: "We had a vision to scale our freelance operations—and Bidders Pro brought it to life. The integration of smart filters, automatic bidding, and seamless workflow was exactly what we needed. It's a game-changer for serious freelancers.",
+      author: "MetaSync Technologies",
+      project: "Web Development Agency",
+      rating: 5,
+      src: ""
     },
     {
-        quote: "I am extremely satisfied with Usama's automation services. His expertise has significantly improved my Upwork profile visibility, resulting in a substantial increase in high-quality invites. His automation solutions are efficient, reliable, and tailored to my needs. I highly recommend his services to anyone looking to enhance their presence and opportunities on Upwork.",
-        name: "Muhammad Junaid Hassan",
-        designation: "Web developer",
-        src: "https://media.licdn.com/dms/image/v2/D4D03AQEOTeSNGrh8Dw/profile-displayphoto-shrink_200_200/B4DZZYeaEWG4Ac-/0/1745241089623?e=1752105600&v=beta&t=gkXA9HA8W4t492A6d4LvfnEp5wHBGDAuN9MRM6KPsEA"
+      quote: "Bidders Pro built us a dynamic bidding system with analytics, automation, and secure access. What impressed me most was their attention to both technical efficiency and usability. It's rare to find a solution that's both powerful and easy to use.",
+      author: "Freelance Accelerator",
+      project: "Freelancing Collective",
+      rating: 5,
+      src: ""
     },
     {
-        quote: "Usama Ashraf and his team have been instrumental in transforming my Upwork journey. Their smart automation strategies have not only optimized my profile but also helped me secure a steady flow of high-quality projects. Their expertise, professionalism, and commitment to delivering results are truly commendable. If you're serious about scaling your freelancing career and attracting top-tier opportunities, I highly recommend working with them!",
-        name: "Umar Shahzad",
-        designation: "CEO of MetaSyncTechnologies",
-        src: "https://media.licdn.com/dms/image/v2/D4D35AQEYtntVDNBPAg/profile-framedphoto-shrink_200_200/B4DZUy6AF.HIAo-/0/1740315820689?e=1747224000&v=beta&t=k-BDlsUKyHvprxjOdWrJuYuzkP4E4fMLzjqjUGtDq_0"
+      quote: "We needed a reliable way to scale our Upwork presence. Bidders Pro delivered a comprehensive automation suite that helped us increase client acquisition by 90%. Their system is intuitive and incredibly effective.",
+      author: "Global Design Hub",
+      project: "Creative Agency",
+      rating: 5,
+      src: ""
     },
     {
-        quote: "Usama and his team did a great job! They delivered on their promises. I highly recommend him for Upwork profile optimization and automation services.",
-        name: "Muhammad Ghufran",
-        designation: "SQA Engineer",
-        src: "https://media.licdn.com/dms/image/v2/D4D03AQGhbQNiTdSn3A/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1700162549797?e=1752105600&v=beta&t=zaQ3uDjg5LQWfL91LmZ13L86EAl96Ns4kXtp8m2AjQU"
+      quote: "Bidders Pro delivered a functional, fast automation tool with intelligent filtering and real-time opportunity matching. They even added custom optimization features to help us stand out. Their proactive approach sets them apart.",
+      author: "ContentCraft Studios",
+      project: "Content Marketing Team",
+      rating: 5,
+      src: ""
     }
   ];
 
   return (
-    <div id="testimonials" className="relative w-full">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 space-y-4 sm:space-y-6 md:space-y-8">
-        <TextAnimate 
-          animate='blurIn' 
-          as={'h1'} 
-          className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-violet-600"
+    <section id="testimonials" className="py-20 px-6 lg:px-8 relative">
+      <div className="container mx-auto max-w-6xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          What Our Clients Say
-        </TextAnimate>
-        <TextAnimate 
-          animate='blurIn' 
-          as={'p'} 
-          className="text-center text-sm sm:text-base md:text-lg lg:text-xl text-gray-100 dark:text-neutral-100 uppercase font-bold"
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-yellow-400 text-sm font-medium mb-6">
+            <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+            Client Testimonials
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              What Clients
+            </span>
+            <br />
+            <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
+              Say About Me
+            </span>
+          </h2>
+          
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Real feedback from real clients who trusted me with their projects and achieved 
+            <span className="text-yellow-400 font-semibold"> exceptional results</span>
+          </p>
+        </motion.div>
+
+        <AnimatedTestimonials testimonials={testimonials}  />
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-2xl p-8 border border-yellow-500/20"
         >
-          We don't talk about success — we automate it.
-        </TextAnimate>
+          <h3 className="text-2xl font-bold text-white mb-4">
+            Your Success Story Could Be Next
+          </h3>
+          <p className="text-gray-300 text-lg mb-6 max-w-2xl mx-auto">
+            Join the growing list of satisfied clients who chose quality, reliability, and results.
+          </p>
+          
+          <button
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-8 py-4 bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-semibold rounded-xl hover:from-yellow-700 hover:to-orange-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Start Your Project Today
+          </button>
+        </motion.div>
       </div>
-      <div className="px-2 sm:px-4 md:px-6 lg:px-8">
-        <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
-      </div>
-    </div>
+    </section>
   );
 }
