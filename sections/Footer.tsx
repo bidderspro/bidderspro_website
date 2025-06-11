@@ -1,3 +1,6 @@
+import BP_logo from "@/public/assets/images/BP_logo.png";
+import Image from 'next/image';
+
 export default function Footer() {
   return (
     <footer className="relative bg-gradient-to-b bg-transparent text-white">
@@ -7,10 +10,12 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="col-span-1 lg:col-span-2 space-y-4 text-center md:text-left">
             <div className="flex items-center gap-3 justify-center md:justify-start">
-              <img 
-                src="/assets/images/BP_Logo.png" 
+              <Image 
+                src={BP_logo}
                 alt="BiddersPro Logo"
-                className="w-10 h-10 object-contain"
+                width={40}
+                height={40}
+                className="object-contain"
               />
               <span className="text-4xl font-bold uppercase bg-gradient-to-r from-violet-500 to-indigo-500 bg-clip-text text-transparent">
                 Bidders Pro

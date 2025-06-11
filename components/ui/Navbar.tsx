@@ -10,6 +10,7 @@ import {
 
 import React, { useRef, useState } from "react";
 import BP_logo from "@/public/assets/images/BP_logo.png";
+import Image from 'next/image';
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -236,8 +237,8 @@ export const NavbarLogo = () => {
       href="/"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black dark:text-white"
     >
-      <img
-        src={BP_logo.src}
+      <Image
+        src={BP_logo}
         alt="BiddersPro logo"
         width={30}
         height={30}
