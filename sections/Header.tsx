@@ -24,6 +24,8 @@ export default function Header() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  // Client-side state for hash handling
+  const [isClient, setIsClient] = useState(false);
 
   // Define navigation items based on current page
   const navItems: NavItem[] = [
@@ -49,10 +51,15 @@ export default function Header() {
     },
   ];
 
+  // Set client-side state
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   // Handle scrolling for hash links when not on home page
   useEffect(() => {
-    // Check if there's a hash in the URL when the component mounts
-    if (typeof window !== 'undefined' && window.location.hash && !isHomePage) {
+    // Only run on the client and after the component has mounted
+    if (isClient && !isHomePage && window.location.hash) {
       // Navigate to the section after a short delay to ensure the page is loaded
       setTimeout(() => {
         const id = window.location.hash.substring(1);
@@ -62,14 +69,17 @@ export default function Header() {
         }
       }, 500);
     }
-  }, [isHomePage]);
+  }, [isHomePage, isClient]);
 
   // Custom navigation handler
   function handleNavigation(e: React.MouseEvent<HTMLAnchorElement>, link: string): void {
-    // If it's a hash link on non-home page, prevent default behavior
-    if (link.startsWith("/#") && !isHomePage) {
-      e.preventDefault();
-      window.location.href = link;
+    // Only run client-side code after hydration
+    if (isClient) {
+      // If it's a hash link on non-home page, prevent default behavior
+      if (link.startsWith("/#") && !isHomePage) {
+        e.preventDefault();
+        window.location.href = link;
+      }
     }
   }
 
