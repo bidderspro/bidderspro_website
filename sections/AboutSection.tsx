@@ -11,6 +11,7 @@ export default function AboutSection() {
           alt="About Us" 
           className="w-full max-w-[280px] md:max-w-[340px] lg:max-w-[440px] xl:max-w-[520px] h-auto object-cover rounded-xl drop-shadow-lg shadow-indigo-700"
           placeholder="blur"
+          priority={true}
         />
       </div>
       <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center space-y-3 md:space-y-8 lg:space-y-10">
