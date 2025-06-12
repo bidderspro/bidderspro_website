@@ -96,10 +96,10 @@ export function TestimonialSection() {
           </p>
           
           <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => window.location.href = '/calendar'}
             className="px-8 py-4 bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-semibold rounded-xl hover:from-yellow-700 hover:to-orange-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
-            Start Your Project Today
+            Schedule Your Meeting
           </button>
         </motion.div>
       </div>

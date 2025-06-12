@@ -42,6 +42,10 @@ export default function Header() {
       link: "/automation",
     },
     {
+      name: "Consultation",
+      link: "/calendar",
+    },
+    {
       name: "Testimonials",
       link: isHomePage ? "#testimonials" : "/#testimonials",
     },
