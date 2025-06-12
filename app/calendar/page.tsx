@@ -192,27 +192,65 @@ export default function CalendarPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 py-16 sm:px-6 md:px-8">
-        <TextAnimate as="h1" animate="fadeIn" className="text-4xl md:text-5xl font-bold text-center mb-4 text-white">
-          Book a Meeting
-        </TextAnimate>
-        <p className="text-lg text-center text-gray-300 mb-12 max-w-2xl mx-auto">
-          Schedule a consultation with our team to discuss how we can help automate your business processes and increase efficiency.
-        </p>
-        
-        <div className="bg-gradient-to-br bg-violet-500/30 p-8 rounded-2xl shadow-xl backdrop-blur-md max-w-3xl mx-auto">
-          <ProgressBar currentStep={step} totalSteps={4} />
-          
-          <motion.div
-            key={`step-${step}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+      {/* Decorative Elements */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-purple-600/20 rounded-full filter blur-[120px] opacity-70 animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-600/20 rounded-full filter blur-[120px] opacity-70 animate-pulse"></div>
+      <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-violet-600/20 rounded-full filter blur-[100px] opacity-60 animate-pulse"></div>
+      
+      <div className="max-w-6xl mx-auto px-4 py-16 sm:px-6 md:px-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-12"
+        >
+          <TextAnimate 
+            as="h1" 
+            animate="fadeIn" 
+            className="text-5xl md:text-6xl font-bold mb-4 text-white"
           >
-            {renderCurrentStep()}
-          </motion.div>
-        </div>
+            Book a Meeting
+          </TextAnimate>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.7 }}
+            className="text-lg md:text-xl text-center text-gray-300 mb-6 max-w-2xl mx-auto"
+          >
+            Schedule a consultation with our team to discuss how we can help automate your business processes and increase efficiency.
+          </motion.p>
+          
+          <motion.div 
+            initial={{ width: 0 }}
+            animate={{ width: "80px" }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="h-1 bg-gradient-to-r from-violet-500 to-purple-600 rounded-full mx-auto"
+          />
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.7 }}
+          className="relative p-8 rounded-2xl backdrop-blur-lg max-w-3xl mx-auto"
+        >
+          {/* Glass card effect */}
+          <div className="absolute inset-0 bg-white/5 rounded-2xl border border-white/10 shadow-xl z-0"></div>
+          
+          <div className="relative z-10">
+            <ProgressBar currentStep={step} totalSteps={4} />
+            
+            <motion.div
+              key={`step-${step}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+            >
+              {renderCurrentStep()}
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

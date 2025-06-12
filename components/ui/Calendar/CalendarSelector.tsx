@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 
 interface TimeSlot {
   id: string;
@@ -23,6 +25,7 @@ export default function CalendarSelector({
 }: CalendarSelectorProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
+  const [animationDirection, setAnimationDirection] = useState<'left' | 'right'>('right');
 
   // Generate available time slots for the selected date
   useEffect(() => {
@@ -73,10 +76,12 @@ export default function CalendarSelector({
   };
 
   const handlePrevMonth = () => {
+    setAnimationDirection('left');
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
   };
 
   const handleNextMonth = () => {
+    setAnimationDirection('right');
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
 
@@ -85,37 +90,53 @@ export default function CalendarSelector({
   
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="flex justify-between items-center mb-4">
-        <button 
-          onClick={handlePrevMonth}
-          className="p-2 rounded-full hover:bg-violet-600/20 focus:outline-none"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-          </svg>
-        </button>
-        <h2 className="text-xl font-semibold">
-          {currentDate.toLocaleString('default', { month: 'long' })} {currentDate.getFullYear()}
-        </h2>
-        <button 
-          onClick={handleNextMonth}
-          className="p-2 rounded-full hover:bg-violet-600/20 focus:outline-none"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-          </svg>
-        </button>
+      {/* Calendar Header */}
+      <div className="relative mb-6">
+        <div className="flex items-center justify-between">
+          <button 
+            onClick={handlePrevMonth}
+            className="p-3 rounded-full hover:bg-violet-600/20 transition-colors duration-200 text-white focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+            aria-label="Previous month"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          
+          <motion.h2 
+            key={`${currentDate.getMonth()}-${currentDate.getFullYear()}`}
+            initial={{ opacity: 0, y: animationDirection === 'right' ? 20 : -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="text-2xl font-bold text-white"
+          >
+            {currentDate.toLocaleString('default', { month: 'long' })} {currentDate.getFullYear()}
+          </motion.h2>
+          
+          <button 
+            onClick={handleNextMonth}
+            className="p-3 rounded-full hover:bg-violet-600/20 transition-colors duration-200 text-white focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+            aria-label="Next month"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+        
+        {/* Decorative Elements */}
+        <div className="absolute -top-4 -right-4 w-20 h-20 bg-violet-600/20 rounded-full blur-xl pointer-events-none"></div>
+        <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-600/20 rounded-full blur-xl pointer-events-none"></div>
       </div>
       
-      <div className="grid grid-cols-7 gap-1 mb-2">
+      {/* Days of Week Header */}
+      <div className="grid grid-cols-7 gap-1 mb-3">
         {daysOfWeek.map(day => (
-          <div key={day} className="text-center text-sm font-medium text-gray-300">
+          <div key={day} className="text-center text-sm font-medium text-violet-300 py-1">
             {day}
           </div>
         ))}
       </div>
       
-      <div className="grid grid-cols-7 gap-1">
+      {/* Calendar Grid */}
+      <div className="grid grid-cols-7 gap-1.5 mb-6">
         {calendarDays.map((day, index) => {
           if (day === null) {
             return <div key={`empty-${index}`} className="h-10 w-10" />;
@@ -130,43 +151,58 @@ export default function CalendarSelector({
           const isToday = date.toDateString() === new Date().toDateString();
           
           return (
-            <button
+            <motion.button
               key={`day-${date.getDate()}`}
-              className={`h-10 w-10 flex items-center justify-center rounded-full transition-colors duration-200 ${
-                isSelected ? 'bg-violet-600 text-white' : 
-                isToday ? 'border border-violet-500 text-violet-500' : 
-                isPast ? 'text-gray-500 cursor-not-allowed' : 'hover:bg-violet-600/20'
+              whileHover={!isPast ? { scale: 1.1 } : {}}
+              whileTap={!isPast ? { scale: 0.95 } : {}}
+              className={`h-10 w-10 flex items-center justify-center rounded-full transition-all duration-200 ${
+                isSelected ? 'bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-lg shadow-violet-500/30' : 
+                isToday ? 'border-2 border-violet-400 text-violet-400' : 
+                isPast ? 'text-gray-500 cursor-not-allowed' : 'hover:bg-violet-600/20 text-white'
               }`}
               onClick={() => !isPast && onDateSelect(date)}
               disabled={isPast}
             >
               {date.getDate()}
-            </button>
+            </motion.button>
           );
         })}
       </div>
       
+      {/* Time Slots */}
       {selectedDate && (
-        <div className="mt-6">
-          <h3 className="text-lg font-medium mb-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-8 bg-gray-800/30 backdrop-blur-sm p-5 rounded-xl border border-gray-700"
+        >
+          <h3 className="text-lg font-medium mb-4 text-white flex items-center">
+            <span className="w-2 h-8 bg-violet-500 rounded-full mr-3"></span>
             Available times for {selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
           </h3>
           <div className="grid grid-cols-3 gap-2">
-            {timeSlots.map(slot => (
-              <button
+            {timeSlots.map((slot, index) => (
+              <motion.button
                 key={slot.id}
-                className={`p-2 rounded-lg text-center transition-colors duration-200 ${
-                  selectedTime === slot.time ? 'bg-violet-600 text-white' :
-                  slot.available ? 'bg-gray-800/60 hover:bg-violet-600/20' : 'bg-gray-800/30 text-gray-500 cursor-not-allowed'
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2, delay: 0.05 * index }}
+                whileHover={slot.available ? { scale: 1.05, y: -2 } : {}}
+                whileTap={slot.available ? { scale: 0.98 } : {}}
+                className={`p-2.5 rounded-lg text-center transition-all duration-200 flex items-center justify-center gap-2 ${
+                  selectedTime === slot.time ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg shadow-violet-600/30' :
+                  slot.available ? 'bg-gray-800/60 hover:bg-violet-600/30 text-white' : 'bg-gray-800/30 text-gray-500 cursor-not-allowed'
                 }`}
                 onClick={() => slot.available && onTimeSelect(slot.time)}
                 disabled={!slot.available}
               >
+                <Clock className="w-3.5 h-3.5" />
                 {slot.time}
-              </button>
+              </motion.button>
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
     </div>
   );
