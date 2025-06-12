@@ -1,6 +1,6 @@
 import { TextAnimate } from "@/components/magicui/text-animate";
 import Image from "next/image";
-import aboutUsImage from "@/public/assets/images/about-us.jpg";
+import aboutUsImage from "@/public/assets/images/about-us.webp";
 
 export default function AboutSection() {
   return (

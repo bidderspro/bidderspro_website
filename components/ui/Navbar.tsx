@@ -9,7 +9,7 @@ import {
 } from "motion/react";
 
 import React, { useRef, useState } from "react";
-import BP_logo from "@/public/assets/images/BP_logo.png";
+import BP_logo from "@/public/assets/images/bp-logo.webp";
 import Image from 'next/image';
 
 interface NavbarProps {
