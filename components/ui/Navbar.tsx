@@ -6,7 +6,7 @@ import {
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
-} from "motion/react";
+} from "framer-motion";
 
 import React, { useRef, useState } from "react";
 import BP_logo from "@/public/assets/images/bp-logo.webp";
@@ -72,14 +72,22 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       // IMPORTANT: Change this to class of `fixed` if you want the navbar to be fixed
       className={cn("sticky inset-x-0 top-0 z-40 w-full", className)}
     >
-      {React.Children.map(children, (child) =>
-        React.isValidElement(child)
-          ? React.cloneElement(
-              child as React.ReactElement<{ visible?: boolean }>,
-              { visible },
-            )
-          : child,
-      )}
+      {React.Children.map(children, (child) => {
+        if (!React.isValidElement(child)) return child;
+        // Only pass 'visible' to known custom components
+        const customComponents = [
+          "NavBody",
+          "MobileNav",
+        ];
+        const typeName = (child.type as any).name;
+        if (customComponents.includes(typeName)) {
+          return React.cloneElement(
+            child as React.ReactElement<{ visible?: boolean }>,
+            { visible },
+          );
+        }
+        return child;
+      })}
     </motion.div>
   );
 };
@@ -92,7 +100,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
           : "none",
-        width: visible ? "40%" : "100%",
+        width: visible ? "calc(100% - 2rem)" : "100%",
+        maxWidth: visible ? "1280px" : "100%",
         y: visible ? 20 : 0,
       }}
       transition={{
@@ -100,11 +109,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         stiffness: 200,
         damping: 50,
       }}
-      style={{
-        minWidth: "800px",
-      }}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex dark:bg-transparent",
+        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 md:flex dark:bg-transparent",
         visible && "bg-white/80 dark:bg-violet-800/30",
         className,
       )}
@@ -121,7 +127,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 md:flex md:space-x-1 lg:space-x-2",
         className,
       )}
     >
@@ -129,7 +135,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
         <a
           onMouseEnter={() => setHovered(idx)}
           onClick={onItemClick}
-          className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300"
+          className="relative px-2 md:px-3 lg:px-4 py-2 text-neutral-600 dark:text-neutral-300"
           key={`link-${idx}`}
           href={item.link}
         >
@@ -161,12 +167,12 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         y: visible ? 20 : 0,
       }}
       transition={{
-        type: "sptring",
+        type: "spring",
         stiffness: 200,
         damping: 50,
       }}
       className={cn(
-        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
+        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 md:hidden",
         visible && "bg-white/80 dark:bg-neutral-950/80",
         className,
       )}
