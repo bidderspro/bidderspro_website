@@ -2,7 +2,7 @@ import { TextAnimate } from "@/components/magicui/text-animate";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { motion } from "framer-motion";
 import Image from 'next/image';
-import upworkStatsImage from "@/public/assets/images/upwork-stats.png";
+import upworkStatsImage from "@/public/assets/images/upwork-stats.webp";
 
 export default function AutomationHeroSection() {
   return (
