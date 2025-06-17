@@ -104,9 +104,9 @@ const CollisionMechanism = React.forwardRef<
     parentRef: React.RefObject<HTMLDivElement>;
     beamOptions?: {
       initialX?: number;
-      translateX?: number;
+      x?: number;
       initialY?: number;
-      translateY?: number;
+      y?: number;
       rotate?: number;
       className?: string;
       duration?: number;
@@ -186,8 +186,8 @@ const CollisionMechanism = React.forwardRef<
         }}
         variants={{
           animate: {
-            y: beamOptions.translateY || "1800px",
-            x: beamOptions.translateX || "0px",
+            y: beamOptions.y || "1800px",
+            x: beamOptions.x || "0px",
             rotate: beamOptions.rotate || 0,
           },
         }}
