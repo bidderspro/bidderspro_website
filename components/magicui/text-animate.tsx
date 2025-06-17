@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion, MotionProps, Variants } from "motion/react";
+import { AnimatePresence, motion, MotionProps, Variants } from "framer-motion";
 import { ElementType } from "react";
 
 type AnimationType = "text" | "word" | "character" | "line";
@@ -311,7 +311,16 @@ export function TextAnimate({
   animation = "fadeIn",
   ...props
 }: TextAnimateProps) {
-  const MotionComponent = motion.create(Component);
+  const MotionTag = Component === 'p' ? motion.p :
+                   Component === 'span' ? motion.span :
+                   Component === 'div' ? motion.div :
+                   Component === 'h1' ? motion.h1 :
+                   Component === 'h2' ? motion.h2 :
+                   Component === 'h3' ? motion.h3 :
+                   Component === 'h4' ? motion.h4 :
+                   Component === 'h5' ? motion.h5 :
+                   Component === 'h6' ? motion.h6 :
+                   motion.div; // Default fallback
 
   let segments: string[] = [];
   switch (by) {
@@ -377,7 +386,7 @@ export function TextAnimate({
 
   return (
     <AnimatePresence mode="popLayout">
-      <MotionComponent
+      <MotionTag
         variants={finalVariants.container as Variants}
         initial="hidden"
         whileInView={startOnView ? "show" : undefined}
@@ -401,7 +410,7 @@ export function TextAnimate({
             {segment}
           </motion.span>
         ))}
-      </MotionComponent>
+      </MotionTag>
     </AnimatePresence>
   );
 }

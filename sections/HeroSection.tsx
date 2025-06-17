@@ -1,7 +1,6 @@
 import { BackgroundBeamsWithCollision } from "@/components/ui/Background";
 import { TextAnimate } from "@/components/magicui/text-animate";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
-
 export default function HeroSection() {
   return (
     <div id="home" className="relative w-full min-h-screen flex items-center justify-center z-10">
@@ -59,7 +58,7 @@ export default function HeroSection() {
             animate="blur-in"
             as="p"
             duration={0.5}
-            className="text-center text-gray-600 mt-3 sm:mt-4 max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-3xl mx-auto font-bold text-xs sm:text-sm md:text-lg lg:text-xl uppercase"
+            className="text-center text-gray-600 mt-3 sm:mt-4 md:mt-6 max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-3xl mx-auto font-bold text-xs sm:text-sm md:text-lg lg:text-xl uppercase"
           >
             More revenue. Less manual work. Ready to scale?
           </TextAnimate>
@@ -67,7 +66,7 @@ export default function HeroSection() {
 
         <div className="mt-4 sm:mt-6 md:mt-8 lg:mt-10 w-full flex justify-center">
           <InteractiveHoverButton
-            className="bg-violet-800 text-white text-center font-medium px-4 sm:px-5 md:px-7 lg:px-10 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm md:text-lg rounded-full hover:bg-violet-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
+            className="bg-violet-800 text-white text-center font-medium px-4 sm:px-5 md:px-7 lg:px-10 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm md:text-base lg:text-lg rounded-full hover:bg-violet-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
             onClick={() => {
               alert("Coming soon!");
             }}

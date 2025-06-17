@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useCallback, useEffect, useRef } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { animate } from "framer-motion";
 
@@ -32,6 +32,7 @@ const GlowingEffect = memo(
     const containerRef = useRef<HTMLDivElement>(null);
     const lastPosition = useRef({ x: 0, y: 0 });
     const animationFrameRef = useRef<number>(0);
+    const [isMounted, setIsMounted] = useState(false);
 
     const handleMove = useCallback(
       (e?: MouseEvent | { x: number; y: number }) => {
@@ -97,8 +98,14 @@ const GlowingEffect = memo(
       [inactiveZone, proximity, movementDuration]
     );
 
+    // Mark as mounted on the client side
     useEffect(() => {
-      if (disabled) return;
+      setIsMounted(true);
+    }, []);
+
+    useEffect(() => {
+      // Only run this effect on the client side after component has mounted
+      if (!isMounted || disabled) return;
 
       const handleScroll = () => handleMove();
       const handlePointerMove = (e: PointerEvent) => handleMove(e);
@@ -115,7 +122,7 @@ const GlowingEffect = memo(
         window.removeEventListener("scroll", handleScroll);
         document.body.removeEventListener("pointermove", handlePointerMove);
       };
-    }, [handleMove, disabled]);
+    }, [handleMove, disabled, isMounted]);
 
     return (
       <>
