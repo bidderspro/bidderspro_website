@@ -16,49 +16,49 @@ export const BackgroundBeamsWithCollision = ({
   const beams = [
     {
       initialX: 10,
-      translateX: 10,
+      x: 10,
       duration: 7,
       repeatDelay: 3,
       delay: 2,
     },
     {
       initialX: 600,
-      translateX: 600,
+      x: 600,
       duration: 3,
       repeatDelay: 3,
       delay: 4,
     },
     {
       initialX: 100,
-      translateX: 100,
+      x: 100,
       duration: 7,
       repeatDelay: 7,
       className: "h-6",
     },
     {
       initialX: 400,
-      translateX: 400,
+      x: 400,
       duration: 5,
       repeatDelay: 14,
       delay: 4,
     },
     {
       initialX: 800,
-      translateX: 800,
+      x: 800,
       duration: 11,
       repeatDelay: 2,
       className: "h-20",
     },
     {
       initialX: 1000,
-      translateX: 1000,
+      x: 1000,
       duration: 4,
       repeatDelay: 2,
       className: "h-12",
     },
     {
       initialX: 1200,
-      translateX: 1200,
+      x: 1200,
       duration: 6,
       repeatDelay: 4,
       delay: 2,
@@ -104,9 +104,9 @@ const CollisionMechanism = React.forwardRef<
     parentRef: React.RefObject<HTMLDivElement>;
     beamOptions?: {
       initialX?: number;
-      translateX?: number;
+      x?: number;
       initialY?: number;
-      translateY?: number;
+      y?: number;
       rotate?: number;
       className?: string;
       duration?: number;
@@ -186,8 +186,8 @@ const CollisionMechanism = React.forwardRef<
         }}
         variants={{
           animate: {
-            y: beamOptions.translateY || "1800px",
-            x: beamOptions.translateX || "0px",
+            y: beamOptions.y || "1800px",
+            x: beamOptions.x || "0px",
             rotate: beamOptions.rotate || 0,
           },
         }}
