@@ -6,8 +6,8 @@ const bundleAnalyzer = withBundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  output: "standalone",
-  distDir: 'build',
+  output: "export",
+  distDir: "build",
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
   // Image optimization
   images: {
     formats: ['image/webp', 'image/avif'], // Serve next-gen formats
-    unoptimized: false, // Enable built-in optimization unless using a custom image host
+    unoptimized: true, // Set to true for static export
     remotePatterns: [
       {
         protocol: 'https',
