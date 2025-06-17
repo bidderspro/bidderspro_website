@@ -1,4 +1,4 @@
-import BP_logo from "@/public/assets/images/BP_logo.png";
+import BP_logo from "@/public/assets/images/bp-logo.webp";
 import Image from 'next/image';
 
 export default function Footer() {
