@@ -16,6 +16,7 @@ export default function Footer() {
                 width={40}
                 height={40}
                 className="object-contain"
+                loading="lazy"
               />
               <span className="text-4xl font-bold uppercase bg-gradient-to-r from-violet-500 to-indigo-500 bg-clip-text text-transparent">
                 Bidders Pro

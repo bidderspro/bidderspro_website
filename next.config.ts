@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
   output: "standalone",
   reactStrictMode: true,
   compress: true,
+  poweredByHeader: false,
+  generateEtags: true,
 
   // Image optimization
   images: {
@@ -28,10 +30,14 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === "production",
   },
 
+  // Minify HTML and optimize JavaScript
+  swcMinify: true,
+
   // Experimental features
   experimental: {
     optimizeCss: true,
     webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'INP'],
+    serverMinification: true,
   },
 };
 

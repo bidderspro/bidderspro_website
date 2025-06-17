@@ -249,6 +249,7 @@ export const NavbarLogo = () => {
         alt="BiddersPro logo"
         width={30}
         height={30}
+        priority={true}
       />
       
     </Link>

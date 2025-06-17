@@ -74,7 +74,8 @@ const WhyAutomationSection = () => {
                   alt="Tired freelancer at 2AM" 
                   fill
                   style={{ objectFit: 'contain' }}
-                  priority
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
               

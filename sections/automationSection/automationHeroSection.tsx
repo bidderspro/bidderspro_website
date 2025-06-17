@@ -84,6 +84,8 @@ export default function AutomationHeroSection() {
                 fill
                 className="object-cover sm:object-fill"
                 placeholder="blur"
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
               />
             </div>
           </div>

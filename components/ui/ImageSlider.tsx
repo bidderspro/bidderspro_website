@@ -2,6 +2,7 @@
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence, cubicBezier } from "motion/react";
 import React, { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 
 export const ImagesSlider = ({
   images,
@@ -40,7 +41,7 @@ export const ImagesSlider = ({
     setLoading(true);
     const loadPromises = images.map((image) => {
       return new Promise((resolve, reject) => {
-        const img = new Image();
+        const img = new globalThis.Image();
         img.src = image;
         img.onload = () => resolve(image);
         img.onerror = reject;
@@ -136,16 +137,25 @@ export const ImagesSlider = ({
 
       {areImagesLoaded && (
         <AnimatePresence>
-          <motion.img
+          <motion.div
             key={currentIndex}
-            src={loadedImages[currentIndex]}
             initial="initial"
             animate="visible"
             exit={direction === "up" ? "upExit" : "downExit"}
             variants={slideVariants}
             layout="preserve-aspect"
-            className="image h-full w-full absolute inset-0 object-cover object-center"
-          />
+            className="image h-full w-full absolute inset-0"
+          >
+            <Image
+              src={loadedImages[currentIndex]}
+              alt={`Slide ${currentIndex + 1}`}
+              fill
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, 100vw"
+              priority={currentIndex === 0}
+              className="object-cover object-center"
+            />
+          </motion.div>
         </AnimatePresence>
       )}
     </div>
