@@ -7,6 +7,7 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  distDir: 'build',
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
