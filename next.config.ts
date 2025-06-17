@@ -30,9 +30,6 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === "production",
   },
 
-  // Minify HTML and optimize JavaScript
-  swcMinify: true,
-
   // Experimental features
   experimental: {
     optimizeCss: true,
