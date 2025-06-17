@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import LazyImage from '@/components/ui/LazyImage';
 
 const WhyAutomationSection = () => {
   return (
@@ -69,12 +69,11 @@ const WhyAutomationSection = () => {
               className="relative"
             >
               <div className="relative w-full h-[250px] sm:h-[300px] md:h-[350px]">
-                <Image 
+                <LazyImage 
                   src="/assets/images/freelancer.svg" 
                   alt="Tired freelancer at 2AM" 
                   fill
                   style={{ objectFit: 'contain' }}
-                  loading="lazy"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>

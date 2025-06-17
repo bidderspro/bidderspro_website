@@ -65,17 +65,17 @@ export function TestimonialSection() {
           
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              What Clients
+            What Our Clients 
             </span>
             <br />
             <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
-              Say About Me
+            Say About Bidders Pro
             </span>
           </h2>
           
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Real feedback from real clients who trusted me with their projects and achieved 
-            <span className="text-yellow-400 font-semibold"> exceptional results</span>
+          We don't talk about success — 
+            <span className="text-yellow-400 font-semibold"> we automate it.</span>
           </p>
         </motion.div>
 
