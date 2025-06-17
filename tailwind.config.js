@@ -8,6 +8,14 @@ module.exports = {
     './sections/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      'xs': '480px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       animation: {
         marquee: "marquee var(--duration) linear infinite",
@@ -22,6 +30,9 @@ module.exports = {
           from: { transform: "translateY(0)" },
           to: { transform: "translateY(calc(-100% - var(--gap)))" },
         },
+      },
+      fontSize: {
+        'xxs': '0.625rem', // 10px
       },
       colors: {
         gray: {

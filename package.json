@@ -14,6 +14,7 @@
     "@next/bundle-analyzer": "^15.3.3",
     "@tabler/icons-react": "^3.31.0",
     "clsx": "^2.1.1",
+    "critters": "^0.0.23",
     "framer-motion": "^12.9.7",
     "lucide-react": "^0.507.0",
     "motion": "^12.9.7",
