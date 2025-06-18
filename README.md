@@ -52,6 +52,43 @@ SITE_URL=https://bidderspro.com
 - [ ] Verify all pages work correctly
 - [ ] Check performance using Lighthouse
 
+### Deploying with PM2 on Hostinger VPS
+
+1. Upload your code to the VPS
+2. Install PM2 globally if not already installed:
+   ```bash
+   npm install -g pm2
+   ```
+3. Navigate to your project directory
+4. Run the deployment script:
+   ```bash
+   chmod +x deploy.sh
+   ./deploy.sh
+   ```
+   
+   Or manually follow these steps:
+   ```bash
+   # Install dependencies
+   npm install
+   
+   # Build the application
+   npm run build
+   
+   # Start with PM2
+   pm2 start ecosystem.config.js
+   
+   # Save PM2 configuration
+   pm2 save
+   ```
+5. To check logs:
+   ```bash
+   pm2 logs bidderspro
+   ```
+6. To restart the application:
+   ```bash
+   pm2 restart bidderspro
+   ```
+
 ## Tech Stack
 
 - Next.js 15
