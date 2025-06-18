@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run build:server && npm run build:static",
-    "build:server": "cross-env BUILD_MODE=server next build",
-    "build:static": "cross-env BUILD_MODE=export next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },

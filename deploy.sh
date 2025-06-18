@@ -1,23 +1,32 @@
 #!/bin/bash
 
-# Stop the existing PM2 process if it exists
+# Stop PM2 processes (if any running)
 pm2 stop bidderspro || true
 pm2 delete bidderspro || true
 
 # Install dependencies
 npm install
 
-# Build the application for standalone deployment
-npm run build:server
+# Build static export (creates 'out' folder)
+npm run build
 
-# Copy public and static files to standalone directory
-cp -r public .next/standalone/
-cp -r .next/static .next/standalone/.next/
+# Set proper permissions for static files
+chmod -R 755 out/
 
-# Start with PM2
-pm2 start ecosystem.config.js
+# Create backup of current deployment (optional)
+if [ -d "/var/www/bidderspro.com/out.backup" ]; then
+    rm -rf /var/www/bidderspro.com/out.backup
+fi
 
-# Save PM2 configuration
-pm2 save
+if [ -d "/var/www/bidderspro.com/out" ]; then
+    mv /var/www/bidderspro.com/out /var/www/bidderspro.com/out.backup
+fi
 
-echo "Deployment completed successfully!" 
+# Copy new static files
+cp -r out /var/www/bidderspro.com/
+
+# Reload nginx to serve static files
+sudo systemctl reload nginx
+
+echo "Static deployment completed successfully!"
+echo "Website is now running from: /var/www/bidderspro.com/out" 
