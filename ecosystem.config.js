@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: "bidderspro",
-      script: "npm",
+      script: "node_modules/next/dist/bin/next",
       args: "start",
       cwd: "./",
       env: {
@@ -10,7 +10,12 @@ module.exports = {
         PORT: 3000
       },
       exec_mode: "cluster",
-      instances: "max"
+      instances: 1,
+      log_file: "./logs/app.log",
+      out_file: "./logs/out.log",
+      error_file: "./logs/error.log",
+      merge_logs: true,
+      time: true
     }
   ]
 }; 

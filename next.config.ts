@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   generateEtags: true,
+  output: 'standalone',
   images: {
     formats: ['image/webp', 'image/avif'] as const,
     remotePatterns: [

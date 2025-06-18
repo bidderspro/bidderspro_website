@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import { TextAnimate } from "@/components/magicui/text-animate";
 import { motion } from "framer-motion";
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 // UI Components
 import ProgressBar from "@/components/ui/Calendar/ProgressBar";
 import CalendarSelector from "@/components/ui/Calendar/CalendarSelector";
