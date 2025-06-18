@@ -14,7 +14,6 @@ import {
   NavbarButton
 } from "@/components/ui/Navbar";
 
-// Define nav item type
 type NavItem = {
   name: string;
   link: string;
@@ -24,10 +23,8 @@ export default function Header() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
-  // Client-side state for hash handling
   const [isClient, setIsClient] = useState(false);
 
-  // Define navigation items based on current page
   const navItems: NavItem[] = [
     {
       name: "Home",
@@ -55,16 +52,12 @@ export default function Header() {
     },
   ];
 
-  // Set client-side state
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  // Handle scrolling for hash links when not on home page
   useEffect(() => {
-    // Only run on the client and after the component has mounted
     if (isClient && !isHomePage && window.location.hash) {
-      // Navigate to the section after a short delay to ensure the page is loaded
       setTimeout(() => {
         const id = window.location.hash.substring(1);
         const element = document.getElementById(id);
@@ -75,27 +68,28 @@ export default function Header() {
     }
   }, [isHomePage, isClient]);
 
-  // Handle window resize to close mobile menu when switching to desktop
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth >= 768 && mobileNavOpen) {
         setMobileNavOpen(false);
       }
     }
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [mobileNavOpen]);
 
-  // Custom navigation handler
   function handleNavigation(e: React.MouseEvent<HTMLAnchorElement>, link: string): void {
-    // Only run client-side code after hydration
-    if (isClient) {
-      // If it's a hash link on non-home page, prevent default behavior
-      if (link.startsWith("/#") && !isHomePage) {
-        e.preventDefault();
-        window.location.href = link;
+    if (!isClient) return;
+
+    if (link.startsWith("#")) {
+      e.preventDefault();
+      const el = document.getElementById(link.substring(1));
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
       }
+    } else if (link.startsWith("/#") && !isHomePage) {
+      e.preventDefault();
+      window.location.href = link;
     }
   }
 
@@ -108,7 +102,8 @@ export default function Header() {
             <Link
               key={`link-${idx}`}
               href={item.link}
-              onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavigation(e, item.link)}
+              scroll={false}
+              onClick={(e) => handleNavigation(e, item.link)}
               className="relative px-2 md:px-3 lg:px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-white transition-colors duration-200"
             >
               <span className="relative z-20 whitespace-nowrap md:text-xs lg:text-sm">{item.name}</span>
@@ -116,9 +111,9 @@ export default function Header() {
           ))}
         </div>
         <div className="relative z-20 flex items-center">
-          <Link href={isHomePage ? "#contact" : "/#contact"}>
+          <Link href={isHomePage ? "#contact" : "/#contact"} scroll={false}>
             <NavbarButton as="button" variant="primary" className="bg-white text-black hover:bg-violet-700 hover:text-white text-xs md:text-sm">
-             Talk to us
+              Talk to us
             </NavbarButton>
           </Link>
         </div>
@@ -137,7 +132,8 @@ export default function Header() {
             <Link
               key={i}
               href={item.link}
-              onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+              scroll={false}
+              onClick={(e) => {
                 handleNavigation(e, item.link);
                 setMobileNavOpen(false);
               }}
@@ -147,7 +143,7 @@ export default function Header() {
             </Link>
           ))}
           <div className="flex w-full flex-col gap-2 mt-4">
-            <Link href={isHomePage ? "#contact" : "/#contact"}>
+            <Link href={isHomePage ? "#contact" : "/#contact"} scroll={false}>
               <NavbarButton as="button" variant="primary" className="w-full bg-white text-black hover:bg-violet-700 hover:text-white rounded-3xl uppercase">
                 Talk to us
               </NavbarButton>
