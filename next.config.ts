@@ -5,14 +5,19 @@ const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
+// Determine output mode based on environment variable
+const isStaticExport = process.env.BUILD_MODE === 'export';
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
-  generateEtags: true,
-  output: 'standalone',
+  // Conditional output - 'export' creates 'out' folder, 'standalone' creates '.next' folder
+  output: isStaticExport ? 'export' : 'standalone',
   images: {
     formats: ['image/webp', 'image/avif'] as const,
+    // Disable image optimization for static export
+    unoptimized: isStaticExport,
     remotePatterns: [
       {
         protocol: 'https',
@@ -24,13 +29,7 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
-  experimental: {
-    optimizeCss: true,
-    webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'INP'],
-    serverMinification: true,
-  },
   trailingSlash: false,
-  skipTrailingSlashRedirect: true,
 };
 
 export default bundleAnalyzer(nextConfig);
