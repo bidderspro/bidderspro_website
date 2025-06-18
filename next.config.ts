@@ -7,7 +7,7 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 const nextConfig: NextConfig = {
   output: "export",
-  distDir: "build",
+  distDir: "out",
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
