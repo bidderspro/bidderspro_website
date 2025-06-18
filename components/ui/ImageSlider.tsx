@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence, cubicBezier } from "motion/react";
+import { motion, AnimatePresence, cubicBezier } from "framer-motion";
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 

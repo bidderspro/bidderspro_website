@@ -29,6 +29,46 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+  // Performance optimizations
+  experimental: {
+    optimizeCss: true,
+    optimizeServerReact: true,
+    serverMinification: true,
+    turbo: {
+      rules: {
+        "*.svg": ["@svgr/webpack"],
+      },
+    },
+  },
+  // Webpack optimizations
+  webpack: (config, { isServer }) => {
+    // Optimize bundle splitting
+    config.optimization = {
+      ...config.optimization,
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+          },
+          framerMotion: {
+            test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+            name: 'framer-motion',
+            chunks: 'all',
+          },
+          lucideReact: {
+            test: /[\\/]node_modules[\\/]lucide-react[\\/]/,
+            name: 'lucide-react',
+            chunks: 'all',
+          },
+        },
+      },
+    };
+    
+    return config;
+  },
   trailingSlash: false,
 };
 

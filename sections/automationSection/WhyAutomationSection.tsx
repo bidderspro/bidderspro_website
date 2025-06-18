@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const WhyAutomationSection = () => {
@@ -60,7 +59,7 @@ const WhyAutomationSection = () => {
               </p>
             </motion.div>
             
-            {/* Freelancer SVG illustration */}
+            {/* Lightweight CSS-based illustration */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -68,36 +67,54 @@ const WhyAutomationSection = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="relative w-full h-[250px] sm:h-[300px] md:h-[350px]">
-                <Image 
-                  src="/assets/images/freelancer.svg" 
-                  alt="Tired freelancer at 2AM" 
-                  fill
-                  style={{ objectFit: 'contain' }}
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
+              <div className="relative w-full h-[250px] sm:h-[300px] md:h-[350px] bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl border border-gray-700/50 backdrop-blur-sm overflow-hidden">
+                {/* Frustrated freelancer illustration using CSS */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center space-y-4">
+                  {/* Computer screen */}
+                  <div className="w-32 h-20 bg-gray-700 rounded-lg border-2 border-gray-600 relative">
+                    <div className="absolute inset-2 bg-gray-900 rounded flex items-center justify-center">
+                      <div className="text-red-400 text-xs font-mono">No Proposals</div>
+                    </div>
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-8 h-2 bg-gray-600 rounded-b"></div>
+                  </div>
+                  
+                  {/* Person */}
+                  <div className="relative">
+                    {/* Head */}
+                    <div className="w-8 h-8 bg-orange-300 rounded-full mx-auto mb-1"></div>
+                    {/* Body */}
+                    <div className="w-6 h-12 bg-blue-600 rounded-lg mx-auto"></div>
+                    {/* Arms - tired gesture */}
+                    <div className="absolute top-8 -left-3 w-6 h-2 bg-orange-300 rounded-full transform rotate-45"></div>
+                    <div className="absolute top-8 -right-3 w-6 h-2 bg-orange-300 rounded-full transform -rotate-45"></div>
+                  </div>
+                  
+                  {/* Frustration indicators */}
+                  <div className="absolute top-4 left-4 text-yellow-400 text-lg animate-bounce">💸</div>
+                  <div className="absolute top-8 right-6 text-red-400 text-sm animate-pulse">😤</div>
+                </div>
+                
+                {/* Status indicators */}
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 1 }}
+                  viewport={{ once: true }}
+                  className="absolute top-4 right-4 bg-red-500/20 backdrop-blur-sm px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-red-500/30"
+                >
+                  <p className="text-red-400 font-medium text-sm sm:text-base">0 Invites</p>
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 1.2 }}
+                  viewport={{ once: true }}
+                  className="absolute bottom-4 left-4 bg-gray-800/80 backdrop-blur-sm px-2 sm:px-3 py-1 rounded-lg border border-gray-700/50"
+                >
+                  <p className="text-gray-400 text-xs sm:text-sm">2:32 AM</p>
+                </motion.div>
               </div>
-              
-              <motion.div 
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 1 }}
-                viewport={{ once: true }}
-                className="absolute top-4 right-4 bg-red-500/10 px-3 sm:px-4 py-1 sm:py-2 rounded-full"
-              >
-                <p className="text-red-400 font-medium text-sm sm:text-base">0 Invites</p>
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 1.2 }}
-                viewport={{ once: true }}
-                className="absolute bottom-4 left-4 bg-gray-800/80 px-2 sm:px-3 py-1 rounded-lg"
-              >
-                <p className="text-gray-400 text-xs sm:text-sm">2:32 AM</p>
-              </motion.div>
             </motion.div>
           </div>
         </motion.div>
