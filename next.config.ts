@@ -5,16 +5,19 @@ const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
+// Dual mode: server or static export
+const isStaticExport = process.env.BUILD_MODE === 'export';
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
   exportTrailingSlash: true,
-  // Always export as static
-  output: 'export',
-   trailingSlash: true,
+  // Conditional output based on BUILD_MODE
+  output: isStaticExport ? 'export' : 'standalone',
+  trailingSlash: true,
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: isStaticExport, // Only unoptimized for static export
     formats: ['image/webp', 'image/avif'] as const,
     remotePatterns: [
       {
@@ -27,9 +30,13 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
-  // Performance optimizations for static export
+  // Performance optimizations
   experimental: {
     optimizeCss: true,
+    ...(isStaticExport ? {} : {
+      optimizeServerReact: true,
+      serverMinification: true,
+    }),
   },
 };
 
