@@ -2,34 +2,25 @@
 
 echo "🚀 Starting static deployment for BiddersPro..."
 
-# Stop PM2 processes (if any running)
-pm2 stop bidderspro || true
-pm2 delete bidderspro || true
-
 # Install dependencies
 npm install
 
-# Build static export (creates 'out' folder)
+# Build and export static version
 npm run build
+npx next export
 
-# Set proper permissions for static files
+# Ensure target directory exists
+mkdir -p /var/www/bidderspro.com/out
+
+# Set proper permissions
 chmod -R 755 out/
 
-# Backup existing deployment (optional)
-if [ -d "/var/www/bidderspro.com/out.backup" ]; then
-    rm -rf /var/www/bidderspro.com/out.backup
-fi
+# Copy exported files (overwrite, but don't delete folder)
+cp -r out/* /var/www/bidderspro.com/out/
 
-if [ -d "/var/www/bidderspro.com/out" ]; then
-    mv /var/www/bidderspro.com/out /var/www/bidderspro.com/out.backup
-fi
-
-# Copy new static files to deployment directory
-cp -r out /var/www/bidderspro.com/
-
-# Reload nginx to apply changes
+# Reload NGINX
 sudo systemctl reload nginx
 
 echo ""
-echo "✅ Static deployment completed successfully!"
+echo "✅ Static deployment completed!"
 echo "🌐 Website is now running from: /var/www/bidderspro.com/out"

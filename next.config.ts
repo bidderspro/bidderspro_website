@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   // Conditional output based on BUILD_MODE
-  output: isStaticExport ? 'export' : 'standalone',
+  output: 'export',
   trailingSlash: true,
   images: {
     unoptimized: isStaticExport, // Only unoptimized for static export
