@@ -5,13 +5,13 @@ const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const nextConfig = {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
   generateEtags: true,
   images: {
-    formats: ['image/webp', 'image/avif'],
+    formats: ['image/webp', 'image/avif'] as const,
     remotePatterns: [
       {
         protocol: 'https',
@@ -28,6 +28,8 @@ const nextConfig = {
     webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'INP'],
     serverMinification: true,
   },
+  trailingSlash: false,
+  skipTrailingSlashRedirect: true,
 };
 
 export default bundleAnalyzer(nextConfig);
