@@ -12,7 +12,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
-  exportTrailingSlash: true,
   // Conditional output based on BUILD_MODE
   output: isStaticExport ? 'export' : 'standalone',
   trailingSlash: true,
