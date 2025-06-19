@@ -112,7 +112,7 @@ export default function ContactForm() {
     <section className="px-4 py-16 sm:px-6 md:px-8 lg:px-12 xl:px-1">
       <div className="max-w-4xl mx-auto bg-gradient-to-br bg-violet-500/30 p-8 rounded-2xl shadow-xl backdrop-blur-md">
         <TextAnimate as={'h1'} animate='fadeIn' className="mb-8 text-3xl font-bold uppercase text-gray-100 sm:text-4xl md:text-5xl text-center">
-          Get in touch 
+          Get in Touch
         </TextAnimate>
 
         <form onSubmit={handleSubmit} className="space-y-6">

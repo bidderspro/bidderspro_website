@@ -23,7 +23,7 @@ const WhyAutomationSection = dynamicImport(
 );
 
 const CompareSection = dynamicImport(
-  () => import("@/sections/automationSection/CampareSection"),
+  () => import("@/sections/automationSection/CompareSection"),
   { 
     loading: () => <div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />
   }

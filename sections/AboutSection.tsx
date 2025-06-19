@@ -4,7 +4,7 @@ import aboutUsImage from "@/public/assets/images/about-us.webp";
 
 export default function AboutSection() {
   return (
-    <div id="about" className="flex flex-col md:flex-row items-center p-4 md:p-8 lg:p-16 gap-8 md:gap- lg:gap-16">
+    <div id="about" className="flex flex-col md:flex-row items-center p-4 md:p-8 lg:p-16 gap-8 md:gap-12 lg:gap-16">
       <div className="w-full md:w-1/2 flex flex-col items-center justify-center">
         <Image
           src={aboutUsImage}

@@ -74,7 +74,7 @@ export function TestimonialSection() {
           </h2>
           
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-          We don't talk about success — 
+            We don't talk about success — 
             <span className="text-yellow-400 font-semibold"> we automate it.</span>
           </p>
         </motion.div>

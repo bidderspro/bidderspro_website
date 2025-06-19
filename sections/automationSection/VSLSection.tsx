@@ -33,7 +33,7 @@ const VSLSection = () => {
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-indigo-600 mb-6">
               🎥 See It In Action
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
               Watch how our automation system revolutionizes your freelancing workflow in minutes
             </p>
           </motion.div>
