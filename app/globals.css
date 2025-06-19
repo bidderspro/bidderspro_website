@@ -223,8 +223,29 @@ html {
   }
 }
 
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-fade-in-delayed {
+  animation: fadeIn 0.6s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-delayed-2 {
+  animation: fadeIn 0.6s ease-out 0.6s forwards;
+  opacity: 0;
 }
 
 .animate-slide-in-left {
@@ -235,6 +256,15 @@ html {
   animation: slideInRight 0.6s ease-out forwards;
 }
 
+.animate-slide-in-up {
+  animation: slideInUp 0.6s ease-out forwards;
+}
+
+.animate-slide-in-up-delayed {
+  animation: slideInUp 0.6s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
 .animate-scale-in {
   animation: scaleIn 0.6s ease-out forwards;
 }
@@ -242,8 +272,12 @@ html {
 /* Respect user's preference for reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in,
+  .animate-fade-in-delayed,
+  .animate-fade-in-delayed-2,
   .animate-slide-in-left,
   .animate-slide-in-right,
+  .animate-slide-in-up,
+  .animate-slide-in-up-delayed,
   .animate-scale-in {
     animation: none;
     opacity: 1;

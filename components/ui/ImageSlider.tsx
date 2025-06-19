@@ -1,8 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect, useState, useCallback } from "react";
-import Image from "next/image";
 
 export const ImagesSlider = ({
   images,
@@ -22,17 +20,26 @@ export const ImagesSlider = ({
   direction?: "up" | "down";
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const handleNext = useCallback(() => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex + 1 === images.length ? 0 : prevIndex + 1
-    );
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex + 1 === images.length ? 0 : prevIndex + 1
+      );
+      setIsTransitioning(false);
+    }, 150);
   }, [images.length]);
 
   const handlePrevious = useCallback(() => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex - 1 < 0 ? images.length - 1 : prevIndex - 1
-    );
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex - 1 < 0 ? images.length - 1 : prevIndex - 1
+      );
+      setIsTransitioning(false);
+    }, 150);
   }, [images.length]);
 
   useEffect(() => {
@@ -64,28 +71,6 @@ export const ImagesSlider = ({
     };
   }, [autoplay, handleNext, handlePrevious]);
 
-  const slideVariants = {
-    initial: {
-      scale: 0.8,
-      opacity: 0,
-    },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.8,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  };
-
   return (
     <div
       className={cn(
@@ -100,26 +85,19 @@ export const ImagesSlider = ({
         />
       )}
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial="initial"
-          animate="visible"
-          exit="exit"
-          variants={slideVariants}
-          className="image h-full w-full absolute inset-0"
-        >
-          <Image
-            src={images[currentIndex]}
-            alt={`Slide ${currentIndex + 1}`}
-            fill
-            loading="lazy"
-            sizes="(max-width: 768px) 100vw, 100vw"
-            priority={currentIndex === 0}
-            className="object-cover object-center"
-          />
-        </motion.div>
-      </AnimatePresence>
+      <div
+        className={cn(
+          "h-full w-full absolute inset-0 transition-all duration-300 ease-out",
+          isTransitioning ? "opacity-80 scale-105" : "opacity-100 scale-100"
+        )}
+      >
+        <img
+          src={images[currentIndex]}
+          alt={`Slide ${currentIndex + 1}`}
+          className="w-full h-full object-cover object-center"
+          loading="lazy"
+        />
+      </div>
     </div>
   );
 };
