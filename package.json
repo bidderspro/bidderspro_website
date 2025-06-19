@@ -9,7 +9,8 @@
     "build:static": "cross-env BUILD_MODE=export next build",
     "start": "next start",
     "start:server": "node .next/standalone/server.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^15.3.3",
@@ -21,6 +22,7 @@
     "next": "15.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "sharp": "^0.34.2",
     "tailwind-merge": "^3.2.0"
   },
   "devDependencies": {
@@ -31,6 +33,7 @@
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",
+    "cssnano": "^6.0.5",
     "eslint": "9.29.0",
     "eslint-config-next": "15.3.3",
     "postcss": "^8.5.3",

@@ -1,18 +1,21 @@
 "use client";
 
 import React, { useState } from "react";
-import { TextAnimate } from "@/components/magicui/text-animate";
+import dynamicImport from "next/dynamic";
 import { motion } from "framer-motion";
 
-// Force dynamic rendering
-export const dynamic = 'force-dynamic';
+// Dynamically import TextAnimate component
+const TextAnimate = dynamicImport(() => 
+  import("@/components/magicui/text-animate").then(mod => mod.TextAnimate), 
+  { ssr: true }
+);
 
-// UI Components
-import ProgressBar from "@/components/ui/Calendar/ProgressBar";
-import CalendarSelector from "@/components/ui/Calendar/CalendarSelector";
-import MeetingTypeSelector from "@/components/ui/Calendar/MeetingTypeSelector";
-import BookingForm from "@/components/ui/Calendar/BookingForm";
-import BookingConfirmation from "@/components/ui/Calendar/BookingConfirmation";
+// Dynamically import Calendar UI components
+const ProgressBar = dynamicImport(() => import("@/components/ui/Calendar/ProgressBar"), { ssr: true });
+const CalendarSelector = dynamicImport(() => import("@/components/ui/Calendar/CalendarSelector"));
+const MeetingTypeSelector = dynamicImport(() => import("@/components/ui/Calendar/MeetingTypeSelector"));
+const BookingForm = dynamicImport(() => import("@/components/ui/Calendar/BookingForm"));
+const BookingConfirmation = dynamicImport(() => import("@/components/ui/Calendar/BookingConfirmation"));
 
 // Types
 import { BookingData, FormErrors, MeetingType } from "@/components/ui/Calendar/types";
@@ -249,6 +252,7 @@ export default function CalendarPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
+              className="mt-8"
             >
               {renderCurrentStep()}
             </motion.div>

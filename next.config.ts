@@ -1,24 +1,25 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 import withBundleAnalyzer from '@next/bundle-analyzer';
 
 const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-// Dual mode: server or static export
 const isStaticExport = process.env.BUILD_MODE === 'export';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
-  swcMinify: true,
-  // Conditional output based on BUILD_MODE
-  output: isStaticExport ? 'export' : undefined,
   trailingSlash: true,
+
+  // Conditional output for static export
+  output: isStaticExport ? 'export' : undefined,
+
   images: {
-    unoptimized: true, // Temporarily disable optimization to fix 404 errors
-    formats: ['image/webp', 'image/avif'] as const,
+    // Enable unoptimized images only for static export mode
+    unoptimized: isStaticExport,
+    formats: ['image/webp', 'image/avif'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -27,88 +28,107 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production",
+    // Remove console logs in production builds
+    removeConsole: process.env.NODE_ENV === 'production',
   },
-  // Updated experimental options for Next.js 15 compatibility
+
   experimental: {
+    // Enable CSS minification
     optimizeCss: true,
-    // Removed server optimizations to avoid webpack conflicts
-    ...(isStaticExport ? {} : {
-      // Removed optimizeServerReact and serverMinification as they may cause conflicts
-    }),
+    // Modern optimizations
+    optimizePackageImports: ['framer-motion', '@tabler/icons-react', 'lucide-react'],
   },
-  // Webpack configuration to resolve optimization conflicts
+
   webpack: (config, { isServer }) => {
-    // Fix for optimization.usedExports conflict with cacheUnaffected
-    if (config.optimization) {
+    // Enable module concatenation (scope hoisting) for better JS performance
+    if (!isServer && config.optimization) {
+      config.optimization.concatenateModules = true;
+      
+      // Disable usedExports to avoid conflict with cacheUnaffected
+      // This fixes the error: "optimization.usedExports can't be used with cacheUnaffected"
       config.optimization.usedExports = false;
+      
+      // Remove comments from output
+      if (config.optimization.minimizer) {
+        const terserOptions = {
+          terserOptions: {
+            compress: {
+              drop_console: true,
+            },
+            output: {
+              comments: false,
+            },
+          },
+        };
+        
+        config.optimization.minimizer.forEach((minimizer: any) => {
+          if (minimizer.constructor && minimizer.constructor.name === 'TerserPlugin') {
+            Object.assign(minimizer.options, terserOptions);
+          }
+        });
+      }
     }
-    
+
     return config;
   },
-  // Cache-Control headers for static assets (only applies to server mode)
-  // Headers don't work with output: 'export' - use NGINX config for static exports
+
+  // Headers for server mode only (not supported with `output: 'export'`)
   ...(!isStaticExport && {
     async headers() {
       return [
-        // Cache static assets aggressively
         {
           source: '/assets/:path*',
           headers: [
             {
               key: 'Cache-Control',
-              value: 'public, max-age=31536000, immutable', // 1 year
+              value: 'public, max-age=31536000, immutable',
             },
           ],
         },
-        // Cache images with longer duration
         {
           source: '/:path*\\.(jpg|jpeg|png|gif|ico|svg|webp|avif)',
           headers: [
             {
               key: 'Cache-Control',
-              value: 'public, max-age=2592000, stale-while-revalidate=86400', // 30 days, revalidate after 1 day
+              value: 'public, max-age=2592000, stale-while-revalidate=86400',
             },
           ],
         },
-        // Cache CSS and JS files
         {
           source: '/_next/static/:path*',
           headers: [
             {
               key: 'Cache-Control',
-              value: 'public, max-age=31536000, immutable', // 1 year for Next.js static assets
+              value: 'public, max-age=31536000, immutable',
             },
           ],
         },
-        // Cache fonts
         {
           source: '/:path*\\.(woff|woff2|ttf|otf|eot)',
           headers: [
             {
               key: 'Cache-Control',
-              value: 'public, max-age=31536000, immutable', // 1 year
+              value: 'public, max-age=31536000, immutable',
             },
           ],
         },
-        // Cache manifest and other PWA files
         {
           source: '/:path*\\.(json|xml|txt)',
           headers: [
             {
               key: 'Cache-Control',
-              value: 'public, max-age=86400', // 1 day
+              value: 'public, max-age=86400',
             },
           ],
         },
-        // Cache HTML pages with shorter duration and revalidation
         {
           source: '/:path*',
           headers: [
             {
               key: 'Cache-Control',
-              value: 'public, max-age=3600, stale-while-revalidate=86400', // 1 hour, revalidate after 1 day
+              value: 'public, max-age=3600, stale-while-revalidate=86400',
             },
           ],
         },

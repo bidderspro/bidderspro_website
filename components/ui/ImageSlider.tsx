@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 
 export const ImagesSlider = ({
   images,
@@ -91,11 +92,13 @@ export const ImagesSlider = ({
           isTransitioning ? "opacity-80 scale-105" : "opacity-100 scale-100"
         )}
       >
-        <img
+        <Image
           src={images[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
-          className="w-full h-full object-cover object-center"
-          loading="lazy"
+          className="object-cover object-center"
+          fill
+          sizes="100vw"
+          priority={currentIndex === 0}
         />
       </div>
     </div>

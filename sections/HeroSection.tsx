@@ -1,5 +1,15 @@
-import { TextAnimate } from "@/components/magicui/text-animate";
-import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+import dynamicImport from 'next/dynamic';
+
+// Dynamically import heavy UI components
+const TextAnimate = dynamicImport(() => 
+  import('@/components/magicui/text-animate').then(mod => mod.TextAnimate), 
+  { ssr: true }
+);
+
+const InteractiveHoverButton = dynamicImport(() => 
+  import('@/components/magicui/interactive-hover-button').then(mod => mod.InteractiveHoverButton), 
+  { ssr: true }
+);
 
 export default function HeroSection() {
   return (

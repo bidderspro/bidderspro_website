@@ -2,17 +2,17 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import {
-  Navbar,
-  NavBody,
-  NavItems,
-  MobileNav,
-  MobileNavHeader,
-  MobileNavMenu,
-  MobileNavToggle,
-  NavbarLogo,
-  NavbarButton
-} from "@/components/ui/Navbar";
+import dynamicImport from "next/dynamic";
+
+// Dynamically import Navbar components individually
+const Navbar = dynamicImport(() => import("@/components/ui/Navbar").then(mod => mod.Navbar), { ssr: true });
+const NavBody = dynamicImport(() => import("@/components/ui/Navbar").then(mod => mod.NavBody), { ssr: true });
+const MobileNav = dynamicImport(() => import("@/components/ui/Navbar").then(mod => mod.MobileNav), { ssr: true });
+const MobileNavHeader = dynamicImport(() => import("@/components/ui/Navbar").then(mod => mod.MobileNavHeader), { ssr: true });
+const MobileNavMenu = dynamicImport(() => import("@/components/ui/Navbar").then(mod => mod.MobileNavMenu), { ssr: true });
+const MobileNavToggle = dynamicImport(() => import("@/components/ui/Navbar").then(mod => mod.MobileNavToggle), { ssr: true });
+const NavbarLogo = dynamicImport(() => import("@/components/ui/Navbar").then(mod => mod.NavbarLogo), { ssr: true });
+const NavbarButton = dynamicImport(() => import("@/components/ui/Navbar").then(mod => mod.NavbarButton), { ssr: true });
 
 type NavItem = {
   name: string;

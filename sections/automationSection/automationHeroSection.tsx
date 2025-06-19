@@ -1,5 +1,6 @@
 import { TextAnimate } from "@/components/magicui/text-animate";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+import Image from "next/image";
 
 export default function AutomationHeroSection() {
   return (
@@ -59,10 +60,13 @@ export default function AutomationHeroSection() {
         <div className="w-full max-w-6xl mx-auto px-1 sm:px-2 lg:px-3 mb-0 sm:mb-0 md:mb-0 animate-slide-in-up-delayed">
           <div className="bg-white/5  rounded-lg sm:rounded-xl lg:rounded-2xl p-1 sm:p-2 md:p-3 lg:p-4 shadow-2xl border border-white/10 overflow-hidden">
             <div className="relative w-full aspect-video rounded-md sm:rounded-lg lg:rounded-xl overflow-hidden">
-              <img
+              <Image
                 src="/assets/images/upwork-stats.webp"
                 alt="Upwork stats dashboard"
+                width={1920}
+                height={1080}
                 className="w-full h-full object-cover sm:object-fill"
+                priority
               />
             </div>
           </div>

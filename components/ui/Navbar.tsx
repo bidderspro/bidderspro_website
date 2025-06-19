@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import React, { useState, useEffect } from "react";
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -199,12 +200,13 @@ export const NavbarLogo = () => {
       href="/"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black dark:text-white"
     >
-      <img
+      <Image
         src="/assets/images/bp-logo.webp"
         alt="BiddersPro logo"
         width={30}
         height={30}
         className="object-contain"
+        priority
       />
     </Link>
   );
