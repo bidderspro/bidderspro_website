@@ -94,6 +94,9 @@ export function TextAnimate({
   // Use animation prop for backward compatibility
   const animationType = animation || animate || "fadeIn";
   
+  // Memoize transition options - moved before early return to fix the React Hook error
+  const transition = useMemo(() => ({ duration, delay }), [duration, delay]);
+  
   // Early return for reduced motion or no animation
   if (prefersReducedMotion || animationType === "none") {
     return <Component className={className}>{children}</Component>;
@@ -101,9 +104,6 @@ export function TextAnimate({
 
   // Get the appropriate animation variant
   const variants = animationVariants[animationType as keyof typeof animationVariants] || animationVariants.default;
-
-  // Memoize transition options
-  const transition = useMemo(() => ({ duration, delay }), [duration, delay]);
 
   return (
     <motion.div

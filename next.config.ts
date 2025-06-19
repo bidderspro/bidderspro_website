@@ -71,40 +71,6 @@ const nextConfig: NextConfig = {
           }
         });
       }
-
-      // Add modern JavaScript output targeting
-      if (!dev) {
-        config.module = config.module || {};
-        config.module.rules = config.module.rules || [];
-        
-        // Target modern browsers for smaller bundles
-        config.module.rules.push({
-          test: /\.(js|mjs|jsx|ts|tsx)$/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                ['next/babel', {
-                  'preset-env': {
-                    targets: {
-                      browsers: [
-                        'Chrome >= 87',
-                        'Safari >= 14',
-                        'Edge >= 88',
-                        'Firefox >= 78',
-                        'iOS >= 14',
-                      ],
-                    },
-                    modules: false,
-                    useBuiltIns: 'usage',
-                    corejs: 3,
-                  },
-                }],
-              ],
-            },
-          },
-        });
-      }
     }
 
     return config;
