@@ -25,7 +25,7 @@ const UpworkAutomationSection = dynamic(() => import('@/sections/UpworkAutomatio
   ssr: false
 });
 
-const TestimonialSection = dynamic(() => import('@/sections/TestimonialSection').then(mod => ({ default: mod.TestimonialSection })), {
+const TestimonialSection = dynamic(() => import('@/sections/TestimonialSection'), {
   loading: () => <LoadingComponent />,
   ssr: false
 });

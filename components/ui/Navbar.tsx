@@ -44,15 +44,23 @@ interface MobileNavMenuProps {
 
 export const Navbar = ({ children, className }: NavbarProps) => {
   const [visible, setVisible] = useState<boolean>(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure consistent initial state between server and client
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
+    if (!isClient) return;
+    
     const handleScroll = () => {
       setVisible(window.scrollY > 100);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isClient]);
 
   return (
     <div className={cn("sticky inset-x-0 top-0 z-40 w-full", className)}>
@@ -67,7 +75,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
         if (customComponents.includes(typeName)) {
           return React.cloneElement(
             child as React.ReactElement<{ visible?: boolean }>,
-            { visible },
+            { visible: isClient ? visible : false }, // Always false during SSR
           );
         }
         return child;
@@ -81,14 +89,9 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
     <div
       className={cn(
         "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 md:flex dark:bg-transparent transition-all duration-300 ease-out",
-        visible && "bg-white/80 dark:bg-violet-800/30 backdrop-blur-md shadow-lg",
+        visible && "bg-white/80 dark:bg-violet-800/30 backdrop-blur-md shadow-lg [transform:translateY(20px)] max-w-[calc(100%-2rem)] [max-width:1280px]",
         className,
       )}
-      style={{
-        transform: visible ? 'translateY(20px)' : 'translateY(0)',
-        width: visible ? 'calc(100% - 2rem)' : '100%',
-        maxWidth: visible ? '1280px' : '100%',
-      }}
     >
       {children}
     </div>
@@ -129,15 +132,9 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
     <div
       className={cn(
         "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 md:hidden transition-all duration-300 ease-out",
-        visible && "bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md shadow-lg",
+        visible && "bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md shadow-lg [transform:translateY(20px)] w-[90%] p-3 rounded",
         className,
       )}
-      style={{
-        transform: visible ? 'translateY(20px)' : 'translateY(0)',
-        width: visible ? '90%' : '100%',
-        padding: visible ? '12px' : '0px',
-        borderRadius: visible ? '4px' : '2rem',
-      }}
     >
       {children}
     </div>
