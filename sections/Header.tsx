@@ -96,65 +96,68 @@ export default function Header() {
   }
 
   return (
-    <Navbar className="fixed top-0 left-0 right-0 z-50 bg-transparent max-w-6xl mx-auto">
-      <NavBody className="!py-2">
-        <NavbarLogo />
-        <div className="absolute inset-0 hidden md:flex flex-1 flex-row items-center justify-center space-x-1 md:space-x-2 text-sm font-medium text-zinc-600">
-          {navItems.map((item, idx) => (
-            <Link
-              key={`link-${idx}`}
-              href={item.link}
-              scroll={false}
-              onClick={(e) => handleNavigation(e, item.link)}
-              className="relative px-2 md:px-3 lg:px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-white transition-colors duration-200"
-              prefetch={true}
-            >
-              <span className="relative z-20 whitespace-nowrap md:text-xs lg:text-sm">{item.name}</span>
-            </Link>
-          ))}
-        </div>
-        <div className="relative z-20 flex items-center">
-          <Link href={isHomePage ? "#contact" : "/#contact"} scroll={false} onClick={(e) => handleNavigation(e, isHomePage ? "#contact" : "/#contact")}> 
-            <NavbarButton as="button" variant="primary" className="bg-white text-black hover:bg-violet-700 hover:text-white text-xs md:text-sm">
-              Talk to us
-            </NavbarButton>
-          </Link>
-        </div>
-      </NavBody>
-
-      <MobileNav className="!py-2">
-        <MobileNavHeader>
+    <Navbar className="fixed top-0 left-0 right-0 z-50 w-full bg-transparent backdrop-blur-sm">
+      <div className="absolute inset-0 bg-black/5 backdrop-blur-sm z-0"></div>
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <NavBody className="!py-3">
           <NavbarLogo />
-          <MobileNavToggle
-            isOpen={mobileNavOpen}
-            onClick={() => setMobileNavOpen(!mobileNavOpen)}
-          />
-        </MobileNavHeader>
-        <MobileNavMenu isOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)}>
-          {navItems.map((item, i) => (
-            <Link
-              key={i}
-              href={item.link}
-              scroll={false}
-              onClick={(e) => {
-                handleNavigation(e, item.link);
-                setMobileNavOpen(false);
-              }}
-              className="w-full rounded-lg p-2 text-sm hover:bg-gray-100 dark:hover:bg-neutral-900"
-              prefetch={true}
-            >
-              {item.name}
-            </Link>
-          ))}
-          <div className="flex w-full flex-col gap-2 mt-4">
+          <div className="absolute inset-0 hidden md:flex flex-1 flex-row items-center justify-center space-x-1 md:space-x-2 text-sm font-medium text-zinc-600">
+            {navItems.map((item, idx) => (
+              <Link
+                key={`link-${idx}`}
+                href={item.link}
+                scroll={false}
+                onClick={(e) => handleNavigation(e, item.link)}
+                className="relative px-2 md:px-3 lg:px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-white transition-colors duration-200"
+                prefetch={true}
+              >
+                <span className="relative z-20 whitespace-nowrap md:text-xs lg:text-sm">{item.name}</span>
+              </Link>
+            ))}
+          </div>
+          <div className="relative z-20 flex items-center">
             <Link href={isHomePage ? "#contact" : "/#contact"} scroll={false} onClick={(e) => handleNavigation(e, isHomePage ? "#contact" : "/#contact")}> 
-              <NavbarButton as="button" variant="primary" className="w-full bg-white text-black hover:bg-violet-700 hover:text-white rounded-3xl uppercase">
+              <NavbarButton as="button" variant="primary" className="bg-white text-black hover:bg-violet-700 hover:text-white text-xs md:text-sm">
                 Talk to us
               </NavbarButton>
             </Link>
           </div>
-        </MobileNavMenu>
-      </MobileNav>
+        </NavBody>
+
+        <MobileNav className="!py-3">
+          <MobileNavHeader>
+            <NavbarLogo />
+            <MobileNavToggle
+              isOpen={mobileNavOpen}
+              onClick={() => setMobileNavOpen(!mobileNavOpen)}
+            />
+          </MobileNavHeader>
+          <MobileNavMenu isOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)}>
+            {navItems.map((item, i) => (
+              <Link
+                key={i}
+                href={item.link}
+                scroll={false}
+                onClick={(e) => {
+                  handleNavigation(e, item.link);
+                  setMobileNavOpen(false);
+                }}
+                className="w-full rounded-lg p-2 text-sm hover:bg-gray-100 dark:hover:bg-neutral-900"
+                prefetch={true}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="flex w-full flex-col gap-2 mt-4">
+              <Link href={isHomePage ? "#contact" : "/#contact"} scroll={false} onClick={(e) => handleNavigation(e, isHomePage ? "#contact" : "/#contact")}> 
+                <NavbarButton as="button" variant="primary" className="w-full bg-white text-black hover:bg-violet-700 hover:text-white rounded-3xl uppercase">
+                  Talk to us
+                </NavbarButton>
+              </Link>
+            </div>
+          </MobileNavMenu>
+        </MobileNav>
+      </div>
     </Navbar>
   );
 }

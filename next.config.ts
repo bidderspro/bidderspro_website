@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
+  swcMinify: true,
   // Conditional output based on BUILD_MODE
   output: isStaticExport ? 'export' : undefined,
   trailingSlash: true,
@@ -29,13 +30,22 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
-  // Performance optimizations
+  // Updated experimental options for Next.js 15 compatibility
   experimental: {
     optimizeCss: true,
+    // Removed server optimizations to avoid webpack conflicts
     ...(isStaticExport ? {} : {
-      optimizeServerReact: true,
-      serverMinification: true,
+      // Removed optimizeServerReact and serverMinification as they may cause conflicts
     }),
+  },
+  // Webpack configuration to resolve optimization conflicts
+  webpack: (config, { isServer }) => {
+    // Fix for optimization.usedExports conflict with cacheUnaffected
+    if (config.optimization) {
+      config.optimization.usedExports = false;
+    }
+    
+    return config;
   },
   // Cache-Control headers for static assets (only applies to server mode)
   // Headers don't work with output: 'export' - use NGINX config for static exports

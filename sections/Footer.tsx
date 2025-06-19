@@ -3,9 +3,10 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-b bg-transparent text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 justify-center items-center">
+    <footer className="relative w-full bg-gradient-to-b from-transparent to-violet-950/20 text-white border-t border-gray-800/20 mt-16">
+      <div className="absolute inset-0 bg-black/5 backdrop-blur-sm z-0"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 justify-center items-start md:items-start lg:items-start justify-items-center">
           
           {/* Brand Section */}
           <div className="col-span-1 lg:col-span-2 space-y-4 text-center md:text-left">
