@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
   output: isStaticExport ? 'export' : undefined,
   trailingSlash: true,
   images: {
-    unoptimized: isStaticExport, // Only unoptimized for static export
+    unoptimized: true, // Temporarily disable optimization to fix 404 errors
     formats: ['image/webp', 'image/avif'] as const,
     remotePatterns: [
       {

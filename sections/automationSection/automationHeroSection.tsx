@@ -1,8 +1,6 @@
 import { TextAnimate } from "@/components/magicui/text-animate";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import upworkStatsImage from "@/public/assets/images/upwork-stats.webp";
 
 export default function AutomationHeroSection() {
   return (
@@ -78,13 +76,10 @@ export default function AutomationHeroSection() {
         <div className="w-full max-w-6xl mx-auto px-1 sm:px-2 lg:px-3 mb-0 sm:mb-0 md:mb-0">
           <div className="bg-white/5  rounded-lg sm:rounded-xl lg:rounded-2xl p-1 sm:p-2 md:p-3 lg:p-4 shadow-2xl border border-white/10 overflow-hidden">
             <div className="relative w-full aspect-video rounded-md sm:rounded-lg lg:rounded-xl overflow-hidden">
-              <Image
-                src={upworkStatsImage}
+              <img
+                src="/assets/images/upwork-stats.webp"
                 alt="Upwork stats dashboard"
-                fill
-                className="object-cover sm:object-fill"
-                placeholder="blur"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                className="w-full h-full object-cover sm:object-fill"
               />
             </div>
           </div>

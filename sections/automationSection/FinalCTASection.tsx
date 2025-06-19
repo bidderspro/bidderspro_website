@@ -27,8 +27,7 @@ const FinalCTASection = () => {
 
   return (
     <section className="py-24 relative overflow-hidden">
-      {/* Background with gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-indigo-950/50 to-gray-900"></div>
+      
       
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">

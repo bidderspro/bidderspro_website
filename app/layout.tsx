@@ -50,8 +50,10 @@ export default function RootLayout({
       >
         <Background />
         <Header />
-        <main className="max-w-[100vw] pt-14 sm:pt-6 md:pt-16 lg:pt-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 mx-auto">
-          {children}
+        <main className="relative z-10 w-full pt-20 sm:pt-24 md:pt-28">
+          <div className="w-full max-w-none">
+            {children}
+          </div>
         </main>
         <Footer />
       </body>

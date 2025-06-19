@@ -96,7 +96,7 @@ export default function Header() {
   }
 
   return (
-    <Navbar className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+    <Navbar className="fixed top-0 left-0 right-0 z-50 bg-transparent max-w-6xl mx-auto">
       <NavBody className="!py-2">
         <NavbarLogo />
         <div className="absolute inset-0 hidden md:flex flex-1 flex-row items-center justify-center space-x-1 md:space-x-2 text-sm font-medium text-zinc-600">

@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence, cubicBezier } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 
@@ -22,8 +22,6 @@ export const ImagesSlider = ({
   direction?: "up" | "down";
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [loadedImages, setLoadedImages] = useState<string[]>([]);
 
   const handleNext = useCallback(() => {
     setCurrentIndex((prevIndex) =>
@@ -37,29 +35,6 @@ export const ImagesSlider = ({
     );
   }, [images.length]);
 
-  const loadImages = useCallback(() => {
-    setLoading(true);
-    const loadPromises = images.map((image) => {
-      return new Promise((resolve, reject) => {
-        const img = new globalThis.Image();
-        img.src = image;
-        img.onload = () => resolve(image);
-        img.onerror = reject;
-      });
-    });
-
-    Promise.all(loadPromises)
-      .then((loadedImages) => {
-        setLoadedImages(loadedImages as string[]);
-        setLoading(false);
-      })
-      .catch((error) => console.error("Failed to load images", error));
-  }, [images]);
-
-  useEffect(() => {
-    loadImages();
-  }, [loadImages]);
-
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "ArrowRight") {
@@ -69,7 +44,9 @@ export const ImagesSlider = ({
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    if (typeof window !== 'undefined') {
+      window.addEventListener("keydown", handleKeyDown);
+    }
 
     // autoplay
     let interval: ReturnType<typeof setInterval>;
@@ -80,43 +57,34 @@ export const ImagesSlider = ({
     }
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener("keydown", handleKeyDown);
+      }
       clearInterval(interval);
     };
   }, [autoplay, handleNext, handlePrevious]);
 
   const slideVariants = {
     initial: {
-      scale: 0,
+      scale: 0.8,
       opacity: 0,
-      rotateX: 45,
     },
     visible: {
       scale: 1,
-      rotateX: 0,
       opacity: 1,
       transition: {
-        duration: 0.5,
-        ease: cubicBezier(0.645, 0.045, 0.355, 1.0),
+        duration: 0.3,
+        ease: "easeOut",
       },
     },
-    upExit: {
-      opacity: 1,
-      y: "-150%",
+    exit: {
+      opacity: 0,
+      scale: 0.8,
       transition: {
-        duration: 1,
-      },
-    },
-    downExit: {
-      opacity: 1,
-      y: "150%",
-      transition: {
-        duration: 1,
+        duration: 0.2,
       },
     },
   };
-
-  const areImagesLoaded = loadedImages.length > 0;
 
   return (
     <div
@@ -124,40 +92,34 @@ export const ImagesSlider = ({
         "overflow-hidden h-full w-full relative flex items-center justify-center",
         className
       )}
-      style={{
-        perspective: "1000px",
-      }}
     >
-      {areImagesLoaded && children}
-      {areImagesLoaded && overlay && (
+      {children}
+      {overlay && (
         <div
           className={cn("absolute inset-0 bg-black/60 z-40", overlayClassName)}
         />
       )}
 
-      {areImagesLoaded && (
-        <AnimatePresence>
-          <motion.div
-            key={currentIndex}
-            initial="initial"
-            animate="visible"
-            exit={direction === "up" ? "upExit" : "downExit"}
-            variants={slideVariants}
-            layout="preserve-aspect"
-            className="image h-full w-full absolute inset-0"
-          >
-            <Image
-              src={loadedImages[currentIndex]}
-              alt={`Slide ${currentIndex + 1}`}
-              fill
-              loading="lazy"
-              sizes="(max-width: 768px) 100vw, 100vw"
-              priority={currentIndex === 0}
-              className="object-cover object-center"
-            />
-          </motion.div>
-        </AnimatePresence>
-      )}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial="initial"
+          animate="visible"
+          exit="exit"
+          variants={slideVariants}
+          className="image h-full w-full absolute inset-0"
+        >
+          <Image
+            src={images[currentIndex]}
+            alt={`Slide ${currentIndex + 1}`}
+            fill
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, 100vw"
+            priority={currentIndex === 0}
+            className="object-cover object-center"
+          />
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
