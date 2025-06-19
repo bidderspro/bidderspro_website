@@ -41,7 +41,7 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['framer-motion', '@tabler/icons-react', 'lucide-react'],
   },
 
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, dev }) => {
     // Enable module concatenation (scope hoisting) for better JS performance
     if (!isServer && config.optimization) {
       config.optimization.concatenateModules = true;
@@ -56,10 +56,12 @@ const nextConfig: NextConfig = {
           terserOptions: {
             compress: {
               drop_console: true,
+              passes: 2, // Additional optimization passes
             },
             output: {
               comments: false,
             },
+            mangle: true,
           },
         };
         
@@ -67,6 +69,40 @@ const nextConfig: NextConfig = {
           if (minimizer.constructor && minimizer.constructor.name === 'TerserPlugin') {
             Object.assign(minimizer.options, terserOptions);
           }
+        });
+      }
+
+      // Add modern JavaScript output targeting
+      if (!dev) {
+        config.module = config.module || {};
+        config.module.rules = config.module.rules || [];
+        
+        // Target modern browsers for smaller bundles
+        config.module.rules.push({
+          test: /\.(js|mjs|jsx|ts|tsx)$/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['next/babel', {
+                  'preset-env': {
+                    targets: {
+                      browsers: [
+                        'Chrome >= 87',
+                        'Safari >= 14',
+                        'Edge >= 88',
+                        'Firefox >= 78',
+                        'iOS >= 14',
+                      ],
+                    },
+                    modules: false,
+                    useBuiltIns: 'usage',
+                    corejs: 3,
+                  },
+                }],
+              ],
+            },
+          },
         });
       }
     }
@@ -115,6 +151,15 @@ const nextConfig: NextConfig = {
           ],
         },
         {
+          source: '/:path*\\.(js|css)',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable',
+            },
+          ],
+        },
+        {
           source: '/:path*\\.(json|xml|txt)',
           headers: [
             {
@@ -129,6 +174,18 @@ const nextConfig: NextConfig = {
             {
               key: 'Cache-Control',
               value: 'public, max-age=3600, stale-while-revalidate=86400',
+            },
+            {
+              key: 'X-Content-Type-Options',
+              value: 'nosniff',
+            },
+            {
+              key: 'X-Frame-Options',
+              value: 'DENY',
+            },
+            {
+              key: 'X-XSS-Protection',
+              value: '1; mode=block',
             },
           ],
         },

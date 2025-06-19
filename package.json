@@ -10,16 +10,21 @@
     "start": "next start",
     "start:server": "node .next/standalone/server.js",
     "lint": "next lint",
-    "analyze": "cross-env ANALYZE=true next build"
+    "analyze": "cross-env ANALYZE=true next build",
+    "optimize:images": "next-image-export-optimizer",
+    "compress:js": "terser-folder dist -e -o dist",
+    "compress:css": "postcss dist/**/*.css --replace --config postcss.config.mjs"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^15.3.3",
     "@tabler/icons-react": "^3.31.0",
     "clsx": "^2.1.1",
+    "core-js": "^3.36.0",
     "critters": "^0.0.23",
     "framer-motion": "^12.9.7",
     "lucide-react": "^0.507.0",
     "next": "15.2.0",
+    "next-image-export-optimizer": "^1.12.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sharp": "^0.34.2",
@@ -37,7 +42,10 @@
     "eslint": "9.29.0",
     "eslint-config-next": "15.3.3",
     "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.0",
     "tailwindcss": "^4.1.5",
+    "terser": "^5.29.2",
+    "terser-folder": "^2.0.0",
     "typescript": "^5"
   }
 }

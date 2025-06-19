@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { ElementType, useEffect, useState } from "react";
+import { ElementType, useEffect, useState, useMemo } from "react";
 
 interface TextAnimateProps {
   children: string;
@@ -18,27 +18,62 @@ interface TextAnimateProps {
   once?: boolean; // For backward compatibility
 }
 
-// Detect reduced motion preference
-function useReducedMotion() {
+// Detect reduced motion preference - shared across all instances
+const useReducedMotion = () => {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      setPrefersReducedMotion(mediaQuery.matches);
-      
-      const onChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    // Only run in browser
+    if (typeof window === 'undefined') return;
+    
+    // Use existing media query if possible
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    // Add listener with proper cleanup
+    const onChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    
+    // Use the appropriate event listener method based on browser support
+    if (mediaQuery.addEventListener) {
       mediaQuery.addEventListener('change', onChange);
-      
-      return () => {
-        mediaQuery.removeEventListener('change', onChange);
-      };
+      return () => mediaQuery.removeEventListener('change', onChange);
+    } else {
+      // Fallback for older browsers
+      mediaQuery.addListener(onChange);
+      return () => mediaQuery.removeListener(onChange);
     }
-    return () => {};
   }, []);
   
   return prefersReducedMotion;
-}
+};
+
+// Cache animation variants to avoid recreating objects
+const animationVariants = {
+  fadeIn: {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 }
+  },
+  slideUp: {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  },
+  blurInDown: {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 }
+  },
+  blurIn: {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 }
+  },
+  slideDown: {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 }
+  },
+  default: {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 }
+  }
+};
 
 export function TextAnimate({
   children,
@@ -59,50 +94,23 @@ export function TextAnimate({
   // Use animation prop for backward compatibility
   const animationType = animation || animate || "fadeIn";
   
+  // Early return for reduced motion or no animation
   if (prefersReducedMotion || animationType === "none") {
     return <Component className={className}>{children}</Component>;
   }
 
-  // Map animation types to variants
-  const getVariants = () => {
-    switch (animationType) {
-      case "fadeIn":
-        return {
-          hidden: { opacity: 0, y: 10 },
-          visible: { opacity: 1, y: 0 }
-        };
-      case "slideUp":
-        return {
-          hidden: { opacity: 0, y: 20 },
-          visible: { opacity: 1, y: 0 }
-        };
-      case "blurInDown":
-      case "blurIn":
-        return {
-          hidden: { opacity: 0, y: -20 },
-          visible: { opacity: 1, y: 0 }
-        };
-      case "slideDown":
-        return {
-          hidden: { opacity: 0, y: -20 },
-          visible: { opacity: 1, y: 0 }
-        };
-      default:
-        return {
-          hidden: { opacity: 0 },
-          visible: { opacity: 1 }
-        };
-    }
-  };
+  // Get the appropriate animation variant
+  const variants = animationVariants[animationType as keyof typeof animationVariants] || animationVariants.default;
 
-  const variants = getVariants();
+  // Memoize transition options
+  const transition = useMemo(() => ({ duration, delay }), [duration, delay]);
 
   return (
     <motion.div
       initial="hidden"
       animate="visible"
       variants={variants}
-      transition={{ duration, delay }}
+      transition={transition}
       className="contents"
     >
       <Component className={className}>{children}</Component>

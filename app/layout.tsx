@@ -1,19 +1,14 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import dynamicImport from "next/dynamic";
+import { lazy, Suspense } from "react";
 import Background from "@/components/ui/Background2";
 
 // Dynamically import components that aren't needed for initial render
-const Header = dynamicImport(() => import("@/sections/Header"), {
-  ssr: true,
-  loading: () => <div className="h-16 w-full" />
-});
+const Header = lazy(() => import("@/sections/Header"));
+const Footer = lazy(() => import("@/sections/Footer"));
 
-const Footer = dynamicImport(() => import("@/sections/Footer"), {
-  loading: () => <div className="h-24 w-full" />
-});
-
+// Optimize font loading
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -63,7 +58,11 @@ export default function RootLayout({
         {/* Add meta tags to improve bfcache */}
         <meta httpEquiv="Cache-Control" content="public, max-age=3600, stale-while-revalidate=86400" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-        {/* Preload hero font to reduce LCP */}
+        {/* Prevent back/forward cache issues */}
+        <meta name="theme-color" content="#000000" />
+        <meta httpEquiv="Permissions-Policy" content="interest-cohort=()" />
+        <meta httpEquiv="Pragma" content="no-cache" />
+        {/* Preload critical assets */}
         <link
           rel="preload"
           href="/fonts/geist-sans-latin.woff2"
@@ -71,18 +70,43 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        {/* Optional: preload hero image if applicable */}
-        {/* <link rel="preload" href="/images/hero-banner.webp" as="image" type="image/webp" /> */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen w-full overflow-x-hidden`}
       >
         <Background />
-        <Header />
+        <Suspense fallback={<div className="h-16 w-full" />}>
+          <Header />
+        </Suspense>
         <main className="relative z-10 w-full pt-20 sm:pt-24 md:pt-28">
           {children}
         </main>
-        <Footer />
+        <Suspense fallback={<div className="h-24 w-full" />}>
+          <Footer />
+        </Suspense>
+        {/* Script to help with back/forward cache */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Enable back/forward cache
+              window.addEventListener('pageshow', function(event) {
+                if (event.persisted) {
+                  // Page was restored from back/forward cache
+                  window.location.reload();
+                }
+              });
+              
+              // Remove service worker if exists (can cause cache issues)
+              if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                  for (let registration of registrations) {
+                    registration.unregister();
+                  }
+                });
+              }
+            `
+          }}
+        />
       </body>
     </html>
   );
