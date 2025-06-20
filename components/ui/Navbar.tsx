@@ -113,7 +113,39 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
       {items.map((item, idx) => (
         <a
           onMouseEnter={() => setHovered(idx)}
-          onClick={onItemClick}
+          onClick={(e) => {
+            if (onItemClick) onItemClick();
+            
+            // Handle navigation to sections on the home page
+            if (item.link.startsWith("/#") && window.location.pathname !== "/") {
+              e.preventDefault();
+              // Extract the section ID and store it
+              const sectionId = item.link.substring(2);
+              sessionStorage.setItem('scrollToSection', sectionId);
+              window.location.href = "/";
+            } else if (item.link.startsWith("#") && window.location.pathname === "/") {
+              e.preventDefault();
+              // We're on the home page, scroll to the section directly
+              const sectionId = item.link.substring(1);
+              // Use the scrollToSection function from utils
+              const scrollToSection = (id: string, offset: number = 0) => {
+                setTimeout(() => {
+                  const element = document.getElementById(id);
+                  if (element) {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: "smooth"
+                    });
+                  }
+                }, 100);
+              };
+              
+              scrollToSection(sectionId, 80);
+            }
+          }}
           className="relative px-2 md:px-3 lg:px-4 py-2 text-neutral-600 dark:text-neutral-300 transition-colors duration-200"
           key={`link-${idx}`}
           href={item.link}

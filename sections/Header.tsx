@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { scrollToSection, scrollToTop } from "@/lib/utils";
@@ -23,6 +23,7 @@ type NavItem = {
 export default function Header() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const isHomePage = pathname === "/";
   const [isClient, setIsClient] = useState(false);
 
@@ -57,12 +58,32 @@ export default function Header() {
     setIsClient(true);
   }, []);
 
+  // Handle hash navigation when directly accessing a URL with hash
   useEffect(() => {
-    if (isClient && !isHomePage && window.location.hash) {
+    if (isClient && isHomePage && window.location.hash) {
       const id = window.location.hash.substring(1);
-      scrollToSection(id, 80);
+      // Add a slight delay to ensure the page is fully loaded
+      setTimeout(() => {
+        scrollToSection(id, 80);
+      }, 500);
     }
   }, [isHomePage, isClient]);
+
+  // Check for stored section to scroll to after navigation
+  useEffect(() => {
+    if (isClient && isHomePage) {
+      // Check if we have a stored section to scroll to
+      const sectionId = sessionStorage.getItem('scrollToSection');
+      if (sectionId) {
+        // Clear the stored section ID
+        sessionStorage.removeItem('scrollToSection');
+        // Scroll to the section with a longer delay to ensure page is fully rendered
+        setTimeout(() => {
+          scrollToSection(sectionId, 80);
+        }, 500); // Increased delay for more reliable scrolling
+      }
+    }
+  }, [isClient, isHomePage]);
 
   useEffect(() => {
     function handleResize() {
@@ -92,16 +113,25 @@ export default function Header() {
     if (link.startsWith("#")) {
       // Hash link on current page
       const sectionId = link.substring(1);
-      scrollToSection(sectionId, 80);
+      if (isHomePage) {
+        scrollToSection(sectionId, 80);
+      } else {
+        // If we're not on the home page, navigate to home with hash
+        sessionStorage.setItem('scrollToSection', sectionId);
+        window.location.href = "/";
+      }
     } else if (link.startsWith("/#")) {
-      // Hash link on home page while on a different page
+      // Hash link to home page while on a different page
       if (isHomePage) {
         // We're already on home page, just scroll to the section
         const sectionId = link.substring(2);
         scrollToSection(sectionId, 80);
       } else {
         // Navigate to home page with hash
-        window.location.href = link;
+        const sectionId = link.substring(2);
+        // Store the section ID in sessionStorage to scroll after navigation
+        sessionStorage.setItem('scrollToSection', sectionId);
+        window.location.href = "/";
       }
     }
   }
@@ -137,7 +167,16 @@ export default function Header() {
             ))}
           </div>
           <div className="relative z-20 flex items-center">
-            <Link href={isHomePage ? "#contact" : "/#contact"} scroll={false} onClick={(e) => handleNavigation(e, isHomePage ? "#contact" : "/#contact")}> 
+            <Link href={isHomePage ? "#contact" : "/#contact"} scroll={false} onClick={(e) => {
+              e.preventDefault();
+              if (isHomePage) {
+                scrollToSection("contact", 80);
+              } else {
+                // Store section ID and navigate to home
+                sessionStorage.setItem('scrollToSection', 'contact');
+                window.location.href = "/";
+              }
+            }}> 
               <NavbarButton as="button" variant="primary" className="bg-white text-black hover:bg-violet-700 hover:text-white text-xs md:text-sm">
                 Talk to us
               </NavbarButton>
@@ -172,7 +211,17 @@ export default function Header() {
               </Link>
             ))}
             <div className="flex w-full flex-col gap-2 mt-4">
-              <Link href={isHomePage ? "#contact" : "/#contact"} scroll={false} onClick={(e) => handleNavigation(e, isHomePage ? "#contact" : "/#contact")}> 
+              <Link href={isHomePage ? "#contact" : "/#contact"} scroll={false} onClick={(e) => {
+                e.preventDefault();
+                setMobileNavOpen(false);
+                if (isHomePage) {
+                  scrollToSection("contact", 80);
+                } else {
+                  // Store section ID and navigate to home
+                  sessionStorage.setItem('scrollToSection', 'contact');
+                  window.location.href = "/";
+                }
+              }}> 
                 <NavbarButton as="button" variant="primary" className="w-full bg-white text-black hover:bg-violet-700 hover:text-white rounded-3xl uppercase">
                   Talk to us
                 </NavbarButton>

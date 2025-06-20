@@ -1,8 +1,9 @@
 "use client";
 
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { scrollToSection } from '@/lib/utils';
 
 // Preload critical components
 import HeroSection from '@/sections/HeroSection';
@@ -40,6 +41,26 @@ const ContactSection = dynamic(() => import('@/sections/ContactSection'), {
 });
 
 export default function HomePage() {
+  // Handle section scrolling after navigation
+  useEffect(() => {
+    // Check if we have a stored section to scroll to
+    const sectionId = sessionStorage.getItem('scrollToSection');
+    if (sectionId) {
+      // Clear the stored section ID
+      sessionStorage.removeItem('scrollToSection');
+      // Scroll to the section after a delay to ensure all components are loaded
+      setTimeout(() => {
+        scrollToSection(sectionId, 80);
+      }, 800); // Longer delay to ensure dynamic components are loaded
+    } else if (window.location.hash) {
+      // Handle direct URL with hash
+      const id = window.location.hash.substring(1);
+      setTimeout(() => {
+        scrollToSection(id, 80);
+      }, 800);
+    }
+  }, []);
+
   return (
     <>
       {/* Preload critical assets */}
@@ -58,7 +79,9 @@ export default function HomePage() {
 
       <div className="w-full">
         {/* Hero section is critical, load it immediately */}
-        <HeroSection />
+        <div id="home">
+          <HeroSection />
+        </div>
         
         {/* Use Suspense boundaries for each section to improve loading */}
         <Suspense fallback={<LoadingComponent height="h-32" />}>

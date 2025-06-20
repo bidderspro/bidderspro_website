@@ -10,10 +10,12 @@ export function cn(...inputs: ClassValue[]) {
  * @param id The ID of the element to scroll to (without #)
  * @param offset Optional offset from the top in pixels (default: 0)
  * @param fallbackToTop If true, scrolls to top when element not found (default: true)
+ * @param maxRetries Maximum number of retries if element is not found (default: 5)
  */
-export function scrollToSection(id: string, offset: number = 0, fallbackToTop: boolean = true): void {
-  // Wait for DOM to be ready
-  setTimeout(() => {
+export function scrollToSection(id: string, offset: number = 0, fallbackToTop: boolean = true, maxRetries: number = 5): void {
+  let retries = 0;
+  
+  const tryScrolling = () => {
     const element = document.getElementById(id);
     
     if (element) {
@@ -24,14 +26,25 @@ export function scrollToSection(id: string, offset: number = 0, fallbackToTop: b
         top: offsetPosition,
         behavior: "smooth"
       });
+      return true;
+    } else if (retries < maxRetries) {
+      // Element not found yet, retry after a short delay
+      retries++;
+      setTimeout(tryScrolling, 200);
+      return false;
     } else if (fallbackToTop) {
-      // If element not found and fallback is enabled, scroll to top
+      // Max retries reached and element not found, scroll to top if fallback is enabled
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
+      return true;
     }
-  }, 100);
+    return false;
+  };
+  
+  // Start the first attempt after a short delay to allow for dynamic content to load
+  setTimeout(tryScrolling, 100);
 }
 
 /**
