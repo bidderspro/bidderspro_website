@@ -1,102 +1,128 @@
 "use client";
 
 import React, { Suspense } from "react";
-import dynamicImport from "next/dynamic";
+import dynamic from "next/dynamic";
 
-// Force dynamic rendering
-export const dynamic = 'force-dynamic';
+// Page config
+export const config = {
+  runtime: 'client'
+};
+
+// Shared loading component
+const LoadingFallback = ({ height = "h-96" }: { height?: string }) => (
+  <div className={`${height} animate-pulse bg-gray-800/50 rounded-lg w-full`} />
+);
 
 // Only import the hero section immediately (above the fold)
-const AutomationHeroSection = dynamicImport(
+const AutomationHeroSection = dynamic(
   () => import("@/sections/automationSection/automationHeroSection"),
   { 
-    loading: () => <div className="h-screen animate-pulse bg-gray-800/50 rounded-lg" />
+    loading: () => <LoadingFallback height="h-screen" />,
+    ssr: true // Keep hero section server rendered
   }
 );
 
 // Lazy load all other sections (below the fold)
-const WhyAutomationSection = dynamicImport(
+const WhyAutomationSection = dynamic(
   () => import("@/sections/automationSection/WhyAutomationSection"),
   { 
-    loading: () => <div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />
+    loading: () => <LoadingFallback />,
+    ssr: false // Disable SSR for below-the-fold components
   }
 );
 
-const CompareSection = dynamicImport(
+const CompareSection = dynamic(
   () => import("@/sections/automationSection/CompareSection"),
   { 
-    loading: () => <div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />
+    loading: () => <LoadingFallback />,
+    ssr: false
   }
 );
 
-const MoneyMachineSection = dynamicImport(
+const MoneyMachineSection = dynamic(
   () => import("@/sections/automationSection/MoneyMachineSection"),
   { 
-    loading: () => <div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />
+    loading: () => <LoadingFallback />,
+    ssr: false
   }
 );
 
-const AutomationShiftSection = dynamicImport(
+const AutomationShiftSection = dynamic(
   () => import("@/sections/automationSection/AutomationShiftSection"),
   { 
-    loading: () => <div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />
+    loading: () => <LoadingFallback />,
+    ssr: false
   }
 );
 
-const WhoIsThisForSection = dynamicImport(
+const WhoIsThisForSection = dynamic(
   () => import("@/sections/automationSection/WhoIsThisForSection"),
   { 
-    loading: () => <div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />
+    loading: () => <LoadingFallback />,
+    ssr: false
   }
 );
 
-const PricingSection = dynamicImport(
+const PricingSection = dynamic(
   () => import("@/sections/automationSection/PricingSection"),
   { 
-    loading: () => <div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />
+    loading: () => <LoadingFallback />,
+    ssr: false
   }
 );
 
-const VSLSection = dynamicImport(
+const VSLSection = dynamic(
   () => import("@/sections/automationSection/VSLSection"),
   { 
-    loading: () => <div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />
+    loading: () => <LoadingFallback />,
+    ssr: false
   }
 );
 
-const FinalCTASection = dynamicImport(
+const FinalCTASection = dynamic(
   () => import("@/sections/automationSection/FinalCTASection"),
   { 
-    loading: () => <div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />
+    loading: () => <LoadingFallback />,
+    ssr: false
   }
 );
 
 export default function AutomationPage() {
   return (
     <>
+      {/* Load hero section immediately */}
       <AutomationHeroSection />
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />}>
+      
+      {/* Use Intersection Observer via Suspense for below-the-fold content */}
+      <Suspense fallback={<LoadingFallback />}>
         <WhyAutomationSection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />}>
+      
+      <Suspense fallback={<LoadingFallback />}>
         <CompareSection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />}>
+      
+      <Suspense fallback={<LoadingFallback />}>
         <AutomationShiftSection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />}>
+      
+      <Suspense fallback={<LoadingFallback />}>
         <WhoIsThisForSection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />}>
+      
+      <Suspense fallback={<LoadingFallback />}>
         <MoneyMachineSection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />}>
+      
+      <Suspense fallback={<LoadingFallback />}>
         <VSLSection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />}>
+      
+      <Suspense fallback={<LoadingFallback />}>
         <PricingSection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />}>
+      
+      <Suspense fallback={<LoadingFallback />}>
         <FinalCTASection />
       </Suspense>
     </>

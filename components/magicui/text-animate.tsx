@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { ElementType, useEffect, useState, useMemo } from "react";
+import { ElementType, useEffect, useState, useMemo, memo } from "react";
 
 interface TextAnimateProps {
   children: string;
@@ -75,7 +75,8 @@ const animationVariants = {
   }
 };
 
-export function TextAnimate({
+// Memoize the component to prevent unnecessary re-renders
+const TextAnimateComponent = memo(function TextAnimate({
   children,
   className,
   animate = "fadeIn",
@@ -94,10 +95,10 @@ export function TextAnimate({
   // Use animation prop for backward compatibility
   const animationType = animation || animate || "fadeIn";
   
-  // Memoize transition options - moved before early return to fix the React Hook error
+  // Memoize transition options to avoid recreating on each render
   const transition = useMemo(() => ({ duration, delay }), [duration, delay]);
   
-  // Early return for reduced motion or no animation
+  // Early return for reduced motion or no animation - use static component
   if (prefersReducedMotion || animationType === "none") {
     return <Component className={className}>{children}</Component>;
   }
@@ -116,4 +117,7 @@ export function TextAnimate({
       <Component className={className}>{children}</Component>
     </motion.div>
   );
-}
+});
+
+// Export the memoized component
+export const TextAnimate = TextAnimateComponent;

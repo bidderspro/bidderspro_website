@@ -2,11 +2,18 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { lazy, Suspense } from "react";
-import Background from "@/components/ui/Background2";
+
+// Dynamically import Background component with lower priority
+const Background = lazy(() => import("@/components/ui/Background2"));
 
 // Dynamically import components that aren't needed for initial render
 const Header = lazy(() => import("@/sections/Header"));
 const Footer = lazy(() => import("@/sections/Footer"));
+
+// Simple loading fallbacks
+const LoadingFallback = ({ height = "h-16" }: { height?: string }) => (
+  <div className={`${height} w-full`} />
+);
 
 // Optimize font loading
 const geistSans = Geist({
@@ -58,10 +65,7 @@ export default function RootLayout({
         {/* Add meta tags to improve bfcache */}
         <meta httpEquiv="Cache-Control" content="public, max-age=3600, stale-while-revalidate=86400" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-        {/* Prevent back/forward cache issues */}
         <meta name="theme-color" content="#000000" />
-        <meta httpEquiv="Permissions-Policy" content="interest-cohort=()" />
-        <meta httpEquiv="Pragma" content="no-cache" />
         {/* Preload critical assets */}
         <link
           rel="preload"
@@ -74,17 +78,24 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen w-full overflow-x-hidden`}
       >
-        <Background />
-        <Suspense fallback={<div className="h-16 w-full" />}>
+        {/* Load background with lower priority */}
+        <Suspense fallback={<div className="fixed inset-0 bg-black" />}>
+          <Background />
+        </Suspense>
+        
+        <Suspense fallback={<LoadingFallback />}>
           <Header />
         </Suspense>
+        
         <main className="relative z-10 w-full pt-20 sm:pt-24 md:pt-28">
           {children}
         </main>
-        <Suspense fallback={<div className="h-24 w-full" />}>
+        
+        <Suspense fallback={<LoadingFallback height="h-24" />}>
           <Footer />
         </Suspense>
-        {/* Script to help with back/forward cache */}
+        
+        {/* Simplified script for better performance */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -96,38 +107,15 @@ export default function RootLayout({
                 }
               });
               
-              // Remove service worker if exists (can cause cache issues)
-              if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                  for (let registration of registrations) {
-                    registration.unregister();
-                  }
-                });
-              }
-              
               // Improved scroll restoration
               if ('scrollRestoration' in history) {
                 history.scrollRestoration = 'manual';
               }
               
               // Reset scroll position on page load for non-hash URLs
-              document.addEventListener('DOMContentLoaded', function() {
-                if (!window.location.hash) {
-                  window.scrollTo(0, 0);
-                }
-              });
-              
-              // Handle navigation events
-              document.addEventListener('click', function(e) {
-                const target = e.target;
-                // Check if clicked element is a link or inside a link
-                const link = target.tagName === 'A' ? target : target.closest('a');
-                if (link && link.getAttribute('href') && !link.getAttribute('href').includes('#') && 
-                    !e.ctrlKey && !e.metaKey && !e.shiftKey) {
-                  // For regular links (not hash links and not opened in new tab)
-                  window.scrollTo(0, 0);
-                }
-              });
+              if (!window.location.hash) {
+                window.scrollTo(0, 0);
+              }
             `
           }}
         />
