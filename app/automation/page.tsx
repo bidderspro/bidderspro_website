@@ -18,7 +18,7 @@ const AutomationHeroSection = dynamic(
   () => import("@/sections/automationSection/automationHeroSection"),
   { 
     loading: () => <LoadingFallback height="h-screen" />,
-    ssr: true // Keep hero section server rendered
+    ssr: false // Disable SSR to avoid server-side errors
   }
 );
 
