@@ -194,11 +194,12 @@ export const MobileNavToggle = ({
   );
 };
 
-export const NavbarLogo = () => {
+export const NavbarLogo = ({ onClick }: { onClick?: (e: React.MouseEvent) => void }) => {
   return (
     <Link
       href="/"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black dark:text-white"
+      onClick={onClick}
     >
       <Image
         src="/assets/images/bp-logo.webp"

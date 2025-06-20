@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import dynamicImport from "next/dynamic";
+import { scrollToSection, scrollToTop } from "@/lib/utils";
 
 // Dynamically import Navbar components individually
 const Navbar = dynamicImport(() => import("@/components/ui/Navbar").then(mod => mod.Navbar), { ssr: true });
@@ -58,13 +59,8 @@ export default function Header() {
 
   useEffect(() => {
     if (isClient && !isHomePage && window.location.hash) {
-      setTimeout(() => {
-        const id = window.location.hash.substring(1);
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 500);
+      const id = window.location.hash.substring(1);
+      scrollToSection(id, 80);
     }
   }, [isHomePage, isClient]);
 
@@ -80,19 +76,42 @@ export default function Header() {
 
   function handleNavigation(e: React.MouseEvent<HTMLAnchorElement>, link: string): void {
     if (!isClient) return;
-    // Smooth scroll for hash links
-    if (link.startsWith("#")) {
-      e.preventDefault();
-      const el = document.getElementById(link.substring(1));
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
-    } else if (link.startsWith("/#")) {
-      // For hash links on non-home pages, use router push for client-side navigation
-      e.preventDefault();
-      window.location.href = link;
+    
+    // If it's a regular page navigation (not hash-based), let Next.js handle it
+    if (!link.includes("#")) {
+      // For regular page navigation, scroll to top after navigation
+      setTimeout(() => {
+        scrollToTop();
+      }, 100);
+      return;
     }
-    // For all other links, let Next.js handle navigation
+    
+    // Handle hash links
+    e.preventDefault();
+    
+    if (link.startsWith("#")) {
+      // Hash link on current page
+      const sectionId = link.substring(1);
+      scrollToSection(sectionId, 80);
+    } else if (link.startsWith("/#")) {
+      // Hash link on home page while on a different page
+      if (isHomePage) {
+        // We're already on home page, just scroll to the section
+        const sectionId = link.substring(2);
+        scrollToSection(sectionId, 80);
+      } else {
+        // Navigate to home page with hash
+        window.location.href = link;
+      }
+    }
+  }
+
+  // Handle logo click to always go to top of homepage
+  function handleLogoClick(e: React.MouseEvent) {
+    if (isHomePage) {
+      e.preventDefault();
+      scrollToTop();
+    }
   }
 
   return (
@@ -100,7 +119,9 @@ export default function Header() {
       <div className="absolute inset-0 bg-black/5 backdrop-blur-sm z-0"></div>
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <NavBody className="!py-3">
-          <NavbarLogo />
+          <div>
+            <NavbarLogo onClick={handleLogoClick} />
+          </div>
           <div className="absolute inset-0 hidden md:flex flex-1 flex-row items-center justify-center space-x-1 md:space-x-2 text-sm font-medium text-zinc-600">
             {navItems.map((item, idx) => (
               <Link
@@ -126,7 +147,9 @@ export default function Header() {
 
         <MobileNav className="!py-3">
           <MobileNavHeader>
-            <NavbarLogo />
+            <div>
+              <NavbarLogo onClick={handleLogoClick} />
+            </div>
             <MobileNavToggle
               isOpen={mobileNavOpen}
               onClick={() => setMobileNavOpen(!mobileNavOpen)}

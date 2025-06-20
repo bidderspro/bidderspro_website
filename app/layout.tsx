@@ -104,6 +104,30 @@ export default function RootLayout({
                   }
                 });
               }
+              
+              // Improved scroll restoration
+              if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+              }
+              
+              // Reset scroll position on page load for non-hash URLs
+              document.addEventListener('DOMContentLoaded', function() {
+                if (!window.location.hash) {
+                  window.scrollTo(0, 0);
+                }
+              });
+              
+              // Handle navigation events
+              document.addEventListener('click', function(e) {
+                const target = e.target;
+                // Check if clicked element is a link or inside a link
+                const link = target.tagName === 'A' ? target : target.closest('a');
+                if (link && link.getAttribute('href') && !link.getAttribute('href').includes('#') && 
+                    !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                  // For regular links (not hash links and not opened in new tab)
+                  window.scrollTo(0, 0);
+                }
+              });
             `
           }}
         />
