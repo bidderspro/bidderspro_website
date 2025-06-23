@@ -36,10 +36,10 @@ export const metadata: Metadata = {
   keywords: "upwork automation, freelancing, proposal automation, bidding bot",
   icons: {
     icon: [
-      { url: '/bidderspro.svg', type: 'image/svg+xml' }
+      { url: '/BP.ico', type: 'image/x-icon' }
     ],
     apple: [
-      { url: '/bidderspro.svg' }
+      { url: '/BP.ico' }
     ]
   },
   // Add cache control headers
@@ -59,7 +59,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <link rel="icon" href="/bidderspro.svg" type="image/svg+xml" />
+        <link rel="icon" href="/BP.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/BP.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Add meta tags to improve bfcache */}
