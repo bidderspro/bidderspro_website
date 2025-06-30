@@ -11,91 +11,6 @@ const LoadingFallback = ({ height = "h-96" }: { height?: string }) => (
   <div className={`${height} animate-pulse bg-gray-800/50 rounded-lg w-full`} />
 );
 
-// Consultancy Section Component
-const ConsultancySection = () => {
-  return (
-    <div className="w-full bg-gradient-to-br from-blue-900/80 to-black py-16 mb-16 rounded-xl overflow-hidden relative">
-      {/* Background glow effects */}
-      <motion.div 
-        className="absolute top-0 left-0 w-full h-full opacity-20"
-        style={{
-          background: 'radial-gradient(circle at 20% 30%, #4338ca 0%, transparent 50%)',
-        }}
-      />
-      <motion.div 
-        className="absolute bottom-0 right-0 w-full h-full opacity-20"
-        style={{
-          background: 'radial-gradient(circle at 80% 70%, #3b82f6 0%, transparent 50%)',
-        }}
-      />
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-          {/* Image container */}
-          <div className="w-full lg:w-5/12 relative">
-            <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-blue-500/20 border border-white/10">
-              <Image 
-                src="/assets/images/consultancy-meeting.jpg" 
-                alt="Consultancy Services" 
-                width={600} 
-                height={400}
-                className="w-full object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            </div>
-          </div>
-          
-          {/* Content container */}
-          <div className="w-full lg:w-7/12">
-            <motion.h2 
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-400 mb-4"
-            >
-              CONSULTANCY SERVICES
-            </motion.h2>
-            
-            <motion.p 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xl sm:text-2xl font-medium text-white mb-6"
-            >
-              NEED GUIDANCE? WE'VE GOT YOU.
-            </motion.p>
-            
-            <motion.p 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base sm:text-lg text-white/90 mb-8"
-            >
-              NOT SURE WHERE TO START? OUR TECH EXPERTS OFFER ONE-ON-ONE CONSULTANCY TO HELP YOU PLAN YOUR DIGITAL JOURNEY. WHETHER IT'S SELECTING THE RIGHT PLATFORM, DESIGNING THE USER FLOW, OR MAPPING OUT YOUR AUTOMATION STRATEGY, WE PROVIDE HONEST ADVICE AND ACTIONABLE INSIGHTS.
-            </motion.p>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <InteractiveHoverButton
-                className="bg-blue-600 hover:bg-blue-700 text-white text-center font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg uppercase transition-all duration-300"
-                onClick={() => {
-                  window.location.href = "/calendar";
-                }}
-              >
-                CLAIM YOUR FREE CONSULTATION
-              </InteractiveHoverButton>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 // Card component with hover effects
 const ServiceCard = ({ 
   icon, 
@@ -267,9 +182,6 @@ export default function ServicesContentSection() {
             </h2>
           </Suspense>
         </motion.div>
-        
-        {/* Consultancy Section */}
-        <ConsultancySection />
         
         {/* Services cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">

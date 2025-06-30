@@ -31,6 +31,15 @@ const ServicesContentSection = dynamic(
   }
 );
 
+// Import ConsultancySection separately
+const ConsultancySection = dynamic(
+  () => import("@/sections/servicesSection/ConsultancySection"),
+  {
+    loading: () => <LoadingFallback />,
+    ssr: false
+  }
+);
+
 export default function ServicesPage() {
   return (
     <>
@@ -40,6 +49,10 @@ export default function ServicesPage() {
       {/* Use Suspense for below-the-fold content */}
       <Suspense fallback={<LoadingFallback />}>
         <ServicesContentSection />
+      </Suspense>
+       {/* Add ConsultancySection */}
+       <Suspense fallback={<LoadingFallback />}>
+        <ConsultancySection />
       </Suspense>
     </>
   );
