@@ -1,15 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
-
-import React, { useRef, useState } from "react";
-import BP_logo from "@/public/assets/images/bp-logo.webp";
+import React, { useState, useEffect } from "react";
+import Link from 'next/link';
 import Image from 'next/image';
 
 interface NavbarProps {
@@ -51,27 +44,27 @@ interface MobileNavMenuProps {
 }
 
 export const Navbar = ({ children, className }: NavbarProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
   const [visible, setVisible] = useState<boolean>(false);
+  const [isClient, setIsClient] = useState(false);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 100) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
-  });
+  // Ensure consistent initial state between server and client
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+    
+    const handleScroll = () => {
+      setVisible(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isClient]);
 
   return (
-    <motion.div
-      ref={ref}
-      // IMPORTANT: Change this to class of `fixed` if you want the navbar to be fixed
-      className={cn("sticky inset-x-0 top-0 z-40 w-full", className)}
-    >
+    <div className={cn("sticky inset-x-0 top-0 z-40 w-full", className)}>
       {React.Children.map(children, (child) => {
         if (!React.isValidElement(child)) return child;
         // Only pass 'visible' to known custom components
@@ -83,40 +76,26 @@ export const Navbar = ({ children, className }: NavbarProps) => {
         if (customComponents.includes(typeName)) {
           return React.cloneElement(
             child as React.ReactElement<{ visible?: boolean }>,
-            { visible },
+            { visible: isClient ? visible : false }, // Always false during SSR
           );
         }
         return child;
       })}
-    </motion.div>
+    </div>
   );
 };
 
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
-    <motion.div
-      animate={{
-        backdropFilter: visible ? "blur(10px)" : "none",
-        boxShadow: visible
-          ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
-          : "none",
-        width: visible ? "calc(100% - 2rem)" : "100%",
-        maxWidth: visible ? "1280px" : "100%",
-        y: visible ? 20 : 0,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 50,
-      }}
+    <div
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 md:flex dark:bg-transparent",
-        visible && "bg-white/80 dark:bg-violet-800/30",
+        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 md:flex dark:bg-transparent transition-all duration-300 ease-out",
+        visible && "bg-white/80 dark:bg-violet-800/30 backdrop-blur-md shadow-lg [transform:translateY(20px)] max-w-[calc(100%-2rem)] [max-width:1280px]",
         className,
       )}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 
@@ -124,7 +103,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <motion.div
+    <div
       onMouseLeave={() => setHovered(null)}
       className={cn(
         "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 md:flex md:space-x-1 lg:space-x-2",
@@ -134,51 +113,64 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
       {items.map((item, idx) => (
         <a
           onMouseEnter={() => setHovered(idx)}
-          onClick={onItemClick}
-          className="relative px-2 md:px-3 lg:px-4 py-2 text-neutral-600 dark:text-neutral-300"
+          onClick={(e) => {
+            if (onItemClick) onItemClick();
+            
+            // Handle navigation to sections on the home page
+            if (item.link.startsWith("/#") && window.location.pathname !== "/") {
+              e.preventDefault();
+              // Extract the section ID and store it
+              const sectionId = item.link.substring(2);
+              sessionStorage.setItem('scrollToSection', sectionId);
+              window.location.href = "/";
+            } else if (item.link.startsWith("#") && window.location.pathname === "/") {
+              e.preventDefault();
+              // We're on the home page, scroll to the section directly
+              const sectionId = item.link.substring(1);
+              // Use the scrollToSection function from utils
+              const scrollToSection = (id: string, offset: number = 0) => {
+                setTimeout(() => {
+                  const element = document.getElementById(id);
+                  if (element) {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: "smooth"
+                    });
+                  }
+                }, 100);
+              };
+              
+              scrollToSection(sectionId, 80);
+            }
+          }}
+          className="relative px-2 md:px-3 lg:px-4 py-2 text-neutral-600 dark:text-neutral-300 transition-colors duration-200"
           key={`link-${idx}`}
           href={item.link}
         >
           {hovered === idx && (
-            <motion.div
-              layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800"
-            />
+            <div className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800 transition-all duration-200" />
           )}
           <span className="relative z-20">{item.name}</span>
         </a>
       ))}
-    </motion.div>
+    </div>
   );
 };
 
 export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
   return (
-    <motion.div
-      animate={{
-        backdropFilter: visible ? "blur(10px)" : "none",
-        boxShadow: visible
-          ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
-          : "none",
-        width: visible ? "90%" : "100%",
-        paddingRight: visible ? "12px" : "0px",
-        paddingLeft: visible ? "12px" : "0px",
-        borderRadius: visible ? "4px" : "2rem",
-        y: visible ? 20 : 0,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 50,
-      }}
+    <div
       className={cn(
-        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 md:hidden",
-        visible && "bg-white/80 dark:bg-neutral-950/80",
+        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 md:hidden transition-all duration-300 ease-out",
+        visible && "bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md shadow-lg [transform:translateY(20px)] w-[90%] p-3 rounded",
         className,
       )}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 
@@ -205,21 +197,18 @@ export const MobileNavMenu = ({
   onClose,
 }: MobileNavMenuProps) => {
   return (
-    <AnimatePresence>
+    <>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+        <div
           className={cn(
-            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 bg-white px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] dark:bg-violet-950",
+            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 bg-white px-4 py-8 shadow-lg dark:bg-violet-950 animate-fade-in",
             className,
           )}
         >
           {children}
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   );
 };
 
@@ -237,20 +226,22 @@ export const MobileNavToggle = ({
   );
 };
 
-export const NavbarLogo = () => {
+export const NavbarLogo = ({ onClick }: { onClick?: (e: React.MouseEvent) => void }) => {
   return (
-    <a
+    <Link
       href="/"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black dark:text-white"
+      onClick={onClick}
     >
       <Image
-        src={BP_logo}
+        src="/assets/images/bp-logo.webp"
         alt="BiddersPro logo"
         width={30}
         height={30}
+        className="object-contain"
+        priority
       />
-      
-    </a>
+    </Link>
   );
 };
 

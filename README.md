@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BiddersPro Website
 
-## Getting Started
+This is the official website for BiddersPro built with [Next.js](https://nextjs.org).
+
+## Development
 
 First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Building for Production
 
-## Learn More
+```bash
+# Install dependencies
+npm install
 
-To learn more about Next.js, take a look at the following resources:
+# Run production build
+npm run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Start production server
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Environment Setup
 
-## Deploy on Vercel
+Create a `.env.local` file with the following variables:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+SITE_URL=https://bidderspro.com
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Optimizations Applied
+
+- **CSS Optimization**: Using Next.js built-in CSS optimization
+- **Image Optimization**: Using next/image for automatic image optimization
+- **Bundle Analysis**: Run `npm run analyze` to analyze bundle size
+- **Console Removal**: Console logs are automatically removed in production
+- **Sitemap Generation**: Automatically generates sitemap.xml and robots.txt
+
+### Deployment Checklist
+
+- [x] Run linter with `npm run lint`
+- [x] Build the application with `npm run build`
+- [x] Test the production build locally with `npm run start`
+- [ ] Deploy to your hosting provider
+- [ ] Verify all pages work correctly
+- [ ] Check performance using Lighthouse
+
+### Deploying with PM2 on Hostinger VPS
+
+1. Upload your code to the VPS
+2. Install PM2 globally if not already installed:
+   ```bash
+   npm install -g pm2
+   ```
+3. Navigate to your project directory
+4. Run the deployment script:
+   ```bash
+   chmod +x deploy.sh
+   ./deploy.sh
+   ```
+   
+   Or manually follow these steps:
+   ```bash
+   # Install dependencies
+   npm install
+   
+   # Build the application
+   npm run build
+   
+   # Start with PM2
+   pm2 start ecosystem.config.js
+   
+   # Save PM2 configuration
+   pm2 save
+   ```
+5. To check logs:
+   ```bash
+   pm2 logs bidderspro
+   ```
+6. To restart the application:
+   ```bash
+   pm2 restart bidderspro
+   ```
+
+## Tech Stack
+
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+
+## License
+
+All rights reserved.

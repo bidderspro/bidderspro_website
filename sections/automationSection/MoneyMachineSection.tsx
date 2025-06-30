@@ -95,9 +95,9 @@ const MoneyMachineSection = () => {
             <WobbleCard 
               containerClassName="col-span-1 min-h-[300px] bg-gradient-to-br from-indigo-800 to-violet-900"
             >
-              <h2 className="max-w-80 text-left text-balance text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                🔥 Be in the Top 5%
-              </h2>
+                                <h2 className="max-w-80 text-left text-balance text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                    🔥 Join the Top 5%
+                  </h2>
               <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
                 Join the elite group of freelancers who earn consistently through client invitations rather than endless proposals.
               </p>

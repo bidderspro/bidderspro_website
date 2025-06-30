@@ -5,7 +5,7 @@ export default function MarqueeSection() {
 
   return (
     <Marquee  reverse={true} vertical={false} className="bg-transparent p-4 flex items-center justify-center text-center">
-      <div className="flex flex-row items-center justify-center gap-30 sm:gap-40 md:gap-60 lg:gap-80 xl:gap-60 repeat-0">
+      <div className="flex flex-row items-center justify-center gap-16 sm:gap-20 md:gap-24 lg:gap-32 xl:gap-40">
         {brands.map((brand, index) => (
           <span
             key={index}

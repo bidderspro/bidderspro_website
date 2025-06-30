@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 
@@ -17,6 +17,30 @@ interface CalendarSelectorProps {
   selectedTime: string;
 }
 
+// Check for reduced motion preference
+const useReducedMotion = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    const onChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', onChange);
+      return () => mediaQuery.removeEventListener('change', onChange);
+    } else {
+      mediaQuery.addListener(onChange);
+      return () => mediaQuery.removeListener(onChange);
+    }
+  }, []);
+  
+  return prefersReducedMotion;
+};
+
 export default function CalendarSelector({
   onDateSelect,
   onTimeSelect,
@@ -26,8 +50,9 @@ export default function CalendarSelector({
   const [currentDate, setCurrentDate] = useState(new Date());
   const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
   const [animationDirection, setAnimationDirection] = useState<'left' | 'right'>('right');
+  const prefersReducedMotion = useReducedMotion();
 
-  // Generate available time slots for the selected date
+  // Generate available time slots for the selected date - memoized to prevent unnecessary recalculations
   useEffect(() => {
     if (selectedDate) {
       // In a real app, these would come from an API based on availability
@@ -47,7 +72,8 @@ export default function CalendarSelector({
     }
   }, [selectedDate]);
 
-  const generateCalendarDays = () => {
+  // Memoize calendar days to prevent recalculation on each render
+  const calendarDays = useMemo(() => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     
@@ -57,11 +83,11 @@ export default function CalendarSelector({
     const daysInMonth = lastDayOfMonth.getDate();
     const startingDayIndex = firstDayOfMonth.getDay(); // 0 = Sunday, 1 = Monday, etc.
     
-    const calendarDays = [];
+    const days = [];
     
     // Add empty days for the start of the month
     for (let i = 0; i < startingDayIndex; i++) {
-      calendarDays.push(null);
+      days.push(null);
     }
     
     // Add days of the month
@@ -69,11 +95,11 @@ export default function CalendarSelector({
       const date = new Date(year, month, day);
       // Don't allow booking in the past
       const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
-      calendarDays.push({ date, isPast });
+      days.push({ date, isPast });
     }
     
-    return calendarDays;
-  };
+    return days;
+  }, [currentDate]);
 
   const handlePrevMonth = () => {
     setAnimationDirection('left');
@@ -85,7 +111,19 @@ export default function CalendarSelector({
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
 
-  const calendarDays = generateCalendarDays();
+  // Simplified animations for better performance
+  const fadeAnimation = prefersReducedMotion ? {} : {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.3 }
+  };
+
+  const monthAnimation = prefersReducedMotion ? {} : {
+    initial: { opacity: 0, y: animationDirection === 'right' ? 10 : -10 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.3 }
+  };
+
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   
   return (
@@ -103,10 +141,7 @@ export default function CalendarSelector({
           
           <motion.h2 
             key={`${currentDate.getMonth()}-${currentDate.getFullYear()}`}
-            initial={{ opacity: 0, y: animationDirection === 'right' ? 20 : -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            {...monthAnimation}
             className="text-2xl font-bold text-white"
           >
             {currentDate.toLocaleString('default', { month: 'long' })} {currentDate.getFullYear()}
@@ -121,9 +156,8 @@ export default function CalendarSelector({
           </button>
         </div>
         
-        {/* Decorative Elements */}
+        {/* Simplified decorative elements */}
         <div className="absolute -top-4 -right-4 w-20 h-20 bg-violet-600/20 rounded-full blur-xl pointer-events-none"></div>
-        <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-600/20 rounded-full blur-xl pointer-events-none"></div>
       </div>
       
       {/* Days of Week Header */}
@@ -135,7 +169,7 @@ export default function CalendarSelector({
         ))}
       </div>
       
-      {/* Calendar Grid */}
+      {/* Calendar Grid - Using CSS transitions instead of framer-motion for better performance */}
       <div className="grid grid-cols-7 gap-1.5 mb-6">
         {calendarDays.map((day, index) => {
           if (day === null) {
@@ -150,11 +184,10 @@ export default function CalendarSelector({
           
           const isToday = date.toDateString() === new Date().toDateString();
           
+          // Use CSS transitions instead of framer-motion for calendar days
           return (
-            <motion.button
+            <button
               key={`day-${date.getDate()}`}
-              whileHover={!isPast ? { scale: 1.1 } : {}}
-              whileTap={!isPast ? { scale: 0.95 } : {}}
               className={`h-10 w-10 flex items-center justify-center rounded-full transition-all duration-200 ${
                 isSelected ? 'bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-lg shadow-violet-500/30' : 
                 isToday ? 'border-2 border-violet-400 text-violet-400' : 
@@ -164,32 +197,27 @@ export default function CalendarSelector({
               disabled={isPast}
             >
               {date.getDate()}
-            </motion.button>
+            </button>
           );
         })}
       </div>
       
-      {/* Time Slots */}
+      {/* Time Slots with optimized rendering */}
       {selectedDate && (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          {...fadeAnimation}
           className="mt-8 bg-gray-800/30 backdrop-blur-sm p-5 rounded-xl border border-gray-700"
         >
           <h3 className="text-lg font-medium mb-4 text-white flex items-center">
             <span className="w-2 h-8 bg-violet-500 rounded-full mr-3"></span>
             Available times for {selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
           </h3>
+          
+          {/* Optimize time slot rendering with CSS grid instead of individual animations */}
           <div className="grid grid-cols-3 gap-2">
-            {timeSlots.map((slot, index) => (
-              <motion.button
+            {timeSlots.map((slot) => (
+              <button
                 key={slot.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2, delay: 0.05 * index }}
-                whileHover={slot.available ? { scale: 1.05, y: -2 } : {}}
-                whileTap={slot.available ? { scale: 0.98 } : {}}
                 className={`p-2.5 rounded-lg text-center transition-all duration-200 flex items-center justify-center gap-2 ${
                   selectedTime === slot.time ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg shadow-violet-600/30' :
                   slot.available ? 'bg-gray-800/60 hover:bg-violet-600/30 text-white' : 'bg-gray-800/30 text-gray-500 cursor-not-allowed'
@@ -199,7 +227,7 @@ export default function CalendarSelector({
               >
                 <Clock className="w-3.5 h-3.5" />
                 {slot.time}
-              </motion.button>
+              </button>
             ))}
           </div>
         </motion.div>

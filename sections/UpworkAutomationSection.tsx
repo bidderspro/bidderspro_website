@@ -60,7 +60,7 @@ export default function UpworkAutomationSection() {
             as="p" 
             className="text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto text-gray-300"
           >
-            Leverage powerful automation tools to skyrocket your Upwork success, attract premium clients, and scale your freelance business without boundaries.
+            Leverage powerful automation tools to elevate your Upwork success, attract premium clients, and scale your freelance business without limits.
           </TextAnimate>
         </div>
 

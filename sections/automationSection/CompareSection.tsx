@@ -34,7 +34,7 @@ const CompareSection = () => {
                         <IconX className="h-4 w-4 sm:h-5 sm:w-5 text-red-400" />
                       </div>
                       <p className="text-sm sm:text-base md:text-lg text-gray-100">
-                        Staying up all night because someone invited you "applying at night works better."
+                        Staying up all night because someone told you "applying at night works better."
                       </p>
                     </div>
                   </td>
@@ -56,7 +56,7 @@ const CompareSection = () => {
                         <IconX className="h-4 w-4 sm:h-5 sm:w-5 text-red-400" />
                       </div>
                       <p className="text-sm sm:text-base md:text-lg text-gray-100">
-                        Spending your hard-earned cash on bidders who do nothing but burn through your account.
+                        Spending your hard-earned cash on bidding tools that do nothing but burn through your connects.
                       </p>
                     </div>
                   </td>
@@ -66,7 +66,7 @@ const CompareSection = () => {
                         <IconCheck className="h-4 w-4 sm:h-5 sm:w-5 text-[#E0E0FF]" />
                       </div>
                       <p className="text-sm sm:text-base md:text-lg text-gray-100">
-                        Earn $5,000-$10,000+ every month—not by hopping on calls with high-ticket clients.
+                        Earn $5,000-$10,000+ every month by hopping on calls with high-ticket clients.
                       </p>
                     </div>
                   </td>
@@ -100,7 +100,7 @@ const CompareSection = () => {
                         <IconX className="h-4 w-4 sm:h-5 sm:w-5 text-red-400" />
                       </div>
                       <p className="text-sm sm:text-base md:text-lg text-gray-100">
-                        Draining money with zero returns, stuck in a cycle that feels more like a hamster wheel strategy.
+                        Draining money with zero returns, stuck in a cycle that feels more like a hamster wheel than a strategy.
                       </p>
                     </div>
                   </td>
@@ -110,7 +110,7 @@ const CompareSection = () => {
                         <IconCheck className="h-4 w-4 sm:h-5 sm:w-5 text-[#E0E0FF]" />
                       </div>
                       <p className="text-sm sm:text-base md:text-lg text-gray-100">
-                        Get 10x return on your spendings within very first month of automation.
+                        Get 10x return on your investment within the very first month of automation.
                       </p>
                     </div>
                   </td>
