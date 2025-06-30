@@ -41,6 +41,10 @@ export default function Header() {
       link: "/automation",
     },
     {
+      name: "Services",
+      link: "/services",
+    },
+    {
       name: "Consultation",
       link: "/calendar",
     },
