@@ -69,14 +69,29 @@ export default function ServicesPage() {
     // Add listener with proper cleanup
     const onChange = () => setPrefersReducedMotion(mediaQuery.matches);
     
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', onChange);
-      return () => mediaQuery.removeEventListener('change', onChange);
-    } else {
-      // Fallback for older browsers
-      mediaQuery.addListener(onChange);
-      return () => mediaQuery.removeListener(onChange);
+    try {
+      // Modern browsers
+      if (typeof mediaQuery.addEventListener === 'function') {
+        mediaQuery.addEventListener('change', onChange);
+        return () => mediaQuery.removeEventListener('change', onChange);
+      } 
+      // Legacy browsers with deprecated API
+      else {
+        // Use modern API if available, otherwise try deprecated one
+        try {
+          mediaQuery.addEventListener('change', onChange);
+          return () => mediaQuery.removeEventListener('change', onChange);
+        } catch {
+          // Fallback to deprecated API
+          mediaQuery.addListener?.(onChange);
+          return () => mediaQuery.removeListener?.(onChange);
+        }
+      }
+    } catch (error) {
+      console.error('Error setting up media query listener:', error);
     }
+    
+    return () => {};
   }, []);
 
   // Improved scroll restoration

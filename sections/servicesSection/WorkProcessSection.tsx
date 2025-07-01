@@ -6,6 +6,7 @@ import { lazy, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+
 // Simple loading fallback
 const LoadingFallback = memo(({ children, className }: { children?: React.ReactNode, className?: string }) => (
   <div className={className || ""}>{children}</div>
@@ -50,14 +51,29 @@ const useReducedMotion = () => {
       // Add listener with proper cleanup
       const onChange = () => setPrefersReducedMotion(mediaQuery.matches);
       
-      if (mediaQuery.addEventListener) {
-        mediaQuery.addEventListener('change', onChange);
-        return () => mediaQuery.removeEventListener('change', onChange);
-      } else {
-        // Fallback for older browsers
-        mediaQuery.addListener(onChange);
-        return () => mediaQuery.removeListener(onChange);
+      try {
+        // Modern browsers
+        if (typeof mediaQuery.addEventListener === 'function') {
+          mediaQuery.addEventListener('change', onChange);
+          return () => mediaQuery.removeEventListener('change', onChange);
+        } 
+        // Legacy browsers with deprecated API
+        else {
+          // Use modern API if available, otherwise try deprecated one
+          try {
+            mediaQuery.addEventListener('change', onChange);
+            return () => mediaQuery.removeEventListener('change', onChange);
+          } catch {
+            // Fallback to deprecated API
+            mediaQuery.addListener?.(onChange);
+            return () => mediaQuery.removeListener?.(onChange);
+          }
+        }
+      } catch (error) {
+        console.error('Error setting up media query listener:', error);
       }
+      
+      return () => {};
     } catch (error) {
       console.error('Error in useReducedMotion:', error);
       return () => {};
@@ -201,14 +217,14 @@ const TeamAvatar = memo(({
   // Simplified version for reduced motion
   if (prefersReducedMotion) {
     return (
-      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full overflow-hidden border-2 border-white -ml-1 sm:-ml-2 first:ml-0">
+      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-white -ml-2 sm:-ml-3 first:ml-0">
         <Image 
           src={src} 
           alt={alt} 
-          width={32} 
-          height={32}
+          width={40} 
+          height={40}
           className="w-full h-full object-cover"
-          unoptimized
+          priority
         />
       </div>
     );
@@ -219,7 +235,7 @@ const TeamAvatar = memo(({
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3, delay: 0.1 * index }}
-      className="w-6 h-6 sm:w-8 sm:h-8 rounded-full overflow-hidden border-2 border-white -ml-1 sm:-ml-2 first:ml-0 hover:z-10 relative"
+      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-white -ml-2 sm:-ml-3 first:ml-0 hover:z-10 relative"
       whileHover={{ 
         scale: 1.1,
         transition: { duration: 0.2 }
@@ -228,10 +244,10 @@ const TeamAvatar = memo(({
       <Image 
         src={src} 
         alt={alt} 
-        width={32} 
-        height={32}
+        width={40} 
+        height={40}
         className="w-full h-full object-cover"
-        unoptimized
+        priority
       />
     </motion.div>
   );
@@ -361,7 +377,7 @@ const WorkProcessSection = memo(function WorkProcessSection() {
                 <span className="ml-0 sm:ml-2 text-white text-center sm:text-left text-xs sm:text-sm uppercase">Align with businesses that choose quality</span>
               </div>
               
-              <Link href="/calendar" className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 sm:px-6 rounded-full transition-colors text-xs sm:text-sm text-center">
+              <Link href="/calendar" className="w-full sm:w-auto bg-violet-900 hover:bg-violet-600 text-white font-bold py-2 px-4 sm:px-6 rounded-full transition-colors text-xs sm:text-sm text-center">
                 START NOW
               </Link>
             </div>
@@ -427,7 +443,7 @@ const WorkProcessSection = memo(function WorkProcessSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="border border-blue-500/30 rounded-2xl sm:rounded-full p-3 sm:p-4 flex flex-col sm:flex-row justify-between items-center bg-purple-900/40 backdrop-blur-sm"
+            className="border border-blue-500/30 rounded-2xl sm:rounded-full p-3 sm:p-4 flex flex-col sm:flex-row justify-between items-center"
           >
             <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto mb-4 sm:mb-0">
               <div className="flex justify-center w-full sm:w-auto mb-2 sm:mb-0">
@@ -446,7 +462,7 @@ const WorkProcessSection = memo(function WorkProcessSection() {
             
             <ErrorBoundary>
               <InteractiveHoverButton
-                className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 sm:px-6 rounded-full transition-colors text-xs sm:text-sm text-center"
+                className="w-full sm:w-auto bg-violet-900 hover:bg-violet-600 text-white font-bold py-2 px-4 sm:px-6 rounded-full transition-colors text-xs sm:text-sm text-center"
                 onClick={() => {
                   window.location.href = "/calendar";
                 }}
