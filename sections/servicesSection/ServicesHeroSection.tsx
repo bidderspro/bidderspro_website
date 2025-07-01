@@ -1,16 +1,98 @@
-import { TextAnimate } from "@/components/magicui/text-animate";
-import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
-import { Suspense } from "react";
+"use client";
 
-// Simple loading fallback
-const LoadingFallback = ({ children, className }: { children: React.ReactNode, className?: string }) => (
-  <div className={className}>{children}</div>
+import { lazy, Suspense, memo, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+// Lazy load heavy components
+const TextAnimate = lazy(() => 
+  import('@/components/magicui/text-animate').then(mod => ({ default: mod.TextAnimate }))
 );
 
-export default function ServicesHeroSection() {
+const InteractiveHoverButton = lazy(() => 
+  import('@/components/magicui/interactive-hover-button').then(mod => ({ default: mod.InteractiveHoverButton }))
+);
+
+// Simple loading fallback
+const LoadingFallback = memo(({ children, className }: { children: React.ReactNode, className?: string }) => (
+  <div className={className}>{children}</div>
+));
+
+LoadingFallback.displayName = 'LoadingFallback';
+
+// Detect reduced motion preference - shared across all instances
+const useReducedMotion = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  
+  useEffect(() => {
+    // Only run in browser
+    if (typeof window === 'undefined') return;
+    
+    // Use existing media query if possible
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    // Add listener with proper cleanup
+    const onChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    
+    // Use the appropriate event listener method based on browser support
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', onChange);
+      return () => mediaQuery.removeEventListener('change', onChange);
+    } else {
+      // Fallback for older browsers
+      mediaQuery.addListener(onChange);
+      return () => mediaQuery.removeListener(onChange);
+    }
+  }, []);
+  
+  return prefersReducedMotion;
+};
+
+// Memoize the component to prevent unnecessary re-renders
+const ServicesHeroSection = memo(function ServicesHeroSection() {
+  const prefersReducedMotion = useReducedMotion();
+  
+  // Early return for reduced motion - simplified version
+  if (prefersReducedMotion) {
+    return (
+      <div className="w-full text-white relative overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 flex flex-col items-center relative z-10">
+          <div className="flex justify-center mb-4 sm:mb-5 md:mb-6">
+            <div className="inline-flex items-center gap-1 sm:gap-2 px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-[#0e1b52] border border-blue-500/20 rounded-full shadow-lg">
+              <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-amber-400 rounded-full"></div>
+              <p className="text-[10px] xs:text-xs sm:text-sm font-medium text-white tracking-wide">
+                POWERFUL DIGITAL SOLUTIONS. DELIVERED WITH PRECISION.
+              </p>
+            </div>
+          </div>
+          
+          <div className="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto text-center mb-4 sm:mb-5 md:mb-6">
+            <h1 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 md:mb-5 text-white leading-tight uppercase">
+              AT BIDDERS PRO, WE DON'T JUST BUILD WEBSITES OR APPS — WE SOLVE REAL PROBLEMS THROUGH SMART TECHNOLOGY, BEAUTIFUL DESIGN, AND STRATEGIC THINKING
+            </h1>
+            
+            <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto font-medium uppercase">
+              WE HELP STARTUPS, FREELANCERS, AND GROWING BUSINESSES STAND OUT, SCALE UP, AND SUCCEED—FASTER.
+            </p>
+          </div>
+          
+          <div className="flex justify-center mt-3 sm:mt-4 md:mt-5">
+            <button 
+              className="bg-violet-800 text-white text-center font-medium px-4 xs:px-5 sm:px-6 md:px-8 py-2 xs:py-2.5 sm:py-3 md:py-4 rounded-full text-sm xs:text-base sm:text-lg font-semibold hover:bg-violet-700 transition-all duration-300 uppercase w-auto"
+              onClick={() => {
+                window.location.href = "/calendar";
+              }}
+            >
+              LET'S AUTOMATE YOUR SUCCESS
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full text-white relative overflow-hidden">
-      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 flex flex-col items-center relative z-10">
         {/* Top tag pill */}
         <div className="flex justify-center mb-4 sm:mb-5 md:mb-6">
@@ -84,4 +166,8 @@ export default function ServicesHeroSection() {
       </div>
     </div>
   );
-} 
+});
+
+ServicesHeroSection.displayName = 'ServicesHeroSection';
+
+export default ServicesHeroSection; 

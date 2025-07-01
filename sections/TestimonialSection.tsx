@@ -36,12 +36,12 @@ const TestimonialSection = () => {
   ];
 
   return (
-    <section className="bg-slate-950 py-24" id="testimonials">
+    <section className="text-white py-24" id="testimonials">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-yellow-400 text-sm font-medium mb-6 animate-fade-in">
+            <div className="inline-flex items-center gap-2 px-4 py-2 border border-yellow-500/20 rounded-full text-yellow-400 text-sm font-medium mb-6 animate-fade-in">
               <div className="w-2 h-2 bg-yellow-400 rounded-full animate-ping-slow"></div>
               Client Testimonials
             </div>
@@ -65,7 +65,7 @@ const TestimonialSection = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 hover:border-yellow-500/30 transition-all duration-300 relative animate-fade-in"
+                className="group backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 hover:border-yellow-500/30 transition-all duration-300 relative animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Quote Icon */}
@@ -108,7 +108,7 @@ const TestimonialSection = () => {
           </div>
 
           {/* CTA Section */}
-          <div className="text-center bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-2xl p-8 border border-yellow-500/20 animate-fade-in-delayed-2">
+          <div className="text-center border border-yellow-500/20 rounded-2xl p-8 animate-fade-in-delayed-2">
             <h3 className="text-2xl font-bold text-white mb-4">
               Your Success Story Could Be Next
             </h3>

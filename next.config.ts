@@ -26,6 +26,11 @@ const nextConfig: NextConfig = {
         hostname: 'media.licdn.com',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'ui-avatars.com',
+        pathname: '**',
+      },
     ],
   },
 

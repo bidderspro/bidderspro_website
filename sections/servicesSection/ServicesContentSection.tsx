@@ -1,28 +1,91 @@
-import React, { Suspense } from 'react';
+"use client";
+
+import React, { Suspense, memo, useMemo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { TextAnimate } from "@/components/magicui/text-animate";
-import { IconCode, IconDeviceMobile, IconRobot, IconBrandWordpress, IconShoppingCart, IconBrandUpwork, IconHeadset } from '@tabler/icons-react';
+import { lazy } from 'react';
 import Image from 'next/image';
-import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+import { IconCode, IconDeviceMobile, IconRobot, IconBrandWordpress, IconShoppingCart, IconBrandUpwork } from '@tabler/icons-react';
 
-// Simple loading component
-const LoadingFallback = ({ height = "h-96" }: { height?: string }) => (
-  <div className={`${height} animate-pulse bg-gray-800/50 rounded-lg w-full`} />
+// Lazy load heavy components
+const TextAnimate = lazy(() => 
+  import('@/components/magicui/text-animate').then(mod => ({ default: mod.TextAnimate }))
 );
 
-// Card component with hover effects
-const ServiceCard = ({ 
+const InteractiveHoverButton = lazy(() => 
+  import('@/components/magicui/interactive-hover-button').then(mod => ({ default: mod.InteractiveHoverButton }))
+);
+
+// Simple loading component
+const LoadingFallback = memo(({ height = "h-96" }: { height?: string }) => (
+  <div className={`${height} animate-pulse bg-gray-800/50 rounded-lg w-full`} />
+));
+
+LoadingFallback.displayName = 'LoadingFallback';
+
+// Detect reduced motion preference
+const useReducedMotion = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  
+  useEffect(() => {
+    // Only run in browser
+    if (typeof window === 'undefined') return;
+    
+    // Use existing media query if possible
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    // Add listener with proper cleanup
+    const onChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', onChange);
+      return () => mediaQuery.removeEventListener('change', onChange);
+    } else {
+      mediaQuery.addListener(onChange);
+      return () => mediaQuery.removeListener(onChange);
+    }
+  }, []);
+  
+  return prefersReducedMotion;
+};
+
+// Card component with hover effects - memoized
+const ServiceCard = memo(({ 
   icon, 
   title, 
   description, 
-  delay 
+  delay,
+  prefersReducedMotion 
 }: { 
   icon: React.ReactNode; 
   title: string; 
   description: string; 
-  delay: number; 
+  delay: number;
+  prefersReducedMotion: boolean;
 }) => {
+  // Simplified rendering for reduced motion
+  if (prefersReducedMotion) {
+    return (
+      <div className="relative bg-white/10 backdrop-blur-xl rounded-xl p-5 sm:p-6 md:p-7 border border-white/20 overflow-hidden">
+        <div className="bg-white/80 w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-4 shadow-md shadow-violet-500/20 relative z-10">
+          <div className="w-6 h-6 sm:w-7 sm:h-7 text-violet-600">
+            {icon}
+          </div>
+        </div>
+        
+        <div className="relative z-10">
+          <h3 className="text-lg sm:text-xl font-bold mb-2.5 text-white">
+            {title}
+          </h3>
+          <p className="text-sm sm:text-base text-white/80">
+            {description}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -84,11 +147,16 @@ const ServiceCard = ({
       <div className="absolute top-0 left-0 right-0 h-full w-full bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-70"></div>
     </motion.div>
   );
-};
+});
 
-export default function ServicesContentSection() {
-  // Service data
-  const services = [
+ServiceCard.displayName = 'ServiceCard';
+
+// Main component - memoized
+const ServicesContentSection = memo(function ServicesContentSection() {
+  const prefersReducedMotion = useReducedMotion();
+  
+  // Memoize service data to prevent recreation on each render
+  const services = useMemo(() => [
     {
       icon: <IconCode className="w-5 h-5 sm:w-6 sm:h-6" />,
       title: "Web Development",
@@ -125,7 +193,69 @@ export default function ServicesContentSection() {
       description: "You Need To Get Positive Results When You Spend Hard Earned Marketing And Promotions.",
       delay: 0.6
     }
-  ];
+  ], []);
+
+  // Simplified version for reduced motion
+  if (prefersReducedMotion) {
+    return (
+      <div id="services-content" className="w-full pt-0 pb-4 sm:pb-6 md:pb-8">
+        <div className="container max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
+          {/* Section header with star icon */}
+          <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full shadow-lg">
+              <div className="text-amber-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sparkles">
+                  <path d="M12 3v18"></path>
+                  <path d="M3 12h18"></path>
+                  <path d="M12 3l-2 6.5"></path>
+                  <path d="M12 3l2 6.5"></path>
+                  <path d="M12 21l-2-6.5"></path>
+                  <path d="M12 21l2-6.5"></path>
+                  <path d="M3 12l6.5-2"></path>
+                  <path d="M3 12l6.5 2"></path>
+                  <path d="M21 12l-6.5-2"></path>
+                  <path d="M21 12l-6.5 2"></path>
+                </svg>
+              </div>
+              <p className="text-xs sm:text-sm text-white font-medium">
+                Our Core Services
+              </p>
+            </div>
+          </div>
+          
+          {/* Main heading */}
+          <div className="text-center mb-4 sm:mb-5 md:mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+              WHAT DO WE <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text"> PROVIDE</span>?
+            </h2>
+          </div>
+          
+          {/* Services cards grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+            {services.map((service, index) => (
+              <ServiceCard 
+                key={index}
+                icon={service.icon}
+                title={service.title}
+                description={service.description}
+                delay={service.delay}
+                prefersReducedMotion={prefersReducedMotion}
+              />
+            ))}
+          </div>
+          
+          {/* Bottom tagline */}
+          <div className="text-center mt-5 sm:mt-6 md:mt-8">
+            <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-full">
+              <p className="text-xs sm:text-sm md:text-base text-white">
+                From The First Idea To The Final Launch, We're With You Every Step Of The Way.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div id="services-content" className="w-full pt-0 pb-4 sm:pb-6 md:pb-8">
@@ -192,6 +322,7 @@ export default function ServicesContentSection() {
               title={service.title}
               description={service.description}
               delay={service.delay}
+              prefersReducedMotion={prefersReducedMotion}
             />
           ))}
         </div>
@@ -217,4 +348,8 @@ export default function ServicesContentSection() {
       </div>
     </div>
   );
-} 
+});
+
+ServicesContentSection.displayName = 'ServicesContentSection';
+
+export default ServicesContentSection; 
