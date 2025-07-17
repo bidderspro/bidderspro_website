@@ -33,6 +33,15 @@ const ServicesContentSection = dynamic(
   }
 );
 
+// Import PortfolioSection with its own chunk
+const PortfolioSection = dynamic(
+  () => import("@/sections/servicesSection/PortfolioSection"),
+  {
+    loading: () => <LoadingFallback />,
+    ssr: false
+  }
+);
+
 // Import WorkProcessSection with its own chunk
 const WorkProcessSection = dynamic(
   () => import("@/sections/servicesSection/WorkProcessSection"),
@@ -45,6 +54,15 @@ const WorkProcessSection = dynamic(
 // Import ConsultancySection separately with its own chunk
 const ConsultancySection = dynamic(
   () => import("@/sections/servicesSection/ConsultancySection"),
+  {
+    loading: () => <LoadingFallback />,
+    ssr: false
+  }
+);
+
+// Import TestimonialsSection separately with its own chunk
+const TestimonialsSection = dynamic(
+  () => import("@/sections/servicesSection/TestimonialsSection"),
   {
     loading: () => <LoadingFallback />,
     ssr: false
@@ -139,9 +157,18 @@ export default function ServicesPage() {
         <ConsultancySection />
       </Suspense>
       
+      <Suspense fallback={<LoadingFallback />}>
+        <PortfolioSection />
+      </Suspense>
+      
       {/* Use key to force remount when needed */}
       <Suspense fallback={<LoadingFallback />}>
         <WorkProcessSection key={`work-process-${key}`} />
+      </Suspense>
+      
+      {/* Add the new TestimonialsSection */}
+      <Suspense fallback={<LoadingFallback />}>
+        <TestimonialsSection key={`testimonials-${key}`} />
       </Suspense>
     </>
   );

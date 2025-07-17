@@ -398,7 +398,7 @@ const WorkProcessSection = memo(function WorkProcessSection() {
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6"
           >
             <ErrorBoundary>
-              <TextAnimate animate="fadeIn">Our Work Process</TextAnimate>
+              <TextAnimate animate="fadeIn" as="span">Our Work Process</TextAnimate>
             </ErrorBoundary>
           </motion.h2>
           
@@ -420,7 +420,7 @@ const WorkProcessSection = memo(function WorkProcessSection() {
             className="text-base sm:text-lg mb-6 sm:mb-8 lg:mb-10"
           >
             <ErrorBoundary>
-              <TextAnimate animate="fadeIn">
+              <TextAnimate animate="fadeIn" as="span">
                 WE BELIEVE IN CLARITY AND COLLABORATION AT EVERY STAGE.
               </TextAnimate>
             </ErrorBoundary>

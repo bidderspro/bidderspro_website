@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { scrollToSection, scrollToTop } from "@/lib/utils";
+import { IconChevronDown } from "@tabler/icons-react";
 
 // Dynamically import Navbar components individually
 const Navbar = dynamic(() => import("@/components/ui/Navbar").then(mod => mod.Navbar), { ssr: true });
@@ -18,10 +19,13 @@ const NavbarButton = dynamic(() => import("@/components/ui/Navbar").then(mod => 
 type NavItem = {
   name: string;
   link: string;
+  children?: NavItem[];
 };
 
 export default function Header() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [mobileServicesDropdownOpen, setMobileServicesDropdownOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const isHomePage = pathname === "/";
@@ -43,6 +47,36 @@ export default function Header() {
     {
       name: "Services",
       link: "/services",
+      children: [
+        {
+          name: "All Services",
+          link: "/services",
+        },
+        {
+          name: "Web Development",
+          link: "/services/web-development",
+        },
+        {
+          name: "Mobile App Development",
+          link: "/services/mobile-app-development",
+        },
+        {
+          name: "AI & Automation",
+          link: "/services/ai-automation",
+        },
+        {
+          name: "WordPress Development",
+          link: "/services/wordpress-development",
+        },
+        {
+          name: "Shopify Development",
+          link: "/services/shopify-development",
+        },
+        {
+          name: "Upwork Automation",
+          link: "/services/upwork-automation",
+        },
+      ],
     },
     {
       name: "Consultation",
@@ -88,6 +122,21 @@ export default function Header() {
       }
     }
   }, [isClient, isHomePage]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (!isClient) return;
+    
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.services-dropdown')) {
+        setServicesDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isClient]);
 
   useEffect(() => {
     function handleResize() {
@@ -148,6 +197,20 @@ export default function Header() {
     }
   }
 
+  // Toggle services dropdown
+  function toggleServicesDropdown(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    setServicesDropdownOpen(prev => !prev);
+  }
+
+  // Toggle mobile services dropdown
+  function toggleMobileServicesDropdown(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    setMobileServicesDropdownOpen(prev => !prev);
+  }
+
   return (
     <Navbar className="fixed top-0 left-0 right-0 z-50 w-full bg-transparent backdrop-blur-sm">
       <div className="absolute inset-0 bg-black/5 backdrop-blur-sm z-0"></div>
@@ -158,16 +221,48 @@ export default function Header() {
           </div>
           <div className="absolute inset-0 hidden md:flex flex-1 flex-row items-center justify-center space-x-1 md:space-x-2 text-sm font-medium text-zinc-600">
             {navItems.map((item, idx) => (
-              <Link
-                key={`link-${idx}`}
-                href={item.link}
-                scroll={false}
-                onClick={(e) => handleNavigation(e, item.link)}
-                className="relative px-2 md:px-3 lg:px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-white transition-colors duration-200"
-                prefetch={true}
-              >
-                <span className="relative z-20 whitespace-nowrap md:text-xs lg:text-sm">{item.name}</span>
-              </Link>
+              item.children ? (
+                <div key={`dropdown-${idx}`} className="relative services-dropdown">
+                  <button
+                    onClick={toggleServicesDropdown}
+                    className="flex items-center relative px-2 md:px-3 lg:px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-white transition-colors duration-200"
+                  >
+                    <span className="relative z-20 whitespace-nowrap md:text-xs lg:text-sm">{item.name}</span>
+                    <IconChevronDown size={16} className="ml-1 transition-transform duration-200" style={{ transform: servicesDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+                  </button>
+                  
+                  {servicesDropdownOpen && (
+                    <div className="absolute top-full left-0 mt-1 py-2 w-56 bg-white dark:bg-neutral-900 rounded-lg shadow-lg border border-gray-200 dark:border-neutral-800 z-50">
+                      {item.children.map((child, childIdx) => (
+                        <Link
+                          key={`dropdown-item-${childIdx}`}
+                          href={child.link}
+                          scroll={false}
+                          onClick={(e) => {
+                            handleNavigation(e, child.link);
+                            setServicesDropdownOpen(false);
+                          }}
+                          className="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                          prefetch={true}
+                        >
+                          {child.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={`link-${idx}`}
+                  href={item.link}
+                  scroll={false}
+                  onClick={(e) => handleNavigation(e, item.link)}
+                  className="relative px-2 md:px-3 lg:px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-white transition-colors duration-200"
+                  prefetch={true}
+                >
+                  <span className="relative z-20 whitespace-nowrap md:text-xs lg:text-sm">{item.name}</span>
+                </Link>
+              )
             ))}
           </div>
           <div className="relative z-20 flex items-center">
@@ -200,19 +295,51 @@ export default function Header() {
           </MobileNavHeader>
           <MobileNavMenu isOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)}>
             {navItems.map((item, i) => (
-              <Link
-                key={i}
-                href={item.link}
-                scroll={false}
-                onClick={(e) => {
-                  handleNavigation(e, item.link);
-                  setMobileNavOpen(false);
-                }}
-                className="w-full rounded-lg p-2 text-sm hover:bg-gray-100 dark:hover:bg-neutral-900"
-                prefetch={true}
-              >
-                {item.name}
-              </Link>
+              item.children ? (
+                <div key={`mobile-dropdown-${i}`} className="w-full">
+                  <button
+                    onClick={toggleMobileServicesDropdown}
+                    className="flex items-center justify-between w-full rounded-lg p-2 text-sm hover:bg-gray-100 dark:hover:bg-neutral-900"
+                  >
+                    {item.name}
+                    <IconChevronDown size={16} className="transition-transform duration-200" style={{ transform: mobileServicesDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+                  </button>
+                  
+                  {mobileServicesDropdownOpen && (
+                    <div className="pl-4 mt-1 space-y-1">
+                      {item.children.map((child, childIdx) => (
+                        <Link
+                          key={`mobile-dropdown-item-${childIdx}`}
+                          href={child.link}
+                          scroll={false}
+                          onClick={(e) => {
+                            handleNavigation(e, child.link);
+                            setMobileNavOpen(false);
+                          }}
+                          className="block w-full rounded-lg p-2 text-sm hover:bg-gray-100 dark:hover:bg-neutral-900"
+                          prefetch={true}
+                        >
+                          {child.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={i}
+                  href={item.link}
+                  scroll={false}
+                  onClick={(e) => {
+                    handleNavigation(e, item.link);
+                    setMobileNavOpen(false);
+                  }}
+                  className="w-full rounded-lg p-2 text-sm hover:bg-gray-100 dark:hover:bg-neutral-900"
+                  prefetch={true}
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
             <div className="flex w-full flex-col gap-2 mt-4">
               <Link href={isHomePage ? "#contact" : "/#contact"} scroll={false} onClick={(e) => {
