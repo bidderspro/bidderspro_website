@@ -182,29 +182,83 @@ NavButton.displayName = 'NavButton';
 const testimonials = [
   {
     id: 1,
-    title: "GAME-CHANGING INSIGHTS",
-    quote: "This summit opened my eyes to the future of AI and how it will shape industries.",
-    author: "Mark Vandenberg",
-    position: "CTO, NeuralTech",
+    title: "SHOPIFY DEVELOPMENT",
+    quote: "They didn't just build our Shopify store — they rebuilt our sales engine.",
+    author: "Tania R.",
+    position: "GlowCrate Skincare",
     image: "/assets/images/image 1.svg",
     color: "bg-black"
   },
   {
     id: 2,
-    title: "THE BEST AI EVENT!",
-    quote: "Incredible speakers, top-tier networking, and cutting-edge discussions all in one place.",
-    author: "Elena Rojas",
-    position: "AI Researcher, DeepMind",
+    title: "WORDPRESS DEVELOPMENT",
+    quote: "I used to hate updating WordPress. Now it's actually fun.",
+    author: "Ahmed K.",
+    position: "VerdaTech Solutions",
     image: "/assets/images/image 2.svg",
     color: "bg-blue-600"
   },
   {
     id: 3,
-    title: "UNMATCHED OPPORTUNITIES",
-    quote: "From hands-on workshops to visionary keynotes, this summit is a must-attend for AI professionals.",
-    author: "David Laurent",
-    position: "CEO, FutureAI Labs",
+    title: "MOBILE APP DEVELOPMENT",
+    quote: "Their mobile app team delivered a working MVP in 6 weeks. Crazy fast.",
+    author: "Jessica T.",
+    position: "PackPal App",
     image: "/assets/images/image 3.svg",
+    color: "bg-gray-700"
+  },
+  {
+    id: 4,
+    title: "BUSINESS AUTOMATION",
+    quote: "Our automation now runs the business while we sleep.",
+    author: "Rajiv M.",
+    position: "Livie Fashion Co.",
+    image: "/assets/images/image 4.svg",
+    color: "bg-black"
+  },
+  {
+    id: 5,
+    title: "SEO SERVICES",
+    quote: "Ranked page 3 to top 5 in under 2 months. That's what SEO should feel like.",
+    author: "Clara W.",
+    position: "FitWell Naturals",
+    image: "/assets/images/image 1.svg",
+    color: "bg-blue-600"
+  },
+  {
+    id: 6,
+    title: "CLIENT SUPPORT",
+    quote: "They support us like they're part of our team.",
+    author: "Dylan F.",
+    position: "FlowRate Analytics",
+    image: "/assets/images/image 2.svg",
+    color: "bg-gray-700"
+  },
+  {
+    id: 7,
+    title: "STRATEGIC DESIGN",
+    quote: "Not just design — strategic design. We got more signups in 2 weeks than in 2 months before.",
+    author: "Nida S.",
+    position: "SoundNest Audio",
+    image: "/assets/images/image 3.svg",
+    color: "bg-black"
+  },
+  {
+    id: 8,
+    title: "E-COMMERCE SOLUTIONS",
+    quote: "Our conversion rate doubled after implementing their checkout optimization.",
+    author: "Michael P.",
+    position: "OutdoorGear Pro",
+    image: "/assets/images/image 4.svg",
+    color: "bg-blue-600"
+  },
+  {
+    id: 9,
+    title: "AI INTEGRATION",
+    quote: "Their AI solution reduced our customer service workload by 40% while improving satisfaction.",
+    author: "Sarah L.",
+    position: "EcoHome Essentials",
+    image: "/assets/images/image 1.svg",
     color: "bg-gray-700"
   },
 ];
@@ -223,6 +277,12 @@ const TestimonialsSection = () => {
   const handlePrev = () => {
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
+
+  // Get current testimonials to display
+  const currentTestimonials = testimonials.slice(
+    currentPage * itemsPerPage, 
+    (currentPage + 1) * itemsPerPage
+  );
 
   return (
     <div className="w-full text-white relative overflow-hidden py-10 sm:py-12 md:py-16">
@@ -253,7 +313,7 @@ const TestimonialsSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          {testimonials.map((testimonial) => (
+          {currentTestimonials.map((testimonial) => (
             <TestimonialCard
               key={testimonial.id}
               title={testimonial.title}
@@ -266,6 +326,22 @@ const TestimonialsSection = () => {
             />
           ))}
         </div>
+        
+        {/* Pagination indicators */}
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-8 gap-2">
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(index)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  currentPage === index ? "bg-white w-6" : "bg-white/50"
+                }`}
+                aria-label={`Go to page ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

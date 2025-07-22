@@ -56,27 +56,27 @@ const ServicesHeroSection = memo(function ServicesHeroSection() {
   if (prefersReducedMotion) {
     return (
       <div className="w-full text-white relative overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 flex flex-col items-center relative z-10">
-          <div className="flex justify-center mb-4 sm:mb-5 md:mb-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 flex flex-col items-center justify-center min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] relative z-10">
+          <div className="flex justify-center mb-6 sm:mb-8 md:mb-10">
             <div className="inline-flex items-center gap-1 sm:gap-2 px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-[#0e1b52] border border-blue-500/20 rounded-full shadow-lg">
               <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-amber-400 rounded-full"></div>
-              <p className="text-[10px] xs:text-xs sm:text-sm font-medium text-white tracking-wide">
+              <p className="text-xs xs:text-sm sm:text-base md:text-lg font-medium text-white tracking-wide">
                 POWERFUL DIGITAL SOLUTIONS. DELIVERED WITH PRECISION.
               </p>
             </div>
           </div>
           
-          <div className="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto text-center mb-4 sm:mb-5 md:mb-6">
-            <h1 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 md:mb-5 text-white leading-tight uppercase">
-              AT BIDDERS PRO, WE DON'T JUST BUILD WEBSITES OR APPS — WE SOLVE REAL PROBLEMS THROUGH SMART TECHNOLOGY, BEAUTIFUL DESIGN, AND STRATEGIC THINKING
-            </h1>
+          <div className="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto text-center mb-6 sm:mb-8 md:mb-10">
+            <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-5 sm:mb-6 md:mb-8 text-white leading-snug uppercase">
+            Digital Solutions That Grow Your Business. Not Just Your To-Do List.
+              </h2>
             
-            <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto font-medium uppercase">
-              WE HELP STARTUPS, FREELANCERS, AND GROWING BUSINESSES STAND OUT, SCALE UP, AND SUCCEED—FASTER.
+            <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto font-medium leading-relaxed">
+            We don't just design websites or build apps — we solve real business problems. Whether it's automation, development, or scaling your online presence, Bidders Pro delivers solutions that actually move the needle.
             </p>
           </div>
           
-          <div className="flex justify-center mt-3 sm:mt-4 md:mt-5">
+          <div className="flex justify-center mt-5 sm:mt-6 md:mt-8">
             <button 
               className="bg-violet-800 text-white text-center font-medium px-4 xs:px-5 sm:px-6 md:px-8 py-2 xs:py-2.5 sm:py-3 md:py-4 rounded-full text-sm xs:text-base sm:text-lg font-semibold hover:bg-violet-700 transition-all duration-300 uppercase w-auto"
               onClick={() => {
@@ -93,13 +93,13 @@ const ServicesHeroSection = memo(function ServicesHeroSection() {
 
   return (
     <div className="w-full text-white relative overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 flex flex-col items-center relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 flex flex-col items-center justify-center min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] relative z-10">
         {/* Top tag pill */}
-        <div className="flex justify-center mb-4 sm:mb-5 md:mb-6">
+        <div className="flex justify-center mb-6 sm:mb-8 md:mb-10">
           <div className="inline-flex items-center gap-1 sm:gap-2 px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-[#0e1b52] border border-blue-500/20 rounded-full shadow-lg">
             <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-amber-400 rounded-full"></div>
             <Suspense fallback={
-              <LoadingFallback className="text-[10px] xs:text-xs sm:text-sm font-medium text-white tracking-wide">
+              <LoadingFallback className="text-xs xs:text-sm sm:text-base md:text-lg font-medium text-white tracking-wide">
                 POWERFUL DIGITAL SOLUTIONS. DELIVERED WITH PRECISION.
               </LoadingFallback>
             }>
@@ -107,7 +107,7 @@ const ServicesHeroSection = memo(function ServicesHeroSection() {
                 animate="blur-in"
                 as="p"
                 duration={0.5}
-                className="text-[10px] xs:text-xs sm:text-sm font-medium text-white tracking-wide"
+                className="text-xs xs:text-sm sm:text-base md:text-lg font-medium text-white tracking-wide"
               >
                 POWERFUL DIGITAL SOLUTIONS. DELIVERED WITH PRECISION.
               </TextAnimate>
@@ -116,38 +116,38 @@ const ServicesHeroSection = memo(function ServicesHeroSection() {
         </div>
         
         {/* Main heading and subtext */}
-        <div className="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto text-center mb-4 sm:mb-5 md:mb-6">
+        <div className="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto text-center mb-6 sm:mb-8 md:mb-10">
           <Suspense fallback={
-            <LoadingFallback className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 md:mb-5 text-white leading-tight uppercase">
-              AT BIDDERS PRO, WE DON'T JUST BUILD WEBSITES OR APPS — WE SOLVE REAL PROBLEMS THROUGH SMART TECHNOLOGY, BEAUTIFUL DESIGN, AND STRATEGIC THINKING
-            </LoadingFallback>
+            <LoadingFallback className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-5 sm:mb-6 md:mb-8 text-white leading-snug uppercase">
+             Digital Solutions That Grow Your Business. Not Just Your To-Do List.
+              </LoadingFallback>
           }>
             <TextAnimate 
-              as="h1" 
+              as="h5" 
               animate="fadeIn" 
-              className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 md:mb-5 text-white leading-tight uppercase"
+              className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-5 sm:mb-6 md:mb-8 text-white leading-snug uppercase"
             >
-              AT BIDDERS PRO, WE DON'T JUST BUILD WEBSITES OR APPS — WE SOLVE REAL PROBLEMS THROUGH SMART TECHNOLOGY, BEAUTIFUL DESIGN, AND STRATEGIC THINKING
+             Digital Solutions That Grow Your Business. Not Just Your To-Do List.
             </TextAnimate>
           </Suspense>
           
           <Suspense fallback={
-            <LoadingFallback className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto font-medium uppercase">
-              WE HELP STARTUPS, FREELANCERS, AND GROWING BUSINESSES STAND OUT, SCALE UP, AND SUCCEED—FASTER.
+            <LoadingFallback className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto font-medium leading-relaxed">
+              We don't just design websites or build apps — we solve real business problems. Whether it's automation, development, or scaling your online presence, Bidders Pro delivers solutions that actually move the needle.
             </LoadingFallback>
           }>
             <TextAnimate 
               as="p" 
               animate="blur-in" 
-              className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto font-medium uppercase"
+              className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto font-medium leading-relaxed"
             >
-              WE HELP STARTUPS, FREELANCERS, AND GROWING BUSINESSES STAND OUT, SCALE UP, AND SUCCEED—FASTER.
+              We don't just design websites or build apps — we solve real business problems. Whether it's automation, development, or scaling your online presence, Bidders Pro delivers solutions that actually move the needle.
             </TextAnimate>
           </Suspense>
         </div>
         
         {/* CTA Button */}
-        <div className="flex justify-center mt-3 sm:mt-4 md:mt-5">
+        <div className="flex justify-center mt-5 sm:mt-6 md:mt-8">
           <Suspense fallback={
             <button className="bg-violet-800 text-white text-center font-medium px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full text-sm sm:text-base md:text-lg">
               LET'S AUTOMATE YOUR SUCCESS
