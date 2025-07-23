@@ -69,7 +69,7 @@ const ServicesHeroSection = memo(function ServicesHeroSection({
   if (prefersReducedMotion) {
     return (
       <div className="w-full text-white relative overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 flex flex-col items-center justify-center min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 flex flex-col items-center justify-center relative z-10">
           <div className="flex justify-center mb-6 sm:mb-8 md:mb-10">
             <div className="inline-flex items-center gap-1 sm:gap-2 px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-[#0e1b52] border border-blue-500/20 rounded-full shadow-lg">
               <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-amber-400 rounded-full"></div>
@@ -106,7 +106,7 @@ const ServicesHeroSection = memo(function ServicesHeroSection({
 
   return (
     <div className="w-full text-white relative overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 flex flex-col items-center justify-center min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 flex flex-col items-center justify-center relative z-10">
         {/* Top tag pill */}
         <div className="flex justify-center mb-6 sm:mb-8 md:mb-10">
           <div className="inline-flex items-center gap-1 sm:gap-2 px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-[#0e1b52] border border-blue-500/20 rounded-full shadow-lg">

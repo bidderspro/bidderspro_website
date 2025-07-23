@@ -20,8 +20,8 @@ const ButtonFallback = ({ children, className }: { children: React.ReactNode, cl
 
 export default function HeroSection() {
   return (
-    <div id="home" className="relative w-full min-h-screen text-white overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 flex flex-col items-center justify-center relative z-10 min-h-screen">
+    <div id="home" className="relative w-full text-white overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 flex flex-col items-center justify-center relative z-10">
         <div className="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
           {/* Simplify animation elements */}
           {["Automate", "Scale", "Dominate"].map((text, index) => (
@@ -85,7 +85,7 @@ export default function HeroSection() {
               <InteractiveHoverButton
                 className="bg-violet-800 text-white text-center font-medium px-4 sm:px-6 md:px-8 lg:px-10 py-3 sm:py-4 md:py-5 lg:py-6 rounded-full text-base sm:text-lg md:text-xl lg:text-2xl font-semibold hover:bg-violet-700 transition-all duration-300"
                 onClick={() => {
-                  alert("Coming soon!");
+                  
                 }}
               >
                 Let's Automate Your Success
