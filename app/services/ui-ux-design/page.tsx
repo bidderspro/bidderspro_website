@@ -145,7 +145,7 @@ const UIUXDesignContent = () => {
         <div className="mt-12 sm:mt-16 md:mt-20">
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
             <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
-              Great design is more than just aesthetics, it's about creating experiences that users love and businesses profit from. Our UI/UX design process focuses on understanding your users, solving real problems, and delivering designs that convert visitors into customers.
+              Great design is more than just aesthetics — it's about creating experiences that users love and businesses profit from. Our UI/UX design process focuses on understanding your users, solving real problems, and delivering designs that convert visitors into customers.
             </p>
           </div>
         </div>

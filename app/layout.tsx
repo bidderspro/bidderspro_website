@@ -32,7 +32,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Bidders Pro",
-      description: "Professional Upwork Automation Services • Transform Your Freelancing Success",
+  description: "Professional Upwork Automation Services - Transform Your Freelancing Success",
   keywords: "upwork automation, freelancing, proposal automation, bidding bot",
   icons: {
     icon: [

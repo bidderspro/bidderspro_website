@@ -71,7 +71,7 @@ const MobileAppDevelopmentContent = () => {
             SEAMLESS <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">MOBILE EXPERIENCES.</span> ANYWHERE. ANYTIME.
           </h2>
           <p className="mt-4 text-lg sm:text-xl text-white/80 max-w-3xl mx-auto">
-            From native iOS/Android apps to cross-platform solutions, we build intuitive, high-performance mobile applications that engage your audience and drive results.
+            From native iOS/Android apps to cross-platform solutions — we build intuitive, high-performance mobile applications that engage your audience and drive results.
           </p>
         </div>
         
@@ -146,7 +146,7 @@ const MobileAppDevelopmentContent = () => {
         <div className="mt-12 sm:mt-16 md:mt-20">
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
             <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
-              We don't just build apps, we build mobile experiences that users love and businesses profit from. Our mobile development process focuses on performance, usability, and scalability to deliver apps that stand out in crowded app stores.
+              We don't just build apps — we build mobile experiences that users love and businesses profit from. Our mobile development process focuses on performance, usability, and scalability to deliver apps that stand out in crowded app stores.
             </p>
           </div>
         </div>
@@ -234,7 +234,7 @@ export default function MobileAppDevelopmentPage() {
       <ServicesHeroSection 
         badge="MOBILE APP SOLUTIONS"
         headline="SEAMLESS MOBILE EXPERIENCES. ANYWHERE. ANYTIME."
-        subheading="From native iOS/Android apps to cross-platform solutions, we build intuitive, high-performance mobile applications that engage your audience and drive results."
+        subheading="From native iOS/Android apps to cross-platform solutions — we build intuitive, high-performance mobile applications that engage your audience and drive results."
         ctaText="BUILD YOUR MOBILE APP"
       />
       

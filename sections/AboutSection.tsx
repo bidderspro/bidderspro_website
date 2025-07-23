@@ -28,7 +28,7 @@ export default function AboutSection() {
           by="line" 
           className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl max-w-[95%] sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%] text-center md:text-left"
         >
-          BiddersPro is where smart business meets automation. We replace grinding with scaling, turning outreach into predictable deal flow, so you focus on growth, not guesswork.
+          BiddersPro is where smart business meets automation. We replace grinding with scaling, turning outreach into predictable deal flow—so you focus on growth, not guesswork.
         </TextAnimate>
         <TextAnimate 
           as={"span"} 

@@ -44,7 +44,7 @@ const CompareSection = () => {
                         <IconCheck className="h-4 w-4 sm:h-5 sm:w-5 text-[#E0E0FF]" />
                       </div>
                       <p className="text-sm sm:text-base md:text-lg text-gray-100">
-                        Let clients come to you through invites, your off-site hustle stays untouched and uninterrupted.
+                        Let clients come to you through invites—your off-site hustle stays untouched and uninterrupted.
                       </p>
                     </div>
                   </td>
@@ -78,7 +78,7 @@ const CompareSection = () => {
                         <IconX className="h-4 w-4 sm:h-5 sm:w-5 text-red-400" />
                       </div>
                       <p className="text-sm sm:text-base md:text-lg text-gray-100">
-                        Facing radio silence from clients, proposal after proposal, no response, just frustration.
+                        Facing radio silence from clients—proposal after proposal, no response, just frustration.
                       </p>
                     </div>
                   </td>
@@ -88,7 +88,7 @@ const CompareSection = () => {
                         <IconCheck className="h-4 w-4 sm:h-5 sm:w-5 text-[#E0E0FF]" />
                       </div>
                       <p className="text-sm sm:text-base md:text-lg text-gray-100">
-                        Scale higher, faster, stronger, with every passing day, your growth compounds.
+                        Scale higher, faster, stronger—with every passing day, your growth compounds.
                       </p>
                     </div>
                   </td>

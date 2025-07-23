@@ -22,7 +22,7 @@ const TestimonialSection = () => {
       rating: 5,
     },
     {
-              quote: "We had a vision to scale our freelance operations, and Bidders Pro brought it to life. The integration of smart filters, automatic bidding, and seamless workflow was exactly what we needed. It's a game-changer for serious freelancers.",
+      quote: "We had a vision to scale our freelance operations—and Bidders Pro brought it to life. The integration of smart filters, automatic bidding, and seamless workflow was exactly what we needed. It's a game-changer for serious freelancers.",
       author: "MetaSync Technologies",
       project: "Web Development Agency",
       rating: 5,
@@ -55,7 +55,7 @@ const TestimonialSection = () => {
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed animate-fade-in-delayed">
-              We don't talk about success, 
+              We don't talk about success — 
               <span className="text-yellow-400 font-semibold"> we automate it.</span>
             </p>
           </div>
