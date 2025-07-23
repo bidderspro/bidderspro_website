@@ -146,7 +146,12 @@ export default function ServicesPage() {
       </Head>
 
       {/* Load hero section immediately */}
-      <ServicesHeroSection />
+      <ServicesHeroSection 
+        badge="POWERFUL DIGITAL SOLUTIONS. DELIVERED WITH PRECISION."
+        headline="DIGITAL SOLUTIONS THAT GROW YOUR BUSINESS. NOT JUST YOUR TO-DO LIST."
+        subheading="We don't just design websites or build apps — we solve real business problems. Whether it's automation, development, or scaling your online presence, Bidders Pro delivers solutions that actually move the needle."
+        ctaText="LET'S AUTOMATE YOUR SUCCESS"
+      />
       
       {/* Use Suspense boundaries for each section to improve loading */}
       <Suspense fallback={<LoadingFallback />}>

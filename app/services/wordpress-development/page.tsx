@@ -221,7 +221,12 @@ export default function WordPressDevelopmentPage() {
       </Head>
 
       {/* Load hero section immediately */}
-      <ServicesHeroSection />
+      <ServicesHeroSection 
+        badge="WORDPRESS SOLUTIONS"
+        headline="POWERFUL WORDPRESS SITES. EASY TO MANAGE."
+        subheading="Flexible, easy-to-manage websites built on the world's most popular CMS platform. Custom themes, plugins, and e-commerce solutions that grow with your business."
+        ctaText="LAUNCH YOUR WORDPRESS SITE"
+      />
       
       {/* Service-specific content */}
       <Suspense fallback={<LoadingFallback />}>

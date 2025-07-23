@@ -221,7 +221,12 @@ export default function MobileAppDevelopmentPage() {
       </Head>
 
       {/* Load hero section immediately */}
-      <ServicesHeroSection />
+      <ServicesHeroSection 
+        badge="MOBILE APP SOLUTIONS"
+        headline="SEAMLESS MOBILE EXPERIENCES. ANYWHERE. ANYTIME."
+        subheading="From native iOS/Android apps to cross-platform solutions — we build intuitive, high-performance mobile applications that engage your audience and drive results."
+        ctaText="BUILD YOUR MOBILE APP"
+      />
       
       {/* Service-specific content */}
       <Suspense fallback={<LoadingFallback />}>

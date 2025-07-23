@@ -48,8 +48,21 @@ const useReducedMotion = () => {
   return prefersReducedMotion;
 };
 
+// Props interface for the hero section
+interface ServicesHeroSectionProps {
+  badge?: string;
+  headline?: string;
+  subheading?: string;
+  ctaText?: string;
+}
+
 // Memoize the component to prevent unnecessary re-renders
-const ServicesHeroSection = memo(function ServicesHeroSection() {
+const ServicesHeroSection = memo(function ServicesHeroSection({
+  badge = "POWERFUL DIGITAL SOLUTIONS. DELIVERED WITH PRECISION.",
+  headline = "Digital Solutions That Grow Your Business. Not Just Your To-Do List.",
+  subheading = "We don't just design websites or build apps — we solve real business problems. Whether it's automation, development, or scaling your online presence, Bidders Pro delivers solutions that actually move the needle.",
+  ctaText = "LET'S AUTOMATE YOUR SUCCESS"
+}: ServicesHeroSectionProps) {
   const prefersReducedMotion = useReducedMotion();
   
   // Early return for reduced motion - simplified version
@@ -61,18 +74,18 @@ const ServicesHeroSection = memo(function ServicesHeroSection() {
             <div className="inline-flex items-center gap-1 sm:gap-2 px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 bg-[#0e1b52] border border-blue-500/20 rounded-full shadow-lg">
               <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-amber-400 rounded-full"></div>
               <p className="text-xs xs:text-sm sm:text-base md:text-lg font-medium text-white tracking-wide">
-                POWERFUL DIGITAL SOLUTIONS. DELIVERED WITH PRECISION.
+                {badge}
               </p>
             </div>
           </div>
           
           <div className="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto text-center mb-6 sm:mb-8 md:mb-10">
             <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-5 sm:mb-6 md:mb-8 text-white leading-snug uppercase">
-            Digital Solutions That Grow Your Business. Not Just Your To-Do List.
-              </h2>
+              {headline}
+            </h2>
             
             <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto font-medium leading-relaxed">
-            We don't just design websites or build apps — we solve real business problems. Whether it's automation, development, or scaling your online presence, Bidders Pro delivers solutions that actually move the needle.
+              {subheading}
             </p>
           </div>
           
@@ -83,7 +96,7 @@ const ServicesHeroSection = memo(function ServicesHeroSection() {
                 window.location.href = "/calendar";
               }}
             >
-              LET'S AUTOMATE YOUR SUCCESS
+              {ctaText}
             </button>
           </div>
         </div>
@@ -100,7 +113,7 @@ const ServicesHeroSection = memo(function ServicesHeroSection() {
             <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-amber-400 rounded-full"></div>
             <Suspense fallback={
               <LoadingFallback className="text-xs xs:text-sm sm:text-base md:text-lg font-medium text-white tracking-wide">
-                POWERFUL DIGITAL SOLUTIONS. DELIVERED WITH PRECISION.
+                {badge}
               </LoadingFallback>
             }>
               <TextAnimate
@@ -109,7 +122,7 @@ const ServicesHeroSection = memo(function ServicesHeroSection() {
                 duration={0.5}
                 className="text-xs xs:text-sm sm:text-base md:text-lg font-medium text-white tracking-wide"
               >
-                POWERFUL DIGITAL SOLUTIONS. DELIVERED WITH PRECISION.
+                {badge}
               </TextAnimate>
             </Suspense>
           </div>
@@ -119,21 +132,21 @@ const ServicesHeroSection = memo(function ServicesHeroSection() {
         <div className="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto text-center mb-6 sm:mb-8 md:mb-10">
           <Suspense fallback={
             <LoadingFallback className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-5 sm:mb-6 md:mb-8 text-white leading-snug uppercase">
-             Digital Solutions That Grow Your Business. Not Just Your To-Do List.
-              </LoadingFallback>
+              {headline}
+            </LoadingFallback>
           }>
             <TextAnimate 
               as="h5" 
               animate="fadeIn" 
               className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-5 sm:mb-6 md:mb-8 text-white leading-snug uppercase"
             >
-             Digital Solutions That Grow Your Business. Not Just Your To-Do List.
+              {headline}
             </TextAnimate>
           </Suspense>
           
           <Suspense fallback={
             <LoadingFallback className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto font-medium leading-relaxed">
-              We don't just design websites or build apps — we solve real business problems. Whether it's automation, development, or scaling your online presence, Bidders Pro delivers solutions that actually move the needle.
+              {subheading}
             </LoadingFallback>
           }>
             <TextAnimate 
@@ -141,7 +154,7 @@ const ServicesHeroSection = memo(function ServicesHeroSection() {
               animate="blur-in" 
               className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto font-medium leading-relaxed"
             >
-              We don't just design websites or build apps — we solve real business problems. Whether it's automation, development, or scaling your online presence, Bidders Pro delivers solutions that actually move the needle.
+              {subheading}
             </TextAnimate>
           </Suspense>
         </div>
@@ -150,7 +163,7 @@ const ServicesHeroSection = memo(function ServicesHeroSection() {
         <div className="flex justify-center mt-5 sm:mt-6 md:mt-8">
           <Suspense fallback={
             <button className="bg-violet-800 text-white text-center font-medium px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full text-sm sm:text-base md:text-lg">
-              LET'S AUTOMATE YOUR SUCCESS
+              {ctaText}
             </button>
           }>
             <InteractiveHoverButton
@@ -159,7 +172,7 @@ const ServicesHeroSection = memo(function ServicesHeroSection() {
                 window.location.href = "/calendar";
               }}
             >
-              LET'S AUTOMATE YOUR SUCCESS
+              {ctaText}
             </InteractiveHoverButton>
           </Suspense>
         </div>

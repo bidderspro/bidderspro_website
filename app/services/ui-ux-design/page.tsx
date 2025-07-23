@@ -3,7 +3,7 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import { IconRobot } from '@tabler/icons-react';
+import { IconPalette } from '@tabler/icons-react';
 
 // Page config
 export const config = {
@@ -49,7 +49,7 @@ const TestimonialsSection = dynamic(
 );
 
 // Service-specific content component
-const AIAutomationContent = () => {
+const UIUXDesignContent = () => {
   return (
     <div className="w-full py-10 sm:py-12 md:py-16">
       <div className="container max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
@@ -57,10 +57,10 @@ const AIAutomationContent = () => {
         <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full shadow-lg">
             <div className="text-amber-400">
-              <IconRobot size={18} />
+              <IconPalette size={18} />
             </div>
             <p className="text-xs sm:text-sm text-white font-medium">
-              AI & Automation
+              UI/UX Design
             </p>
           </div>
         </div>
@@ -68,10 +68,10 @@ const AIAutomationContent = () => {
         {/* Main heading */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            INTELLIGENT <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">AI & AUTOMATION</span> SOLUTIONS
+            BEAUTIFUL <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">UI/UX DESIGN</span> THAT CONVERTS
           </h2>
           <p className="mt-4 text-lg sm:text-xl text-white/80 max-w-3xl mx-auto">
-            Let technology handle the repetitive tasks while you focus on strategy and growth.
+            User-centered design that combines aesthetics with functionality to create engaging digital experiences that drive results.
           </p>
         </div>
         
@@ -79,28 +79,28 @@ const AIAutomationContent = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {[
             {
-              title: "Business Process Automation",
-              description: "Streamline workflows and eliminate manual tasks to improve efficiency and reduce errors."
+              title: "User Research & Testing",
+              description: "Deep insights into user behavior and needs through comprehensive research and usability testing."
             },
             {
-              title: "AI-Powered Chatbots",
-              description: "24/7 customer service and support through intelligent conversational interfaces."
+              title: "Wireframing & Prototyping",
+              description: "Interactive prototypes that bring your ideas to life before development begins."
             },
             {
-              title: "Data Analysis & Insights",
-              description: "Extract meaningful patterns and actionable insights from your business data."
+              title: "Visual Design",
+              description: "Stunning visual designs that align with your brand and create memorable user experiences."
             },
             {
-              title: "Custom AI Solutions",
-              description: "Tailored artificial intelligence applications designed for your specific business challenges."
+              title: "Information Architecture",
+              description: "Logical, intuitive site structures that help users find what they need quickly."
             },
             {
-              title: "Workflow Integration",
-              description: "Connect your existing systems and tools for seamless automation across platforms."
+              title: "Responsive Design",
+              description: "Seamless experiences across all devices, from mobile phones to desktop computers."
             },
             {
-              title: "Predictive Analytics",
-              description: "Anticipate trends and make data-driven decisions with advanced forecasting models."
+              title: "Design Systems",
+              description: "Consistent, scalable design systems that maintain brand integrity across all touchpoints."
             }
           ].map((feature, index) => (
             <div 
@@ -115,18 +115,17 @@ const AIAutomationContent = () => {
         
         {/* Technologies section */}
         <div className="mb-12">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Technologies We Use</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Design Tools We Use</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              "Machine Learning", "Natural Language Processing", "Computer Vision", 
-              "Python", "TensorFlow", "PyTorch", "OpenAI API", "Zapier", 
-              "Make.com", "Microsoft Power Automate"
-            ].map((tech, index) => (
+              "Figma", "Adobe XD", "Sketch", "InVision", "Principle", 
+              "Framer", "Protopie", "Zeplin", "Abstract", "Notion"
+            ].map((tool, index) => (
               <div 
                 key={index}
                 className="bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-4 py-2 text-white"
               >
-                {tech}
+                {tool}
               </div>
             ))}
           </div>
@@ -138,15 +137,24 @@ const AIAutomationContent = () => {
             onClick={() => window.location.href = "/calendar"}
             className="bg-violet-800 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-full text-lg uppercase transition-all duration-300"
           >
-            Automate Your Business
+            Design Your Experience
           </button>
+        </div>
+        
+        {/* Service Description */}
+        <div className="mt-12 sm:mt-16 md:mt-20">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
+              Great design is more than just aesthetics — it's about creating experiences that users love and businesses profit from. Our UI/UX design process focuses on understanding your users, solving real problems, and delivering designs that convert visitors into customers.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default function AIAutomationPage() {
+export default function UIUXDesignPage() {
   // Detect if user prefers reduced motion
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
   
@@ -223,15 +231,15 @@ export default function AIAutomationPage() {
 
       {/* Load hero section immediately */}
       <ServicesHeroSection 
-        badge="AI & AUTOMATION SOLUTIONS"
-        headline="INTELLIGENT AUTOMATION. SMART BUSINESS GROWTH."
-        subheading="Let technology handle the repetitive tasks while you focus on strategy and growth. From chatbots to workflow automation, we build AI solutions that work."
-        ctaText="AUTOMATE YOUR BUSINESS"
+        badge="UI/UX DESIGN SOLUTIONS"
+        headline="BEAUTIFUL DESIGNS. POWERFUL EXPERIENCES."
+        subheading="User-centered design that combines aesthetics with functionality to create engaging digital experiences that drive results and delight users."
+        ctaText="DESIGN YOUR EXPERIENCE"
       />
       
       {/* Service-specific content */}
       <Suspense fallback={<LoadingFallback />}>
-        <AIAutomationContent />
+        <UIUXDesignContent />
       </Suspense>
       
       {/* Work process section */}

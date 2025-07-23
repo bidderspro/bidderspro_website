@@ -221,7 +221,12 @@ export default function ShopifyDevelopmentPage() {
       </Head>
 
       {/* Load hero section immediately */}
-      <ServicesHeroSection />
+      <ServicesHeroSection 
+        badge="SHOPIFY SOLUTIONS"
+        headline="OPTIMIZED SHOPIFY STORES. MAXIMUM CONVERSIONS."
+        subheading="Custom e-commerce solutions that convert visitors into loyal customers. From custom themes to Shopify Plus development, we build stores that sell."
+        ctaText="LAUNCH YOUR SHOPIFY STORE"
+      />
       
       {/* Service-specific content */}
       <Suspense fallback={<LoadingFallback />}>

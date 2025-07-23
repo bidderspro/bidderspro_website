@@ -60,7 +60,7 @@ const WebDevelopmentContent = () => {
               <IconCode size={18} />
             </div>
             <p className="text-xs sm:text-sm text-white font-medium">
-              Web Development
+              Custom Web Solutions
             </p>
           </div>
         </div>
@@ -68,10 +68,10 @@ const WebDevelopmentContent = () => {
         {/* Main heading */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            CUSTOM <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">WEB DEVELOPMENT</span> SERVICES
+            BUILD FAST. <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">SCALE SMART.</span> WIN ONLINE.
           </h2>
           <p className="mt-4 text-lg sm:text-xl text-white/80 max-w-3xl mx-auto">
-            We create high-performance, responsive websites tailored to your specific business needs and goals.
+            From landing pages to full-stack apps — we design and develop lightning-fast, user-focused websites that grow with your business.
           </p>
         </div>
         
@@ -80,27 +80,27 @@ const WebDevelopmentContent = () => {
           {[
             {
               title: "Responsive Design",
-              description: "Websites that look and function perfectly on any device, from desktops to smartphones."
+              description: "Your site will look and work flawlessly on every device — mobile, tablet, or desktop."
             },
             {
               title: "Performance Optimization",
-              description: "Lightning-fast loading speeds and smooth user experience to keep visitors engaged."
+              description: "We craft websites that load fast, run smooth, and keep users engaged."
             },
             {
               title: "SEO-Friendly Structure",
-              description: "Built with search engines in mind to help improve your visibility online."
+              description: "Clean code and on-page SEO fundamentals built-in — for better search visibility."
             },
             {
               title: "Custom Functionality",
-              description: "Tailored features and integrations that address your specific business challenges."
+              description: "Need something beyond the usual? We build tailored features that fit your needs."
             },
             {
               title: "Scalable Architecture",
-              description: "Future-proof solutions that can grow and evolve with your business needs."
+              description: "Future-proof your business with a solid backend and modular frontend."
             },
             {
               title: "Ongoing Support",
-              description: "Continuous maintenance and updates to ensure your website remains secure and effective."
+              description: "We don't just launch — we maintain, support, and help you grow post-launch."
             }
           ].map((feature, index) => (
             <div 
@@ -118,7 +118,7 @@ const WebDevelopmentContent = () => {
           <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Technologies We Use</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              "React", "Next.js", "TypeScript", "Node.js", "Express", 
+              "React.js", "Next.js", "TypeScript", "Node.js", "Express.js", 
               "MongoDB", "PostgreSQL", "GraphQL", "Tailwind CSS", "AWS"
             ].map((tech, index) => (
               <div 
@@ -137,8 +137,17 @@ const WebDevelopmentContent = () => {
             onClick={() => window.location.href = "/calendar"}
             className="bg-violet-800 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-full text-lg uppercase transition-all duration-300"
           >
-            Start Your Web Project
+            Let's Build Your Website
           </button>
+        </div>
+        
+        {/* Service Description */}
+        <div className="mt-12 sm:mt-16 md:mt-20">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
+              We don't just build websites — we build digital foundations. Whether you're a startup, agency, or scaling business, our web development services combine sleek design, clean code, and growth-driven strategies to deliver websites that perform as good as they look.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -221,7 +230,12 @@ export default function WebDevelopmentPage() {
       </Head>
 
       {/* Load hero section immediately */}
-      <ServicesHeroSection />
+      <ServicesHeroSection 
+        badge="CUSTOM WEB SOLUTIONS"
+        headline="BUILD FAST. SCALE SMART. WIN ONLINE."
+        subheading="From landing pages to full-stack apps — we design and develop lightning-fast, user-focused websites that grow with your business."
+        ctaText="GET YOUR WEBSITE BUILT"
+      />
       
       {/* Service-specific content */}
       <Suspense fallback={<LoadingFallback />}>
