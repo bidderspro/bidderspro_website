@@ -1,3 +1,4 @@
+import router from 'next/router';
 import { lazy, Suspense } from 'react';
 
 // Lazy load heavy components
@@ -85,7 +86,8 @@ export default function HeroSection() {
               <InteractiveHoverButton
                 className="bg-violet-800 text-white text-center font-medium px-4 sm:px-6 md:px-8 lg:px-10 py-3 sm:py-4 md:py-5 lg:py-6 rounded-full text-base sm:text-lg md:text-xl lg:text-2xl font-semibold hover:bg-violet-700 transition-all duration-300"
                 onClick={() => {
-                  
+                  const contactSection = document.getElementById('contact');
+                  contactSection?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
                 Let's Automate Your Success
