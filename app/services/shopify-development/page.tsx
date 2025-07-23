@@ -68,10 +68,10 @@ const ShopifyDevelopmentContent = () => {
         {/* Main heading */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            OPTIMIZED <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">SHOPIFY</span> STORES
+            OPTIMIZED <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">SHOPIFY STORES.</span> MAXIMUM CONVERSIONS.
           </h2>
           <p className="mt-4 text-lg sm:text-xl text-white/80 max-w-3xl mx-auto">
-            Custom e-commerce solutions that convert visitors into loyal customers.
+            Custom e-commerce solutions that convert visitors into loyal customers. From custom themes to Shopify Plus development, we build stores that sell.
           </p>
         </div>
         
@@ -80,27 +80,27 @@ const ShopifyDevelopmentContent = () => {
           {[
             {
               title: "Custom Shopify Themes",
-              description: "Unique, branded store designs that reflect your brand identity and enhance the shopping experience."
+              description: "Unique, branded store designs that reflect your brand identity and create memorable shopping experiences that convert."
             },
             {
               title: "Shopify App Development",
-              description: "Custom applications that extend your store's functionality and streamline operations."
+              description: "Custom applications that extend your store's functionality, streamline operations, and create competitive advantages."
             },
             {
-              title: "Shopify Plus Development",
-              description: "Enterprise-level solutions for high-volume merchants with complex requirements."
+              title: "Shopify Plus Solutions",
+              description: "Enterprise-level solutions for high-volume merchants with complex requirements and advanced automation needs."
             },
             {
-              title: "Conversion Optimization",
-              description: "Strategic design and functionality improvements to increase sales and average order value."
+              title: "Conversion Rate Optimization",
+              description: "Data-driven design and functionality improvements that increase sales, average order value, and customer lifetime value."
             },
             {
-              title: "Migration Services",
-              description: "Seamless transition from other platforms to Shopify with no data or SEO loss."
+              title: "Platform Migration",
+              description: "Seamless transition from other platforms to Shopify with zero downtime, complete data preservation, and SEO maintenance."
             },
             {
-              title: "Ongoing Support",
-              description: "Regular maintenance, updates, and technical support to keep your store running smoothly."
+              title: "Performance & Security",
+              description: "Lightning-fast store performance, advanced security measures, and ongoing optimization to maximize revenue potential."
             }
           ].map((feature, index) => (
             <div 
@@ -115,11 +115,12 @@ const ShopifyDevelopmentContent = () => {
         
         {/* Technologies section */}
         <div className="mb-12">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Technologies & Tools</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Shopify Technologies & Tools</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
               "Shopify", "Shopify Plus", "Liquid", "JavaScript", "React", 
-              "Shopify API", "Shopify CLI", "Themekit", "SCSS", "Webpack"
+              "Shopify API", "Shopify CLI", "Themekit", "SCSS", "Webpack",
+              "GraphQL", "Shopify Flow", "Shopify Scripts", "Figma", "Git"
             ].map((tech, index) => (
               <div 
                 key={index}
@@ -137,8 +138,17 @@ const ShopifyDevelopmentContent = () => {
             onClick={() => window.location.href = "/calendar"}
             className="bg-violet-800 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-full text-lg uppercase transition-all duration-300"
           >
-            Launch Your Shopify Store
+            LAUNCH YOUR SHOPIFY STORE
           </button>
+        </div>
+        
+        {/* Service Description */}
+        <div className="mt-12 sm:mt-16 md:mt-20">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
+              E-commerce success isn't just about having a store, it's about creating shopping experiences that convert. Our Shopify development focuses on user experience, conversion optimization, and scalable architecture to build stores that drive sales and grow your business.
+            </p>
+          </div>
         </div>
       </div>
     </div>

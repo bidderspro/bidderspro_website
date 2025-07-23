@@ -68,10 +68,10 @@ const AIAutomationContent = () => {
         {/* Main heading */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            INTELLIGENT <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">AI & AUTOMATION</span> SOLUTIONS
+            INTELLIGENT <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">AUTOMATION.</span> SMART BUSINESS GROWTH.
           </h2>
           <p className="mt-4 text-lg sm:text-xl text-white/80 max-w-3xl mx-auto">
-            Let technology handle the repetitive tasks while you focus on strategy and growth.
+            Let technology handle the repetitive tasks while you focus on strategy and growth. From chatbots to workflow automation, we build AI solutions that work.
           </p>
         </div>
         
@@ -80,27 +80,27 @@ const AIAutomationContent = () => {
           {[
             {
               title: "Business Process Automation",
-              description: "Streamline workflows and eliminate manual tasks to improve efficiency and reduce errors."
+              description: "Streamline workflows, eliminate manual tasks, and create efficient processes that save time and reduce human error across your organization."
             },
             {
               title: "AI-Powered Chatbots",
-              description: "24/7 customer service and support through intelligent conversational interfaces."
+              description: "24/7 intelligent customer service that handles inquiries, qualifies leads, and provides instant support without human intervention."
             },
             {
-              title: "Data Analysis & Insights",
-              description: "Extract meaningful patterns and actionable insights from your business data."
+              title: "Data Analytics & Insights",
+              description: "Transform raw data into actionable insights with advanced analytics, machine learning, and predictive modeling for better decision-making."
             },
             {
               title: "Custom AI Solutions",
-              description: "Tailored artificial intelligence applications designed for your specific business challenges."
+              description: "Tailored artificial intelligence applications designed specifically for your business challenges, from image recognition to natural language processing."
             },
             {
               title: "Workflow Integration",
-              description: "Connect your existing systems and tools for seamless automation across platforms."
+              description: "Seamlessly connect your existing systems, tools, and platforms to create unified automation workflows that work across your entire business."
             },
             {
               title: "Predictive Analytics",
-              description: "Anticipate trends and make data-driven decisions with advanced forecasting models."
+              description: "Anticipate market trends, customer behavior, and business opportunities with advanced forecasting models and machine learning algorithms."
             }
           ].map((feature, index) => (
             <div 
@@ -115,12 +115,12 @@ const AIAutomationContent = () => {
         
         {/* Technologies section */}
         <div className="mb-12">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Technologies We Use</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">AI & Automation Technologies</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
               "Machine Learning", "Natural Language Processing", "Computer Vision", 
               "Python", "TensorFlow", "PyTorch", "OpenAI API", "Zapier", 
-              "Make.com", "Microsoft Power Automate"
+              "Make.com", "Microsoft Power Automate", "Google Cloud AI", "AWS AI", "Azure ML", "Hugging Face", "LangChain"
             ].map((tech, index) => (
               <div 
                 key={index}
@@ -138,8 +138,17 @@ const AIAutomationContent = () => {
             onClick={() => window.location.href = "/calendar"}
             className="bg-violet-800 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-full text-lg uppercase transition-all duration-300"
           >
-            Automate Your Business
+            AUTOMATE YOUR BUSINESS
           </button>
+        </div>
+        
+        {/* Service Description */}
+        <div className="mt-12 sm:mt-16 md:mt-20">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
+              Automation isn't about replacing humans, it's about empowering them to focus on what matters most. Our AI and automation solutions streamline processes, reduce errors, and create opportunities for growth that manual processes simply can't match.
+            </p>
+          </div>
         </div>
       </div>
     </div>

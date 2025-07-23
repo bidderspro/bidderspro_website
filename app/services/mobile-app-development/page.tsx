@@ -68,10 +68,10 @@ const MobileAppDevelopmentContent = () => {
         {/* Main heading */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            SEAMLESS <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">MOBILE APP</span> DEVELOPMENT
+            SEAMLESS <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">MOBILE EXPERIENCES.</span> ANYWHERE. ANYTIME.
           </h2>
           <p className="mt-4 text-lg sm:text-xl text-white/80 max-w-3xl mx-auto">
-            We build intuitive, high-performance mobile applications that engage your audience and drive results.
+            From native iOS/Android apps to cross-platform solutions, we build intuitive, high-performance mobile applications that engage your audience and drive results.
           </p>
         </div>
         
@@ -80,27 +80,27 @@ const MobileAppDevelopmentContent = () => {
           {[
             {
               title: "Cross-Platform Development",
-              description: "Build once, deploy everywhere with apps that work seamlessly across iOS and Android."
+              description: "Build once, deploy everywhere. React Native and Flutter apps that work seamlessly across iOS and Android with native performance."
             },
             {
               title: "Native App Development",
-              description: "Platform-specific apps with optimal performance and access to all device features."
+              description: "Platform-specific apps with optimal performance, full device access, and native user experience for maximum engagement."
             },
             {
-              title: "UI/UX Design",
-              description: "Intuitive, engaging interfaces that provide exceptional user experiences."
+              title: "Mobile UI/UX Design",
+              description: "Intuitive, engaging interfaces designed specifically for mobile users with touch-first interactions and smooth animations."
             },
             {
-              title: "API Integration",
-              description: "Seamless connectivity with third-party services and your existing systems."
+              title: "API Integration & Backend",
+              description: "Seamless connectivity with third-party services, cloud databases, and your existing business systems."
             },
             {
               title: "Performance Optimization",
-              description: "Fast, responsive apps that work efficiently even with limited connectivity."
+              description: "Lightning-fast apps that work efficiently even with limited connectivity and battery constraints."
             },
             {
-              title: "Ongoing Maintenance",
-              description: "Regular updates and support to keep your app secure and compatible with new OS versions."
+              title: "App Store Optimization",
+              description: "Strategic ASO, regular updates, and ongoing maintenance to keep your app visible and competitive."
             }
           ].map((feature, index) => (
             <div 
@@ -115,11 +115,12 @@ const MobileAppDevelopmentContent = () => {
         
         {/* Technologies section */}
         <div className="mb-12">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Technologies We Use</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Mobile Technologies We Use</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
               "React Native", "Flutter", "Swift", "Kotlin", "Firebase", 
-              "GraphQL", "REST APIs", "Redux", "MobX", "AWS Amplify"
+              "GraphQL", "REST APIs", "Redux", "MobX", "AWS Amplify",
+              "Xcode", "Android Studio", "Figma", "Lottie", "CocoaPods"
             ].map((tech, index) => (
               <div 
                 key={index}
@@ -137,8 +138,17 @@ const MobileAppDevelopmentContent = () => {
             onClick={() => window.location.href = "/calendar"}
             className="bg-violet-800 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-full text-lg uppercase transition-all duration-300"
           >
-            Start Your Mobile App Project
+            BUILD YOUR MOBILE APP
           </button>
+        </div>
+        
+        {/* Service Description */}
+        <div className="mt-12 sm:mt-16 md:mt-20">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
+              We don't just build apps, we build mobile experiences that users love and businesses profit from. Our mobile development process focuses on performance, usability, and scalability to deliver apps that stand out in crowded app stores.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -224,7 +234,7 @@ export default function MobileAppDevelopmentPage() {
       <ServicesHeroSection 
         badge="MOBILE APP SOLUTIONS"
         headline="SEAMLESS MOBILE EXPERIENCES. ANYWHERE. ANYTIME."
-        subheading="From native iOS/Android apps to cross-platform solutions — we build intuitive, high-performance mobile applications that engage your audience and drive results."
+        subheading="From native iOS/Android apps to cross-platform solutions, we build intuitive, high-performance mobile applications that engage your audience and drive results."
         ctaText="BUILD YOUR MOBILE APP"
       />
       

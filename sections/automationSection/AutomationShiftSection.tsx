@@ -29,7 +29,7 @@ const AutomationShiftSection = () => {
               viewport={{ once: true }}
               className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto"
             >
-              Flip the script—stop applying, start attracting.
+              Flip the script, stop applying, start attracting.
             </motion.p>
           </div>
           
@@ -119,7 +119,7 @@ const AutomationShiftSection = () => {
                   translateZ="60"
                   className="text-gray-200 text-sm max-w-sm mt-4 mb-6"
                 >
-                  Let clients come to you through invites—your off-site hustle stays untouched and uninterrupted.
+                  Let clients come to you through invites, your off-site hustle stays untouched and uninterrupted.
                 </CardItem>
                 
                 <CardItem translateZ="100" className="w-full mt-4">

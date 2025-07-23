@@ -68,10 +68,10 @@ const WordPressDevelopmentContent = () => {
         {/* Main heading */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            POWERFUL <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">WORDPRESS</span> SOLUTIONS
+            POWERFUL <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">WORDPRESS SITES.</span> EASY TO MANAGE.
           </h2>
           <p className="mt-4 text-lg sm:text-xl text-white/80 max-w-3xl mx-auto">
-            Flexible, easy-to-manage websites built on the world's most popular CMS platform.
+            Flexible, easy-to-manage websites built on the world's most popular CMS platform. Custom themes, plugins, and e-commerce solutions that grow with your business.
           </p>
         </div>
         
@@ -80,27 +80,27 @@ const WordPressDevelopmentContent = () => {
           {[
             {
               title: "Custom Theme Development",
-              description: "Unique, branded designs that stand out from generic templates and reflect your brand identity."
+              description: "Unique, branded designs that stand out from generic templates and reflect your brand identity with pixel-perfect customization."
             },
             {
-              title: "Plugin Development",
-              description: "Custom functionality tailored to your specific business requirements and workflows."
+              title: "Custom Plugin Development",
+              description: "Tailored functionality that addresses your specific business needs and integrates seamlessly with your workflow."
             },
             {
-              title: "E-commerce Integration",
-              description: "WooCommerce solutions that transform your website into a powerful online store."
+              title: "WooCommerce E-commerce",
+              description: "Complete online store solutions with payment processing, inventory management, and customer experience optimization."
             },
             {
               title: "Performance Optimization",
-              description: "Speed enhancements and optimizations for lightning-fast loading and better user experience."
+              description: "Lightning-fast loading speeds, caching strategies, and database optimization for superior user experience."
             },
             {
-              title: "Security Hardening",
-              description: "Advanced protection against common vulnerabilities and threats to keep your site secure."
+              title: "Security & Maintenance",
+              description: "Advanced security hardening, regular updates, automated backups, and 24/7 monitoring for peace of mind."
             },
             {
-              title: "Maintenance & Support",
-              description: "Ongoing updates, backups, and technical support to keep your site running smoothly."
+              title: "WordPress Migration",
+              description: "Seamless migration from other platforms with zero downtime and complete data preservation."
             }
           ].map((feature, index) => (
             <div 
@@ -115,11 +115,12 @@ const WordPressDevelopmentContent = () => {
         
         {/* Technologies section */}
         <div className="mb-12">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Technologies & Tools</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">WordPress Technologies & Tools</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
               "WordPress", "WooCommerce", "Elementor", "ACF", "Gravity Forms", 
-              "Yoast SEO", "PHP", "MySQL", "JavaScript", "CSS/SASS"
+              "Yoast SEO", "PHP", "MySQL", "JavaScript", "CSS/SASS",
+              "WP-CLI", "Composer", "Git", "WP Engine", "Cloudflare"
             ].map((tech, index) => (
               <div 
                 key={index}
@@ -137,8 +138,17 @@ const WordPressDevelopmentContent = () => {
             onClick={() => window.location.href = "/calendar"}
             className="bg-violet-800 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-full text-lg uppercase transition-all duration-300"
           >
-            Start Your WordPress Project
+            LAUNCH YOUR WORDPRESS SITE
           </button>
+        </div>
+        
+        {/* Service Description */}
+        <div className="mt-12 sm:mt-16 md:mt-20">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
+              WordPress isn't just a CMS, it's a powerful platform for building scalable digital solutions. Whether you need a simple blog or a complex e-commerce site, we leverage WordPress's flexibility to create solutions that grow with your business.
+            </p>
+          </div>
         </div>
       </div>
     </div>

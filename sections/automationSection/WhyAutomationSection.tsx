@@ -14,7 +14,7 @@ const WhyAutomationSection = () => {
           
           {/* Subheading */}
           <h3 className="text-md sm:text-lg md:text-xl text-[#E0E0FF] mb-8 sm:mb-12 max-w-3xl mx-auto text-center animate-slide-in-left [animation-delay:0.2s]">
-            Upwork feels broken—but it's not. You're just playing the wrong game.
+            Upwork feels broken, but it's not. You're just playing the wrong game.
           </h3>
           
           {/* Content and illustration container */}
@@ -26,7 +26,7 @@ const WhyAutomationSection = () => {
               </p>
               
               <p className="text-base sm:text-lg lg:text-xl text-gray-200 leading-relaxed">
-                But the truth is—it's only dead for those burning connects blindly, sending template proposals, and hoping for a miracle.
+                But the truth is, it's only dead for those burning connects blindly, sending template proposals, and hoping for a miracle.
               </p>
               
               <p className="text-base sm:text-lg lg:text-xl text-gray-200 leading-relaxed">
