@@ -58,40 +58,44 @@ const ConsultancySection = memo(function ConsultancySection() {
           </div>
 
           {/* Image and description in row */}
-          <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 mb-8 sm:mb-10 md:mb-12">
+          <div className="flex flex-col lg:flex-row items-start gap-6 sm:gap-8 md:gap-10 lg:gap-12 mb-8 sm:mb-10 md:mb-12">
             {/* Image container */}
             <div className="w-full lg:w-5/12 relative">
-              <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-violet-500/20 border border-violet-500/20">
+              <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-violet-500/20 border border-violet-500/20 h-full">
                 <Image 
                   src="/assets/images/about-us.webp" 
                   alt="Consultancy Services" 
                   width={600} 
                   height={400}
-                  className="w-full object-cover"
+                  className="w-full h-full object-cover min-h-[250px]"
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-violet-950/80 to-transparent"></div>
               </div>
             </div>
             
-            {/* Content container */}
-            <div className="w-full lg:w-7/12 mt-6 lg:mt-0">
-              <p className="text-base sm:text-lg text-white/90 uppercase">
-                NOT SURE WHERE TO START? OUR TECH EXPERTS OFFER ONE-ON-ONE CONSULTANCY TO HELP YOU PLAN YOUR DIGITAL JOURNEY. WHETHER IT'S SELECTING THE RIGHT PLATFORM, DESIGNING THE USER FLOW, OR MAPPING OUT YOUR AUTOMATION STRATEGY, WE PROVIDE HONEST ADVICE AND ACTIONABLE INSIGHTS.
-              </p>
+            {/* Content container with heading, description and button */}
+            <div className="w-full lg:w-7/12 mt-6 lg:mt-0 flex flex-col h-full justify-between">
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-bold text-violet-300 mb-4">
+                  One-on-One Consultancy That Gets You Unstuck.
+                </h3>
+                <p className="text-base sm:text-lg text-white/90 uppercase mb-6">
+                  NOT SURE WHERE TO START? OUR TECH EXPERTS OFFER ONE-ON-ONE CONSULTANCY TO HELP YOU PLAN YOUR DIGITAL JOURNEY. WHETHER IT'S SELECTING THE RIGHT PLATFORM, DESIGNING THE USER FLOW, OR MAPPING OUT YOUR AUTOMATION STRATEGY, WE PROVIDE HONEST ADVICE AND ACTIONABLE INSIGHTS.
+                </p>
+              </div>
+              
+              <div className="mt-6 sm:mt-8">
+                <button
+                  className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white text-center font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg uppercase transition-all duration-300 w-full sm:w-auto"
+                  onClick={() => {
+                    window.location.href = "/calendar";
+                  }}
+                >
+                  CLAIM YOUR FREE CONSULTATION
+                </button>
+              </div>
             </div>
-          </div>
-
-          {/* Button outside the row */}
-          <div className="flex justify-center mt-3 sm:mt-4 md:mt-5">
-            <button
-              className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white text-center font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg uppercase transition-all duration-300"
-              onClick={() => {
-                window.location.href = "/calendar";
-              }}
-            >
-              CLAIM YOUR FREE CONSULTATION
-            </button>
           </div>
         </div>
       </div>
@@ -131,7 +135,7 @@ const ConsultancySection = memo(function ConsultancySection() {
         </motion.div>
 
         {/* Image and description in row */}
-        <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 mb-8 sm:mb-10 md:mb-12">
+        <div className="flex flex-col lg:flex-row items-start gap-6 sm:gap-8 md:gap-10 lg:gap-12 mb-8 sm:mb-10 md:mb-12">
           {/* Image container with optimized loading */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -139,13 +143,13 @@ const ConsultancySection = memo(function ConsultancySection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="w-full lg:w-5/12 relative"
           >
-            <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-violet-500/20 border border-violet-500/20">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-violet-500/20 border border-violet-500/20 h-full">
               <Image 
                 src="/assets/images/about-us.webp" 
                 alt="Consultancy Services" 
                 width={600} 
                 height={400}
-                className="w-full object-cover"
+                className="w-full h-full object-cover min-h-[250px]"
                 priority
                 loading="eager"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -154,39 +158,47 @@ const ConsultancySection = memo(function ConsultancySection() {
             </div>
           </motion.div>
           
-          {/* Content container */}
+          {/* Content container with heading, description and button */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="w-full lg:w-7/12 mt-6 lg:mt-0"
+            className="w-full lg:w-7/12 mt-6 lg:mt-0 flex flex-col h-full justify-between"
           >
-            <motion.p 
+            <div>
+              <motion.h3 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-2xl sm:text-3xl font-bold text-violet-300 mb-4"
+              >
+                One-on-One Consultancy That Gets You Unstuck.
+              </motion.h3>
+              <motion.p 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-base sm:text-lg text-white/90 uppercase mb-6"
+              >
+                NOT SURE WHERE TO START? OUR TECH EXPERTS OFFER ONE-ON-ONE CONSULTANCY TO HELP YOU PLAN YOUR DIGITAL JOURNEY. WHETHER IT'S SELECTING THE RIGHT PLATFORM, DESIGNING THE USER FLOW, OR MAPPING OUT YOUR AUTOMATION STRATEGY, WE PROVIDE HONEST ADVICE AND ACTIONABLE INSIGHTS.
+              </motion.p>
+            </div>
+            
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base sm:text-lg text-white/90 uppercase"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-6 sm:mt-8"
             >
-              NOT SURE WHERE TO START? OUR TECH EXPERTS OFFER ONE-ON-ONE CONSULTANCY TO HELP YOU PLAN YOUR DIGITAL JOURNEY. WHETHER IT'S SELECTING THE RIGHT PLATFORM, DESIGNING THE USER FLOW, OR MAPPING OUT YOUR AUTOMATION STRATEGY, WE PROVIDE HONEST ADVICE AND ACTIONABLE INSIGHTS.
-            </motion.p>
-          </motion.div>
-        </div>
-
-        {/* Button outside the row */}
-        <div className="flex justify-center mt-3 sm:mt-4 md:mt-5">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <InteractiveHoverButton
-              className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white text-center font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg uppercase transition-all duration-300"
-              onClick={() => {
-                window.location.href = "/calendar";
-              }}
-            >
-              CLAIM YOUR FREE CONSULTATION
-            </InteractiveHoverButton>
+              <InteractiveHoverButton
+                className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white text-center font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg uppercase transition-all duration-300 w-full sm:w-auto"
+                onClick={() => {
+                  window.location.href = "/calendar";
+                }}
+              >
+                CLAIM YOUR FREE CONSULTATION
+              </InteractiveHoverButton>
+            </motion.div>
           </motion.div>
         </div>
       </div>

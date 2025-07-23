@@ -45,7 +45,7 @@ export default function UpworkAutomationSection() {
   ];
 
   return (
-    <div id="upwork-automation" className="py-16 sm:py-20 md:py-24 lg:py-28">
+    <div id="automation" className="py-16 sm:py-20 md:py-24 lg:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16 md:mb-20">
           <TextAnimate 
@@ -53,14 +53,14 @@ export default function UpworkAutomationSection() {
             as="h2" 
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-violet-600 mb-4 sm:mb-6"
           >
-            Upwork Automation Services
+            Automation Services
           </TextAnimate>
           <TextAnimate 
             animate="fadeIn" 
             as="p" 
             className="text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto text-gray-300"
           >
-            Leverage powerful automation tools to elevate your Upwork success, attract premium clients, and scale your freelance business without limits.
+            Leverage powerful automation tools to elevate your business success, attract premium clients, and scale your operations without limits.
           </TextAnimate>
         </div>
 

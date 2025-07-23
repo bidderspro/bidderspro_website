@@ -195,7 +195,7 @@ export default function BookingForm({
               className={`w-full pl-10 pr-4 py-3 rounded-lg bg-gray-800/60 border ${errors.service ? 'border-red-500' : 'border-gray-600'} focus:ring-2 focus:ring-violet-500 focus:border-violet-500 text-gray-100 appearance-none shadow-sm transition-all duration-200`}
             >
               <option value="">Select a service</option>
-              <option value="upwork-automation">Upwork Automation</option>
+              <option value="automation">Automation</option>
               <option value="linkedin-automation">LinkedIn Automation</option>
               <option value="b2b-consultation">B2B Consultation</option>
             </select>

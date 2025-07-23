@@ -41,10 +41,6 @@ export default function Header() {
       link: isHomePage ? "#about" : "/#about",
     },
     {
-      name: "Upwork Automation",
-      link: "/automation",
-    },
-    {
       name: "Services",
       link: "/services",
       children: [
@@ -232,7 +228,7 @@ export default function Header() {
                   </button>
                   
                   {servicesDropdownOpen && (
-                    <div className="absolute top-full left-0 mt-1 py-2 w-56 bg-white dark:bg-neutral-900 rounded-lg shadow-lg border border-gray-200 dark:border-neutral-800 z-50">
+                    <div className="absolute top-full left-0 mt-1 py-2 w-56 bg-white dark:bg-neutral-900 rounded-lg shadow-lg border border-gray-200 dark:border-neutral-800 z-50 min-w-max">
                       {item.children.map((child, childIdx) => (
                         <Link
                           key={`dropdown-item-${childIdx}`}
@@ -242,7 +238,7 @@ export default function Header() {
                             handleNavigation(e, child.link);
                             setServicesDropdownOpen(false);
                           }}
-                          className="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                          className="block px-4 py-2 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-800 whitespace-nowrap"
                           prefetch={true}
                         >
                           {child.name}
