@@ -4,6 +4,7 @@ import React, { Suspense, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { IconCode } from '@tabler/icons-react';
+import TechnologyIcons from '@/components/ui/TechnologyIcons';
 
 // Page config
 export const config = {
@@ -116,20 +117,13 @@ const WebDevelopmentContent = () => {
         {/* Technologies section */}
         <div className="mb-12">
           <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Web Development Technologies</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
+          <TechnologyIcons 
+            technologies={[
               "React.js", "Next.js", "TypeScript", "Node.js", "Express.js", 
               "MongoDB", "PostgreSQL", "GraphQL", "Tailwind CSS", "AWS",
               "Vercel", "Docker", "Git", "Figma", "Stripe API"
-            ].map((tech, index) => (
-              <div 
-                key={index}
-                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-4 py-2 text-white"
-              >
-                {tech}
-              </div>
-            ))}
-          </div>
+            ]}
+          />
         </div>
         
         {/* CTA section */}
