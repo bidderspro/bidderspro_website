@@ -60,7 +60,7 @@ interface ServicesHeroSectionProps {
 const ServicesHeroSection = memo(function ServicesHeroSection({
   badge = "POWERFUL DIGITAL SOLUTIONS. DELIVERED WITH PRECISION.",
   headline = "Digital Solutions That Grow Your Business. Not Just Your To-Do List.",
-  subheading = "We don't just design websites or build apps — we solve real business problems. Whether it's automation, development, or scaling your online presence, Bidders Pro delivers solutions that actually move the needle.",
+  subheading = "We don't just design websites or build appswe solve real business problems. Whether it's automation, development, or scaling your online presence, Bidders Pro delivers solutions that actually move the needle.",
   ctaText = "LET'S AUTOMATE YOUR SUCCESS"
 }: ServicesHeroSectionProps) {
   const prefersReducedMotion = useReducedMotion();

@@ -146,7 +146,7 @@ const ShopifyDevelopmentContent = () => {
         <div className="mt-12 sm:mt-16 md:mt-20">
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
             <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
-              E-commerce success isn&#39;t just about having a store — it&#39;s about creating shopping experiences that convert. Our Shopify development focuses on user experience, conversion optimization, and scalable architecture to build stores that drive sales and grow your business.
+              E-commerce success isn&#39;t just about having a store, it&#39;s about creating shopping experiences that convert. Our Shopify development focuses on user experience, conversion optimization, and scalable architecture to build stores that drive sales and grow your business.
             </p>
           </div>
         </div>

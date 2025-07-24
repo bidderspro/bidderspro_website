@@ -183,7 +183,7 @@ const testimonials = [
   {
     id: 1,
     title: "SHOPIFY DEVELOPMENT",
-    quote: "They didn't just build our Shopify store — they rebuilt our sales engine.",
+    quote: "They didn't just build our Shopify store, they rebuilt our sales engine.",
     author: "Tania R.",
     position: "GlowCrate Skincare",
     image: "/assets/images/image 1.svg",
@@ -237,7 +237,7 @@ const testimonials = [
   {
     id: 7,
     title: "STRATEGIC DESIGN",
-    quote: "Not just design — strategic design. We got more signups in 2 weeks than in 2 months before.",
+    quote: "Not just design, strategic design. We got more signups in 2 weeks than in 2 months before.",
     author: "Nida S.",
     position: "SoundNest Audio",
     image: "/assets/images/image 3.svg",

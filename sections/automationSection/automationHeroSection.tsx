@@ -40,7 +40,7 @@ export default function AutomationHeroSection() {
             </span>
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-6 sm:mb-8 lg:mb-10 max-w-2xl mx-auto uppercase font-bold px-4 animate-fade-in-delayed">
-            Upwork is broken—but our automation system flips the script,
+            Upwork is broken but our automation system flips the script,
             bringing clients to you effortlessly.
           </p>
 

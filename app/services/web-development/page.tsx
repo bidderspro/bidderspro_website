@@ -71,7 +71,7 @@ const WebDevelopmentContent = () => {
             BUILD FAST. <span className="bg-gradient-to-r from-violet-500 via-pink-500 to-amber-500 text-transparent bg-clip-text">SCALE SMART.</span> WIN ONLINE.
           </h2>
           <p className="mt-4 text-lg sm:text-xl text-white/80 max-w-3xl mx-auto">
-            From landing pages to full-stack apps — we design and develop lightning-fast, user-focused websites that grow with your business.
+            From landing pages to full-stack apps, we design and develop lightning-fast, user-focused websites that grow with your business.
           </p>
         </div>
         
@@ -80,7 +80,7 @@ const WebDevelopmentContent = () => {
           {[
             {
               title: "Responsive Web Design",
-              description: "Your site will look and work flawlessly on every device — mobile, tablet, or desktop — with pixel-perfect precision across all screen sizes."
+              description: "Your site will look and work flawlessly on every device mobile, tablet, or desktop with pixel-perfect precision across all screen sizes."
             },
             {
               title: "Performance Optimization",
@@ -88,7 +88,7 @@ const WebDevelopmentContent = () => {
             },
             {
               title: "SEO & Search Visibility",
-              description: "Clean code, semantic HTML, and on-page SEO fundamentals built-in — for better search rankings and organic traffic growth."
+              description: "Clean code, semantic HTML, and on-page SEO fundamentals built-in for better search rankings and organic traffic growth."
             },
             {
               title: "Custom Web Applications",
@@ -100,7 +100,7 @@ const WebDevelopmentContent = () => {
             },
             {
               title: "Ongoing Support & Growth",
-              description: "We don't just launch — we maintain, support, and help you grow with regular updates, security patches, and performance monitoring."
+              description: "We don't just launch we maintain, support, and help you grow with regular updates, security patches, and performance monitoring."
             }
           ].map((feature, index) => (
             <div 
@@ -146,7 +146,7 @@ const WebDevelopmentContent = () => {
         <div className="mt-12 sm:mt-16 md:mt-20">
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
             <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
-              We don&#39;t just build websites — we build digital foundations. Whether you&#39;re a startup, agency, or scaling business, our web development services combine sleek design, clean code, and growth-driven strategies to deliver websites that perform as good as they look.
+              We don&#39;t just build websites, we build digital foundations. Whether you&#39;re a startup, agency, or scaling business, our web development services combine sleek design, clean code, and growth-driven strategies to deliver websites that perform as good as they look.
             </p>
           </div>
         </div>
@@ -234,7 +234,7 @@ export default function WebDevelopmentPage() {
       <ServicesHeroSection 
         badge="CUSTOM WEB SOLUTIONS"
         headline="BUILD FAST. SCALE SMART. WIN ONLINE."
-        subheading="From landing pages to full-stack apps — we design and develop lightning-fast, user-focused websites that grow with your business."
+        subheading="From landing pages to full-stack apps, we design and develop lightning-fast, user-focused websites that grow with your business."
         ctaText="GET YOUR WEBSITE BUILT"
       />
       

@@ -146,7 +146,7 @@ const WordPressDevelopmentContent = () => {
         <div className="mt-12 sm:mt-16 md:mt-20">
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
             <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
-              WordPress isn&#39;t just a CMS — it&#39;s a powerful platform for building scalable digital solutions. Whether you need a simple blog or a complex e-commerce site, we leverage WordPress&#39;s flexibility to create solutions that grow with your business.
+              WordPress isn&#39;t just a CMS it&#39;s a powerful platform for building scalable digital solutions. Whether you need a simple blog or a complex e-commerce site, we leverage WordPress&#39;s flexibility to create solutions that grow with your business.
             </p>
           </div>
         </div>

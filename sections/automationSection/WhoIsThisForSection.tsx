@@ -97,7 +97,7 @@ const WhoIsThisForSection = () => {
               Who Is This <span className="text-[#E0E0FF]">For?</span>
             </h2>
             <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto animate-fade-in-delayed">
-              You're a fit if you…
+              You're a fit if you...
             </p>
           </div>
           
@@ -120,7 +120,7 @@ const WhoIsThisForSection = () => {
           <div className="mt-12 sm:mt-16 text-center animate-fade-in-delayed-2">
             <div className="inline-block bg-[#E0E0FF]/10 backdrop-blur-sm border border-[#E0E0FF]/20 px-6 py-4 rounded-lg hover:bg-[#E0E0FF]/20 transition-colors duration-300">
               <p className="text-[#E0E0FF] text-lg font-medium">
-                Even if you're not Top Rated—we've got a solution for you too!
+                Even if you're not Top Rated, we've got a solution for you too!
               </p>
             </div>
           </div>

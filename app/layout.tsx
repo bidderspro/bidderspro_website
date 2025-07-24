@@ -57,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning={true}>
       <head>
         <link rel="icon" href="/BP.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" href="/BP.ico" />
@@ -78,6 +78,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen w-full overflow-x-hidden`}
+        suppressHydrationWarning={true}
       >
         {/* Load background with lower priority */}
         <Suspense fallback={<div className="fixed inset-0 bg-black" />}>

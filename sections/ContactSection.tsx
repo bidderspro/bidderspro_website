@@ -12,7 +12,7 @@ export default function ContactSection() {
           MORE LEADS. MORE REVENUE. LESS MANUAL WORK.
         </TextAnimate>
         <TextAnimate as={"p"} animate="fadeIn" className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl">
-          If you're ready to put your business on autopilot, we're here to make it happen. Let's turn outreach into opportunities and connections into clients—without the grind.
+          If you're ready to put your business on autopilot, we're here to make it happen. Let's turn outreach into opportunities and connections into clients without the grind.
         </TextAnimate>
       </div>
       <ContactForm />

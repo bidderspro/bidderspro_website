@@ -80,7 +80,7 @@ export default function UpworkAutomationSection() {
         </div>
 
         <div className="mt-12 sm:mt-16 text-center">
-          <Link href="/automation">
+          <Link href="/services/upwork-automation/">
             <InteractiveHoverButton
               className="bg-violet-800 text-white text-center font-medium px-6 sm:px-8 md:px-10 py-3 sm:py-4 text-sm sm:text-base md:text-lg rounded-full hover:bg-violet-700 transition-colors duration-200"
             >

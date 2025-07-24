@@ -289,7 +289,7 @@ const WorkProcessSection = memo(function WorkProcessSection() {
     {
       number: "04",
       title: "Launch & Support",
-      description: "Smooth, secure deployment—and ongoing support to keep everything running flawlessly.",
+      description: "Smooth, secure deployment and ongoing support to keep everything running flawlessly.",
       delay: 0.4
     }
   ], []);
