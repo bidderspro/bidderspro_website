@@ -116,7 +116,7 @@ const WebDevelopmentContent = () => {
         
         {/* Technologies section */}
         <div className="mb-12">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Web Development Technologies</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Web Technologies We Used</h3>
           <TechnologyIcons 
             technologies={[
               "React.js", "Next.js", "TypeScript", "Node.js", "Express.js", 

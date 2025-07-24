@@ -116,7 +116,7 @@ const MobileAppDevelopmentContent = () => {
         
         {/* Technologies section */}
         <div className="mb-12">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Mobile Technologies We Use</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6">Mobile Technologies We Used</h3>
           <TechnologyIcons 
             technologies={[
               "React Native", "Flutter", "Swift", "Kotlin", "Firebase", 
