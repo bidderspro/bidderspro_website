@@ -138,7 +138,7 @@ const WebDevelopmentContent = () => {
             onClick={() => window.location.href = "/calendar"}
             className="bg-violet-800 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-full text-lg uppercase transition-all duration-300"
           >
-            Let's Build Your Website
+            Let&#39;s Build Your Website
           </button>
         </div>
         
@@ -146,7 +146,7 @@ const WebDevelopmentContent = () => {
         <div className="mt-12 sm:mt-16 md:mt-20">
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
             <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
-              We don't just build websites — we build digital foundations. Whether you're a startup, agency, or scaling business, our web development services combine sleek design, clean code, and growth-driven strategies to deliver websites that perform as good as they look.
+              We don&#39;t just build websites — we build digital foundations. Whether you&#39;re a startup, agency, or scaling business, our web development services combine sleek design, clean code, and growth-driven strategies to deliver websites that perform as good as they look.
             </p>
           </div>
         </div>

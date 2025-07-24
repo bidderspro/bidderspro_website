@@ -146,7 +146,7 @@ const AIAutomationContent = () => {
         <div className="mt-12 sm:mt-16 md:mt-20">
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 sm:p-8">
             <p className="text-lg sm:text-xl text-white/90 leading-relaxed text-center">
-              Automation isn't about replacing humans — it's about empowering them to focus on what matters most. Our AI and automation solutions streamline processes, reduce errors, and create opportunities for growth that manual processes simply can't match.
+              Automation isn&#39;t about replacing humans — it&#39;s about empowering them to focus on what matters most. Our AI and automation solutions streamline processes, reduce errors, and create opportunities for growth that manual processes simply can&#39;t match.
             </p>
           </div>
         </div>
