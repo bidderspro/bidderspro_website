@@ -1,8 +1,7 @@
 "use client";
 
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { TextAnimate } from '@/components/magicui/text-animate';
 import { InteractiveHoverButton } from '@/components/magicui/interactive-hover-button';
 import { Play, Users, Globe, Award, Trophy } from 'lucide-react';
 import Image from 'next/image';
@@ -12,59 +11,72 @@ const LoadingComponent = ({ height = "h-96" }: { height?: string }) => (
   <div className={`${height} animate-pulse bg-gray-800/20 rounded-lg mx-auto max-w-6xl`} />
 );
 
+// Error boundary for images
+const TeamMemberImage = ({ src, alt, name }: { src: string; alt: string; name: string }) => {
+  const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  return (
+    <div className="relative mb-4 overflow-hidden rounded-full mx-auto w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32">
+      {!imageError ? (
+        <Image
+          src={src}
+          alt={alt}
+          width={128}
+          height={128}
+          className={`w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-300 ${!imageLoaded ? 'opacity-0' : 'opacity-100'}`}
+          onError={() => setImageError(true)}
+          onLoad={() => setImageLoaded(true)}
+          priority={true}
+        />
+      ) : (
+        <div className="w-full h-full bg-gradient-to-br from-violet-500 to-purple-600 rounded-full flex items-center justify-center">
+          <span className="text-white text-lg font-bold">
+            {name.split(' ').map(n => n[0]).join('')}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // Lazy load heavy components - removing unused import to fix linter error
 
-export default function CompanyPage() {
-  // Sample team data - you can replace with real data
-  const teamMembers = [
-    {
-      name: "Olivia Rhye",
-      role: "Founder & CEO",
-      image: "/public/assets/images/team/portfolio.svg"
-    },
-    {
-      name: "Phoenix Baker", 
-      role: "Engineering Manager",
-      image: "/public/assets/images/team/portfolio.svg"
-    },
-    {
-      name: "Lana Steiner",
-      role: "Product Manager", 
-      image: "/public/assets/images/team/portfolio.svg"
-    },
-    {
-      name: "Demi Wilkinson",
-      role: "Frontend Developer",
-      image: "/public/assets/images/team/portfolio.svg"
-    },
-    {
-      name: "Olivia Rhye",
-      role: "Founder & CEO",
-      image: "/public/assets/images/team/portfolio.svg"
-    },
-    {
-      name: "Phoenix Baker",
-      role: "Engineering Manager", 
-      image: "/public/assets/images/team/portfolio.svg"
-    },
-    {
-      name: "Lana Steiner",
-      role: "Product Manager",
-      image: "/public/assets/images/team/portfolio.svg"
-    },
-    {
-      name: "Demi Wilkinson",
-      role: "Frontend Developer",
-      image: "/public/assets/images/team/portfolio.svg"
-    }
-  ];
+// Team data with real names and roles - moved outside component for consistency
+const TEAM_MEMBERS = [
+  {
+    name: "Usama Ashraf",
+    role: "Founder & CEO",
+    image: "/assets/images/team_member_1.jpg"
+  },
+  {
+    name: "Mishal Ali", 
+    role: "Co-Founder",
+    image: "/assets/images/Team_member_2.jpg"
+  },
+  {
+    name: "Abdul Manan",
+    role: "Upwork Automation Manager", 
+    image: "/assets/images/team_member_3.jpg"
+  },
+  {
+    name: "Arif Ullah",
+    role: "Visual Designer",
+    image: "/assets/images/Team_member_4.jpg"
+  }
+];
 
-  const stats = [
-    { number: "100+", label: "Employees", icon: Users },
-    { number: "15+", label: "Countries", icon: Globe },
-    { number: "100+", label: "Project Done", icon: Trophy },
-    { number: "25+", label: "Awards", icon: Award }
-  ];
+const COMPANY_STATS = [
+  { number: "500+", label: "Happy Clients", icon: Users },
+  { number: "15+", label: "Countries Served", icon: Globe },
+  { number: "1000+", label: "Projects Completed", icon: Trophy },
+  { number: "98%", label: "Success Rate", icon: Award }
+];
+
+export default function CompanyPage() {
+  // Use the constants defined outside the component
+  const teamMembers = TEAM_MEMBERS;
+  const stats = COMPANY_STATS;
 
   return (
     <div className="w-full text-white">
@@ -78,21 +90,13 @@ export default function CompanyPage() {
               our company
             </div>
 
-            <TextAnimate
-              animate="blur-in"
-              as="h1"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 lg:mb-8 leading-tight uppercase"
-            >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 lg:mb-8 leading-tight uppercase animate-slide-in-up">
               ABOUT US
-            </TextAnimate>
+            </h1>
 
-            <TextAnimate
-              animate="fade-in"
-              as="p"
-              className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 lg:mb-12 max-w-3xl mx-auto leading-relaxed"
-            >
-              Lorem ipsum dolor sit amet consectetur. In lacinia a rutrum luctus elementum dui pharetra ut tristique. Aliquet sapien quam iaculis lacinia vulputate amet enim convallis lorem. Amet ipsum cum pulvinar volutpat mi. Molestie quis ut et duis non ornare mauris eget scelerisque.
-            </TextAnimate>
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 lg:mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-delayed">
+              We&apos;re the automation specialists who transform manual hustle into predictable business growth. Our mission is simple: replace your grinding with intelligent scaling so you can focus on what truly matters.
+            </p>
 
             <div className="animate-fade-in-delayed-2">
               <InteractiveHoverButton
@@ -109,6 +113,14 @@ export default function CompanyPage() {
       {/* Video Section */}
       <section className="py-12 sm:py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 animate-slide-in-up">
+              See BiddersPro In Action
+            </h2>
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto animate-fade-in-delayed">
+              Watch how our automation transforms the way businesses attract clients and scale their operations
+            </p>
+          </div>
           <div className="max-w-4xl mx-auto">
             <Suspense fallback={<LoadingComponent height="h-64" />}>
               <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden aspect-video group cursor-pointer">
@@ -119,7 +131,7 @@ export default function CompanyPage() {
                   </div>
                 </div>
               </div>
-            </Suspense>
+        </Suspense>
           </div>
         </div>
       </section>
@@ -128,13 +140,21 @@ export default function CompanyPage() {
       <section className="py-12 sm:py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8 lg:mb-12">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 uppercase animate-slide-in-up">
+                Our Impact in Numbers
+              </h2>
+              <p className="text-gray-300 text-lg max-w-2xl mx-auto animate-fade-in-delayed">
+                Real results from real clients who trusted BiddersPro to transform their business growth
+              </p>
+            </div>
             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 md:p-12">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
                 {stats.map((stat, index) => {
                   const IconComponent = stat.icon;
                   return (
                     <div 
-                      key={index}
+                      key={`stat-${stat.label.replace(/\s+/g, '-').toLowerCase()}`}
                       className="text-center animate-fade-in"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
@@ -171,20 +191,20 @@ export default function CompanyPage() {
                 />
               </div>
               <div className="w-full lg:w-1/2 space-y-6">
-                <TextAnimate
-                  animate="blur-in"
-                  as="h2"
-                  className="text-3xl sm:text-4xl md:text-5xl font-bold text-violet-400 uppercase"
-                >
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-violet-400 uppercase animate-slide-in-up">
                   OUR VISION
-                </TextAnimate>
-                <TextAnimate
-                  animate="fade-in"
-                  as="p"
-                  className="text-gray-300 text-lg leading-relaxed"
-                >
-                  Lorem ipsum dolor sit amet consectetur. Nec pellentesque quis blandit tristique dolor posuere egestas diam. Vitae orci convallis amet orci sagittis massa sit elit bibendum risus sapien rhoncus nunc eros. Ipsum quam et a sed quis. Quam purus interdum elementum aliquet quis aliquam aliquam enim. Aliquam lacerat cursus et egestas eleifend. Nunc massa malesuada feugiat fermentum scelerisque amet.
-                </TextAnimate>
+                </h2>
+                <div className="space-y-4">
+                  <p className="text-gray-300 text-lg leading-relaxed animate-fade-in-delayed">
+                    To revolutionize how businesses approach client acquisition by making automation accessible, effective, and profitable for everyone from solo freelancers to large agencies.
+                  </p>
+                  <p className="text-gray-400 text-lg leading-relaxed animate-fade-in-delayed-2">
+                    We envision a world where manual bidding and endless proposal writing become obsolete, replaced by intelligent systems that work 24/7 to attract the right clients at the right time.
+                  </p>
+                  <p className="text-violet-400 text-lg leading-relaxed font-semibold animate-fade-in-delayed">
+                    The future of freelancing is automated. The future is now.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -206,20 +226,20 @@ export default function CompanyPage() {
                 />
               </div>
               <div className="w-full lg:w-1/2 space-y-6">
-                <TextAnimate
-                  animate="blur-in"
-                  as="h2"
-                  className="text-3xl sm:text-4xl md:text-5xl font-bold text-violet-400 uppercase"
-                >
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-violet-400 uppercase animate-slide-in-up">
                   OUR MISSION
-                </TextAnimate>
-                <TextAnimate
-                  animate="fade-in"
-                  as="p"
-                  className="text-gray-300 text-lg leading-relaxed"
-                >
-                  Lorem ipsum dolor sit amet consectetur. Nec pellentesque quis blandit tristique dolor posuere egestas diam. Vitae orci convallis amet orci sagittis massa sit elit bibendum risus sapien rhoncus nunc mollis purus interdum elementum aliquet quis aliquam aliquam enim. Aliquam lacerat cursus et egestas eleifend. Nunc massa malesuada feugiat fermentum scelerisque amet.
-                </TextAnimate>
+                </h2>
+                <div className="space-y-4">
+                  <p className="text-gray-300 text-lg leading-relaxed animate-fade-in-delayed">
+                    To empower businesses with cutting-edge automation solutions that eliminate the guesswork from client acquisition and transform manual processes into predictable revenue streams.
+                  </p>
+                  <p className="text-gray-400 text-lg leading-relaxed animate-fade-in-delayed-2">
+                    We&apos;re committed to delivering personalized automation strategies that not only save time but multiply results, ensuring every client experiences sustainable growth and competitive advantage.
+                  </p>
+                  <p className="text-violet-400 text-lg leading-relaxed font-semibold animate-fade-in-delayed">
+                    Your success is our success. We don&apos;t just build automation; we build partnerships.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -231,34 +251,22 @@ export default function CompanyPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12 lg:mb-16">
-              <TextAnimate
-                animate="blur-in"
-                as="h2"
-                className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 uppercase"
-              >
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 uppercase animate-slide-in-up">
                 MEET OUR TEAM
-              </TextAnimate>
-              <TextAnimate
-                animate="fade-in"
-                as="p"
-                className="text-gray-300 text-lg max-w-2xl mx-auto"
-              >
-                Lorem ipsum dolor sit amet consectetur. Porta tincidunt venenatis purus id. Faucibus sit aliquot dolor amet
-              </TextAnimate>
+              </h2>
+              <p className="text-gray-300 text-lg max-w-2xl mx-auto animate-fade-in-delayed">
+                Meet the innovators behind BiddersPro, a diverse team of automation specialists, developers, and growth strategists dedicated to transforming your business success.
+              </p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 lg:gap-8">
               {teamMembers.map((member, index) => (
                 <div 
-                  key={index}
+                  key={`team-member-${member.name.replace(/\s+/g, '-').toLowerCase()}`}
                   className="text-center animate-fade-in group"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="relative mb-4 overflow-hidden rounded-full mx-auto w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32">
-                    <div className="w-full h-full bg-gradient-to-br from-violet-500 to-purple-600 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                      <Users className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
-                    </div>
-                  </div>
+                  <TeamMemberImage src={member.image} alt={`${member.name} - ${member.role}`} name={member.name} />
                   <h3 className="text-white font-semibold text-sm sm:text-base mb-1">
                     {member.name}
                   </h3>
@@ -271,6 +279,6 @@ export default function CompanyPage() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
   );
 } 

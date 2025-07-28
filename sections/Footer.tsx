@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 justify-center items-start md:items-start lg:items-start justify-items-center">
           
           {/* Brand Section */}
-          <div className="col-span-1 lg:col-span-2 space-y-4 text-center md:text-left">
+          <div className="col-span-1 lg:col-span-1 space-y-4 text-center md:text-left">
             <div className="flex items-center gap-3 justify-center md:justify-start">
               <Image 
                 src={BP_logo}
@@ -33,16 +33,47 @@ export default function Footer() {
             <h3 className="text-lg font-semibold">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#home" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">Home</a>
+                <a href="/" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">Home</a>
               </li>
               <li>
                 <a href="/company" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">About</a>
+              </li>
+              <li>
+                <a href="/services" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">Services</a>
+              </li>
+              <li>
+                <a href="/calendar" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">Calendar</a>
               </li>
               <li>
                 <a href="#testimonials" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">Testimonials</a>
               </li>
               <li>
                 <a href="#contact" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div className="space-y-4 text-center md:text-left">
+            <h3 className="text-lg font-semibold">Services</h3>
+            <ul className="space-y-2">
+              <li>
+                <a href="/services/ai-automation" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">AI Automation</a>
+              </li>
+              <li>
+                <a href="/services/upwork-automation" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">Upwork Automation</a>
+              </li>
+              <li>
+                <a href="/services/web-development" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">Web Development</a>
+              </li>
+              <li>
+                <a href="/services/mobile-app-development" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">Mobile App Development</a>
+              </li>
+              <li>
+                <a href="/services/shopify-development" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">Shopify Development</a>
+              </li>
+              <li>
+                <a href="/services/wordpress-development" className="text-gray-400 hover:text-violet-500 transition-colors duration-200">WordPress Development</a>
               </li>
             </ul>
           </div>
