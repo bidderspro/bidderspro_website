@@ -14,7 +14,7 @@ export default function AboutSection() {
           sizes="(max-width: 768px) 280px, (max-width: 1024px) 340px, (max-width: 1280px) 440px, 520px"
         />
       </div>
-      <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center space-y-3 md:space-y-8 lg:space-y-10">
+      <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center space-y-6 md:space-y-8 lg:space-y-10">
         <TextAnimate 
           as={"h1"} 
           animation="blurInDown" 
@@ -30,6 +30,15 @@ export default function AboutSection() {
         >
           BiddersPro is where smart business meets automation. We replace grinding with scaling, turning outreach into predictable deal flow so you focus on growth, not guesswork.
         </TextAnimate>
+        <TextAnimate 
+          as={"p"}  
+          animation="fadeIn" 
+          by="line" 
+          className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl max-w-[95%] sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%] text-center md:text-left text-gray-300"
+        >
+          Our cutting-edge solutions empower freelancers and agencies to automate their client acquisition process. From intelligent proposal generation to strategic bidding algorithms, we deliver consistent results and exponential growth for our partners.
+        </TextAnimate>
+    
         <TextAnimate 
           as={"span"} 
           animation="slideUp" 

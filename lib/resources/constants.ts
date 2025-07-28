@@ -25,7 +25,7 @@ export const ROUTES = {
   AUTOMATION: '/automation',
   CALENDAR: '/calendar',
   CONTACT: '/#contact',
-  ABOUT: '/#about',
+  COMPANY: '/company',
 };
 
 // SEO defaults

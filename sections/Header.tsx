@@ -38,7 +38,7 @@ export default function Header() {
     },
     {
       name: "About",
-      link: isHomePage ? "#about" : "/#about",
+      link: "/company",
     },
     {
       name: "Services",
