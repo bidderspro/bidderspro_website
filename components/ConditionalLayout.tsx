@@ -29,6 +29,9 @@ export default function ConditionalLayout({ children }: ConditionalLayoutProps) 
   const [isClient, setIsClient] = useState(false);
   const [shouldShowComingSoon, setShouldShowComingSoon] = useState(false);
 
+  // Check if this is the coming soon page route or homepage
+  const isComingSoonPage = pathname === "/coming-soon" || pathname === "/";
+
   useEffect(() => {
     setIsClient(true);
     // Multiple ways to detect production environment
@@ -44,9 +47,6 @@ export default function ConditionalLayout({ children }: ConditionalLayoutProps) 
     
     setShouldShowComingSoon(isProduction);
   }, []);
-
-  // Check if this is the coming soon page route or homepage
-  const isComingSoonPage = pathname === "/coming-soon" || pathname === "/";
 
   // Server-side: Always show loading to prevent hydration mismatch
   if (!isClient) {
@@ -66,7 +66,7 @@ export default function ConditionalLayout({ children }: ConditionalLayoutProps) 
     );
   }
   
-  // Development mode: Hide header and footer ONLY on the coming soon test page
+  // Development mode: Hide header and footer ONLY on coming soon pages (/ and /coming-soon)
   if (isComingSoonPage) {
     return (
       <main className="relative z-10 w-full">
@@ -79,7 +79,7 @@ export default function ConditionalLayout({ children }: ConditionalLayoutProps) 
   return (
     <>
       
-      <main className="relative z-10 w-full">
+      <main className="relative z-10 w-full pt-20 sm:pt-24 md:pt-28">
         {children}
       </main>
       
