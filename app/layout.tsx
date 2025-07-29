@@ -2,18 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { lazy, Suspense } from "react";
+import ConditionalLayout from "../components/ConditionalLayout";
 
 // Dynamically import Background component with lower priority
 const Background = lazy(() => import("@/components/ui/Background2"));
-
-// Dynamically import components that aren't needed for initial render
-const Header = lazy(() => import("@/sections/Header"));
-const Footer = lazy(() => import("@/sections/Footer"));
-
-// Simple loading fallbacks
-const LoadingFallback = ({ height = "h-16" }: { height?: string }) => (
-  <div className={`${height} w-full`} />
-);
 
 // Optimize font loading
 const geistSans = Geist({
@@ -51,6 +43,9 @@ export const metadata: Metadata = {
   }
 };
 
+// Server-side production check for initial render
+const isProductionBuild = process.env.NODE_ENV === 'production' || process.env.SHOW_COMING_SOON === 'true';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -75,9 +70,23 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        {/* Prevent flash of content in production */}
+        {isProductionBuild && (
+          <style dangerouslySetInnerHTML={{
+            __html: `
+              body { 
+                background: #000 !important; 
+                visibility: hidden;
+              }
+              .production-ready body {
+                visibility: visible;
+              }
+            `
+          }} />
+        )}
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen w-full overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased text-white min-h-screen w-full overflow-x-hidden ${isProductionBuild ? 'production-ready' : ''}`}
         suppressHydrationWarning={true}
       >
         {/* Load background with lower priority */}
@@ -85,17 +94,9 @@ export default function RootLayout({
           <Background />
         </Suspense>
         
-        <Suspense fallback={<LoadingFallback />}>
-          <Header />
-        </Suspense>
-        
-        <main className="relative z-10 w-full pt-20 sm:pt-24 md:pt-28">
+        <ConditionalLayout>
           {children}
-        </main>
-        
-        <Suspense fallback={<LoadingFallback height="h-24" />}>
-          <Footer />
-        </Suspense>
+        </ConditionalLayout>
         
         {/* Simplified script for better performance */}
         <script
@@ -118,6 +119,15 @@ export default function RootLayout({
               if (!window.location.hash) {
                 window.scrollTo(0, 0);
               }
+
+              // Production mode: Show content when ConditionalLayout is ready
+              ${isProductionBuild ? `
+                window.addEventListener('DOMContentLoaded', function() {
+                  setTimeout(function() {
+                    document.body.style.visibility = 'visible';
+                  }, 100);
+                });
+              ` : ''}
             `
           }}
         />

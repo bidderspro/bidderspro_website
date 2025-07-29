@@ -13,6 +13,12 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   trailingSlash: true,
 
+  // Environment variables for production detection
+  env: {
+    SHOW_COMING_SOON: process.env.NODE_ENV === 'production' ? 'true' : 'false',
+    BUILD_ENVIRONMENT: process.env.NODE_ENV || 'development',
+  },
+
   // Conditional output for static export
   output: isStaticExport ? 'export' : undefined,
 
