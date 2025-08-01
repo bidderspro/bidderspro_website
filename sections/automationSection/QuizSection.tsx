@@ -559,9 +559,10 @@ const QuizSection = () => {
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  className="w-full max-w-xs mx-auto"
                 >
                   <InteractiveHoverButton
-                    className="bg-gradient-to-br from-violet-500 to-purple-600 text-white px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-violet-600/30 transition-all duration-300 font-medium text-lg"
+                    className="bg-gradient-to-r from-blue-600 to-violet-600 text-white px-8 py-4 rounded-full hover:shadow-lg hover:shadow-blue-600/30 transition-all duration-300 font-medium text-lg w-full"
                     onClick={() => window.open("https://calendly.com/usamaashraf558/15min", "_blank")}
                   >
                     Schedule Now
@@ -666,48 +667,46 @@ const QuizSection = () => {
                 {renderQuestion()}
 
             {currentStep < 8 && (
-              <div className="mt-10 flex justify-between items-center">
+              <div className="mt-10 flex flex-col sm:flex-row justify-between items-center gap-4">
                 {currentStep > 1 ? (
-                  <InteractiveHoverButton
-                    onClick={handlePrevQuestion}
-                    className="px-6 py-3 bg-white/5 text-white rounded-full hover:bg-white/10 transition-all duration-300 border border-white/10 flex items-center gap-2"
+                  <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="w-full sm:w-auto"
                   >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="transform rotate-180">
-                      <path d="M6.5 3L11.5 8L6.5 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    Back
-                  </InteractiveHoverButton>
+                    <InteractiveHoverButton
+                      onClick={handlePrevQuestion}
+                      className="px-6 py-3 bg-white/5 text-white rounded-full hover:bg-white/10 transition-all duration-300 border border-white/10 flex items-center gap-2 w-full justify-center"
+                    >
+                      Back
+                    </InteractiveHoverButton>
+                  </motion.div>
                 ) : (
-                  <div></div> // Empty div for spacing
+                  <div className="w-full sm:w-auto"></div> // Empty div for responsive spacing
                 )}
                 
                 <motion.div
                   whileHover={{ scale: isNextDisabled() || isSubmitting ? 1 : 1.03 }}
                   whileTap={{ scale: isNextDisabled() || isSubmitting ? 1 : 0.98 }}
+                  className="w-full sm:w-auto"
                 >
                   <InteractiveHoverButton
                     onClick={handleNextQuestion}
                     disabled={isNextDisabled() || isSubmitting}
-                    className={`px-8 py-3 rounded-full transition-all duration-300 ${
+                    className={`w-96 px-8 py-3 rounded-full transition-all duration-300 ${
                       isNextDisabled() || isSubmitting
                         ? 'bg-gray-700 cursor-not-allowed opacity-70'
-                        : 'bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 shadow-lg shadow-violet-600/20'
-                    } text-white font-medium flex items-center gap-2`}
+                        : 'bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 shadow-lg shadow-blue-600/20'
+                    } text-white font-medium flex items-center gap-2 w-full justify-center`}
                   >
                     {isSubmitting ? (
                       <>
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
+                       
                         Submitting...
                       </>
                     ) : (
                       <>
                         {currentStep < 7 ? 'Next Question' : 'Submit'}
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.5 3L11.5 8L6.5 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
                       </>
                     )}
                   </InteractiveHoverButton>

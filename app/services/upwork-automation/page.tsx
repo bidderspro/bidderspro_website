@@ -5,6 +5,13 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
+// Section wrapper for consistent spacing
+const SectionWrapper = ({ children, isFirst = false }: { children: React.ReactNode, isFirst?: boolean }) => (
+  <div className={`${isFirst ? '' : 'mt-[-80px] md:mt-[-100px] lg:mt-[-120px]'}`}>
+    {children}
+  </div>
+);
+
 // Page config
 export const config = {
   runtime: 'client'
@@ -99,11 +106,13 @@ export default function AutomationPage() {
     <>
       {!isLoaded && <LoadingFallback height="h-screen" />}
       
-      <div style={{ display: isLoaded ? 'block' : 'none' }}>
-        {sections.map(({ Component, key, height }) => (
-          <Suspense key={`${key}-${refreshKey}`} fallback={<LoadingFallback height={height} />}>
-            <Component key={`${key}-component-${refreshKey}`} />
-          </Suspense>
+      <div style={{ display: isLoaded ? 'block' : 'none' }} className="relative">
+        {sections.map(({ Component, key, height }, index) => (
+          <SectionWrapper key={`${key}-wrapper-${refreshKey}`} isFirst={index === 0}>
+            <Suspense key={`${key}-${refreshKey}`} fallback={<LoadingFallback height={height} />}>
+              <Component key={`${key}-component-${refreshKey}`} />
+            </Suspense>
+          </SectionWrapper>
         ))}
       </div>
     </>

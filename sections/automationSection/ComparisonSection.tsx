@@ -31,7 +31,7 @@ const ComparisonSection = () => {
   ];
 
   return (
-    <section className="py-20 md:py-24 lg:py-28 text-white relative overflow-hidden">
+    <section className="py-10 md:py-18 lg:py-22 text-white relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900/0 via-violet-900/5 to-gray-900/0"></div>
       <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-blue-500/5 rounded-full blur-3xl"></div>
