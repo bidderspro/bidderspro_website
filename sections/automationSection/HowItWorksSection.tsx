@@ -23,7 +23,7 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ number, title, description, d
       transition={{ duration: 0.5, delay }}
       className="relative h-full"
     >
-      <div className="relative rounded-2xl p-1.5 bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 overflow-hidden group">
+      <div className="relative rounded-2xl p-1.5 bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 overflow-hidden group h-full">
         <GlowingEffect
           spread={40}
           glow={true}
@@ -31,7 +31,7 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ number, title, description, d
           proximity={64}
           inactiveZone={0.01}
         />
-        <div className="relative flex h-full flex-col justify-between gap-4 overflow-hidden rounded-xl border border-violet-500/20 bg-white/5 backdrop-blur-sm p-6 shadow-lg hover:bg-white/10 transition-all duration-300">
+        <div className="relative flex h-full flex-col overflow-hidden rounded-xl border border-violet-500/20 bg-white/5 backdrop-blur-sm p-6 shadow-lg hover:bg-white/10 transition-all duration-300">
           <div className="flex items-center mb-4">
             <div className="w-12 h-12 bg-gradient-to-br from-violet-500/30 to-fuchsia-500/30 rounded-full flex items-center justify-center mr-3 group-hover:from-violet-500/40 group-hover:to-fuchsia-500/40 transition-all duration-300">
               {icon}
@@ -40,7 +40,7 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ number, title, description, d
           </div>
           
           <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
-          <p className="text-base text-gray-300">{description}</p>
+          <p className="text-base text-gray-300 flex-grow">{description}</p>
         </div>
       </div>
     </motion.div>
@@ -97,14 +97,15 @@ const HowItWorksSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {processSteps.map((step, index) => (
-            <ProcessCard
-              key={index}
-              number={step.number}
-              title={step.title}
-              description={step.description}
-              delay={step.delay}
-              icon={step.icon}
-            />
+            <div key={index} className="h-full">
+              <ProcessCard
+                number={step.number}
+                title={step.title}
+                description={step.description}
+                delay={step.delay}
+                icon={step.icon}
+              />
+            </div>
           ))}
         </div>
     </SectionContainer>

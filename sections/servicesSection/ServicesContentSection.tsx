@@ -67,7 +67,7 @@ const ServiceCard = memo(({
   // Simplified rendering for reduced motion
   if (prefersReducedMotion) {
     return (
-      <div className="relative bg-white/10 backdrop-blur-xl rounded-xl p-5 sm:p-6 md:p-7 border border-white/20 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-violet-900/70 via-purple-800/60 to-indigo-900/70 backdrop-blur-xl rounded-xl p-5 sm:p-6 md:p-7 border border-white/20 overflow-hidden">
         <div className="bg-white/80 w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-4 shadow-md shadow-violet-500/20 relative z-10">
           <div className="w-6 h-6 sm:w-7 sm:h-7 text-violet-600">
             {icon}
@@ -95,7 +95,7 @@ const ServiceCard = memo(({
         scale: 1.03,
         transition: { duration: 0.2 }
       }}
-      className="relative bg-white/10 backdrop-blur-xl rounded-xl p-5 sm:p-6 md:p-7 cursor-pointer group transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/30 border border-white/20 overflow-hidden"
+      className="relative bg-gradient-to-br from-violet-900/70 via-purple-800/60 to-indigo-900/70 backdrop-blur-xl rounded-xl p-5 sm:p-6 md:p-7 cursor-pointer group transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/30 border border-white/20 overflow-hidden"
     >
       {/* Glassy highlight effect */}
       <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white/30 to-transparent opacity-50 rounded-t-xl"></div>

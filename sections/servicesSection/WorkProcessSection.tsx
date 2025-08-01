@@ -100,7 +100,7 @@ const ProcessStep = memo(({
   // Simplified version for reduced motion
   if (prefersReducedMotion) {
     return (
-      <div className="border border-blue-500/30 rounded-lg p-4 sm:p-6 md:p-8 h-full">
+      <div className="border border-blue-500/30 rounded-lg p-4 sm:p-6 md:p-8 h-full bg-gradient-to-br from-blue-900/60 via-indigo-900/50 to-purple-900/60 backdrop-blur-md">
         <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-100 mb-3 sm:mb-4">
           {number}
         </div>
@@ -124,7 +124,7 @@ const ProcessStep = memo(({
         boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.3)",
         transition: { duration: 0.2 }
       }}
-      className="border border-blue-500/30 rounded-lg p-4 sm:p-6 md:p-8 h-full transition-all duration-300 hover:border-blue-400/50"
+      className="border border-blue-500/30 rounded-lg p-4 sm:p-6 md:p-8 h-full transition-all duration-300 hover:border-blue-400/50 bg-gradient-to-br from-blue-900/60 via-indigo-900/50 to-purple-900/60 backdrop-blur-md"
     >
       <motion.div 
         initial={{ opacity: 0, scale: 0.8 }}

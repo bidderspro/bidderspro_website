@@ -187,7 +187,7 @@ const testimonials = [
     author: "Tania R.",
     position: "GlowCrate Skincare",
     image: "/assets/images/image 1.svg",
-    color: "bg-black"
+    color: "bg-gradient-to-br from-gray-900 to-black"
   },
   {
     id: 2,
@@ -196,7 +196,7 @@ const testimonials = [
     author: "Ahmed K.",
     position: "VerdaTech Solutions",
     image: "/assets/images/image 2.svg",
-    color: "bg-blue-600"
+    color: "bg-gradient-to-br from-blue-700 to-blue-900"
   },
   {
     id: 3,
@@ -205,7 +205,7 @@ const testimonials = [
     author: "Jessica T.",
     position: "PackPal App",
     image: "/assets/images/image 3.svg",
-    color: "bg-gray-700"
+    color: "bg-gradient-to-br from-gray-700 to-gray-900"
   },
   {
     id: 4,
@@ -214,7 +214,7 @@ const testimonials = [
     author: "Rajiv M.",
     position: "Livie Fashion Co.",
     image: "/assets/images/image 4.svg",
-    color: "bg-black"
+    color: "bg-gradient-to-br from-gray-900 to-black"
   },
   {
     id: 5,
@@ -223,7 +223,7 @@ const testimonials = [
     author: "Clara W.",
     position: "FitWell Naturals",
     image: "/assets/images/image 1.svg",
-    color: "bg-blue-600"
+    color: "bg-gradient-to-br from-blue-700 to-blue-900"
   },
   {
     id: 6,
@@ -232,7 +232,7 @@ const testimonials = [
     author: "Dylan F.",
     position: "FlowRate Analytics",
     image: "/assets/images/image 2.svg",
-    color: "bg-gray-700"
+    color: "bg-gradient-to-br from-gray-700 to-gray-900"
   },
   {
     id: 7,
@@ -241,7 +241,7 @@ const testimonials = [
     author: "Nida S.",
     position: "SoundNest Audio",
     image: "/assets/images/image 3.svg",
-    color: "bg-black"
+    color: "bg-gradient-to-br from-gray-900 to-black"
   },
   {
     id: 8,
@@ -250,7 +250,7 @@ const testimonials = [
     author: "Michael P.",
     position: "OutdoorGear Pro",
     image: "/assets/images/image 4.svg",
-    color: "bg-blue-600"
+    color: "bg-gradient-to-br from-blue-700 to-blue-900"
   },
   {
     id: 9,
@@ -259,7 +259,7 @@ const testimonials = [
     author: "Sarah L.",
     position: "EcoHome Essentials",
     image: "/assets/images/image 1.svg",
-    color: "bg-gray-700"
+    color: "bg-gradient-to-br from-gray-700 to-gray-900"
   },
 ];
 
@@ -288,10 +288,27 @@ const TestimonialsSection = () => {
     <div className="w-full text-white relative overflow-hidden py-10 sm:py-12 md:py-16">
       {/* Background glow effects */}
       <motion.div 
-        className="absolute top-0 left-0 w-full h-full opacity-20"
+        className="absolute top-0 left-0 w-full h-full opacity-20 bg-gradient-to-br from-violet-500/20 to-transparent"
+        animate={{ 
+          opacity: [0.1, 0.2, 0.1],
+        }}
+        transition={{ 
+          duration: 8, 
+          repeat: Infinity,
+          repeatType: "reverse"
+        }}
       />
       <motion.div 
-        className="absolute bottom-0 right-0 w-full h-full opacity-20"
+        className="absolute bottom-0 right-0 w-full h-full opacity-20 bg-gradient-to-tl from-blue-500/20 to-transparent"
+        animate={{ 
+          opacity: [0.1, 0.2, 0.1],
+        }}
+        transition={{ 
+          duration: 8, 
+          repeat: Infinity,
+          repeatType: "reverse",
+          delay: 4
+        }}
       />
 
       <div className="container max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">

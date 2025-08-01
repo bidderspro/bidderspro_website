@@ -55,7 +55,7 @@ const PortfolioItem = memo(({
   if (prefersReducedMotion) {
     return (
       <div className={`portfolio-item ${isActive ? 'block' : 'hidden'}`}>
-        <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-xl overflow-hidden">
+        <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-xl overflow-hidden bg-gradient-to-br from-blue-900/40 to-indigo-800/40 backdrop-blur-sm">
           <Image 
             src={image} 
             alt={title}
@@ -80,7 +80,7 @@ const PortfolioItem = memo(({
       transition={{ duration: 0.5 }}
     >
       <motion.div 
-        className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-xl overflow-hidden"
+        className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-xl overflow-hidden bg-gradient-to-br from-blue-900/40 to-indigo-800/40 backdrop-blur-sm"
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.3 }}
       >
