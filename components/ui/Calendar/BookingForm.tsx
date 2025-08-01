@@ -60,8 +60,7 @@ export default function BookingForm({
         </h3>
         
         {/* Decorative Elements */}
-        <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-600/10 rounded-full blur-xl pointer-events-none"></div>
-        <div className="absolute -bottom-10 -left-10 w-24 h-24 bg-blue-600/10 rounded-full blur-xl pointer-events-none"></div>
+
       </div>
 
       <motion.form 

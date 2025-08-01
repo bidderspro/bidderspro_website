@@ -2,115 +2,130 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
-import { Check, ArrowRight, Zap, BarChart, TrendingUp, DollarSign } from 'lucide-react';
+import { Check, X, Sparkles } from 'lucide-react';
+import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+import SectionContainer from "@/components/ui/section-container";
+
+interface PricingTier {
+  name: string;
+  price: string;
+  description: string;
+  features: {
+    text: string;
+    included: boolean;
+  }[];
+  popular?: boolean;
+  buttonText: string;
+  buttonLink: string;
+}
 
 const PricingSection = () => {
-  const benefits = [
-    { text: "One-time payment, lifetime benefits", icon: <Zap className="w-4 h-4 text-emerald-400" /> },
-    { text: "Start receiving client invites within days", icon: <TrendingUp className="w-4 h-4 text-emerald-400" /> },
-    { text: "ROI typically within first 1-2 projects", icon: <BarChart className="w-4 h-4 text-emerald-400" /> },
-    { text: "Potential earnings of $5,000-$10,000/month", icon: <DollarSign className="w-4 h-4 text-emerald-400" /> }
+  const pricingTiers: PricingTier[] = [
+    {
+      name: "Upwork Automation",
+      price: "89,000 PKR",
+      description: "Complete Upwork automation solution for freelancers",
+      features: [
+        { text: "AI Profile Optimization", included: true },
+        { text: "Job Matching Algorithm", included: true },
+        { text: "Advanced Proposal Templates", included: true },
+        { text: "Client Attraction System", included: true },
+        { text: "Analytics Dashboard", included: true },
+        { text: "Priority Support", included: true },
+        { text: "Strategy Consultation", included: true },
+      ],
+      popular: true,
+      buttonText: "Get Started",
+      buttonLink: "https://calendly.com/usamaashraf558/15min"
+    }
   ];
 
   return (
-    <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0"></div>
-      
-      {/* Glowing circle backgrounds */}
-      <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-violet-500/10 blur-[100px] rounded-full"></div>
-      <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-indigo-500/10 blur-[100px] rounded-full"></div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          {/* Heading */}
+    <SectionContainer id="pricing" className="text-white">
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center px-4 py-2 bg-white/5 backdrop-blur-md rounded-full border border-violet-500/20 mb-6">
+          <Sparkles className="w-4 h-4 text-violet-400 mr-2" />
+          <span className="text-sm text-gray-200 font-medium">Limited Time Offer</span>
+        </div>
+        
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+          <span className="bg-gradient-to-r from-violet-400 to-fuchsia-500 text-transparent bg-clip-text">Exclusive Pricing</span>
+        </h2>
+        <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          Get complete access to our Upwork automation system with a single payment
+        </p>
+      </div>
+
+        <div className="max-w-3xl mx-auto">
+          {pricingTiers.map((tier, index) => (
           <motion.div
+              key={tier.name}
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to <span className="text-[#E0E0FF]">Transform</span> Your Upwork Experience?
-            </h2>
-          </motion.div>
-          
-          {/* Pricing Card */}
-          <CardContainer containerClassName="py-10">
-            <CardBody className="bg-gradient-to-br from-indigo-900 to-violet-900 border-indigo-700/30 relative w-full max-w-3xl mx-auto h-auto rounded-2xl p-1 border shadow-xl">
-              {/* Glow border effect */}
-              <div className="absolute inset-0 rounded-2xl overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 via-indigo-500/20 to-violet-500/20 animate-pulse"></div>
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="relative"
+            >
+              <div className="relative rounded-2xl p-1.5 bg-gradient-to-r from-violet-500/50 to-purple-600/50">
+                <GlowingEffect
+                  spread={50}
+                  glow={true}
+                  disabled={false}
+                  proximity={80}
+                  inactiveZone={0.01}
+                />
+                <div className="relative h-full flex flex-col rounded-xl border border-violet-500/20 bg-white/5 backdrop-blur-sm p-8 md:p-10 shadow-lg">
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-violet-500 to-purple-600 text-white text-xs font-bold py-1 px-6 rounded-full">
+                    LIMITED TIME OFFER
+                  </div>
+                  
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-3">{tier.name}</h3>
+                    <div className="mb-4">
+                      <span className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-violet-400 to-purple-500 text-transparent bg-clip-text">{tier.price}</span>
+                      <span className="text-gray-300 ml-2">one-time payment</span>
+                    </div>
+                    <p className="text-gray-200 text-lg mb-6">{tier.description}</p>
               </div>
               
-              <div className="relative bg-gray-900/80 backdrop-blur-sm rounded-2xl p-8 sm:p-10 md:p-12">
-                <CardItem
-                  translateZ={60}
-                  className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-white text-center"
-                >
-                  All This For Just <span className="text-[#E0E0FF]">79K PKR</span>
-                </CardItem>
-                
-                <CardItem
-                  translateZ={40}
-                  className="mt-4 text-center text-gray-400 text-sm sm:text-base md:text-lg"
-                >
-                  One-time payment. Lifetime of client invitations.
-                </CardItem>
-                
-                {/* Value proposition */}
-                <CardItem translateZ={80} className="mt-8">
-                  <div className="bg-indigo-900/30 rounded-xl border border-indigo-700/30 p-6">
-                    <h3 className="text-[#E0E0FF] font-semibold text-lg mb-4">Value You'll Receive:</h3>
-                    <ul className="space-y-3">
-                      {benefits.map((benefit, index) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <div className="rounded-full bg-emerald-500/10 p-1 mt-0.5">{benefit.icon}</div>
-                          <span className="text-gray-200">{benefit.text}</span>
+                  <div className="bg-white/5 rounded-xl p-6 mb-8">
+                    <h4 className="text-lg font-semibold mb-4 text-center">What's Included:</h4>
+                    <ul className="space-y-4">
+                      {tier.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-center">
+                          <Check className="w-6 h-6 text-green-400 mr-3 flex-shrink-0" />
+                          <span className="text-gray-100 text-lg">
+                            {feature.text}
+                          </span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                </CardItem>
-                
-                {/* ROI callout */}
-                <CardItem translateZ={100} className="mt-8 w-full">
-                  <div className="relative bg-gradient-to-r from-violet-600/20 to-indigo-600/20 rounded-lg p-5 border border-indigo-500/30">
-                    <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4">
-                      <div className="text-4xl">✨</div>
-                    </div>
-                    <h4 className="text-lg sm:text-xl font-medium text-white mb-2">ROI That Makes Sense</h4>
-                    <p className="text-gray-300 text-sm sm:text-base">
-                      Most clients recover their investment with just one high-quality client they wouldn't have found otherwise. Everything after that is pure profit.
-                    </p>
-                  </div>
-                </CardItem>
-                
-                {/* CTA Button */}
-                <CardItem translateZ={120} className="mt-10 w-full flex justify-center">
-                  <button 
-                    onClick={() => window.open("https://calendly.com/usamaashraf558/15min", "_blank", "noopener,noreferrer")}
-                    className="relative bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white px-8 py-4 rounded-full text-lg font-semibold inline-flex items-center gap-2 shadow-2xl shadow-violet-500/20 transition-all duration-300 group"
-                  >
-                    <span>Turn On My Money Machine</span>
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    <span className="absolute inset-x-0 -bottom-0.5 h-14 bg-white/10 blur-lg rounded-full"></span>
-                  </button>
-                </CardItem>
-                
-                {/* Money-back note */}
-                <CardItem translateZ={30} className="mt-8 text-center">
-                  <p className="text-sm text-gray-400">
-                    Backed by our performance guarantee. We make it work, or you get your money back.
-                  </p>
-                </CardItem>
+                  
+                  <div className="text-center">
+                    <InteractiveHoverButton
+                      className="px-10 py-4 rounded-lg font-bold text-lg transition-all bg-gradient-to-r from-violet-500 to-purple-600 text-white shadow-lg shadow-violet-600/20 hover:shadow-xl hover:shadow-violet-600/30"
+                      onClick={() => window.open(tier.buttonLink, "_blank")}
+                    >
+                      {tier.buttonText}
+                    </InteractiveHoverButton>
+                    <p className="mt-4 text-sm text-gray-300">No hidden fees. 14-day money-back guarantee.</p>
               </div>
-            </CardBody>
-          </CardContainer>
         </div>
       </div>
-    </section>
+            </motion.div>
+          ))}
+                  </div>
+        
+        <div className="text-center mt-12 text-gray-300 max-w-2xl mx-auto">
+          <p className="text-base">
+            Have questions about the offer? 
+            <a href="https://calendly.com/usamaashraf558/15min" className="text-violet-400 hover:text-violet-300 ml-1 underline underline-offset-4 decoration-violet-500/30 hover:decoration-violet-500">
+              Schedule a free consultation
+            </a> with our team.
+          </p>
+        </div>
+    </SectionContainer>
   );
 };
 

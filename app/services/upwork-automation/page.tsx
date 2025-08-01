@@ -1,7 +1,9 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 // Page config
 export const config = {
@@ -10,121 +12,100 @@ export const config = {
 
 // Shared loading component
 const LoadingFallback = ({ height = "h-96" }: { height?: string }) => (
-  <div className={`${height} animate-pulse bg-gray-800/50 rounded-lg w-full`} />
+  <div className={`${height} w-full flex items-center justify-center`}>
+    <div className="flex flex-col items-center">
+      <div className="w-16 h-16 border-4 border-violet-500 border-t-transparent rounded-full animate-spin"></div>
+      <p className="mt-4 text-violet-500 font-medium">Loading content...</p>
+    </div>
+  </div>
 );
 
-// Only import the hero section immediately (above the fold)
+// Import all components with their own loading states
 const AutomationHeroSection = dynamic(
   () => import("@/sections/automationSection/automationHeroSection"),
-  { 
-    loading: () => <LoadingFallback height="h-screen" />,
-    ssr: false // Disable SSR to avoid server-side errors
-  }
+  { loading: () => <LoadingFallback height="h-screen" /> }
 );
 
-// Lazy load all other sections (below the fold)
-const WhyAutomationSection = dynamic(
-  () => import("@/sections/automationSection/WhyAutomationSection"),
-  { 
-    loading: () => <LoadingFallback />,
-    ssr: false // Disable SSR for below-the-fold components
-  }
+const QuizSection = dynamic(
+  () => import("@/sections/automationSection/QuizSection"),
+  { loading: () => <LoadingFallback /> }
 );
 
-const CompareSection = dynamic(
-  () => import("@/sections/automationSection/CompareSection"),
-  { 
-    loading: () => <LoadingFallback />,
-    ssr: false
-  }
+const HowItWorksSection = dynamic(
+  () => import("@/sections/automationSection/HowItWorksSection"),
+  { loading: () => <LoadingFallback /> }
 );
 
-const MoneyMachineSection = dynamic(
-  () => import("@/sections/automationSection/MoneyMachineSection"),
-  { 
-    loading: () => <LoadingFallback />,
-    ssr: false
-  }
+const TestimonialSlider = dynamic(
+  () => import("@/sections/automationSection/TestimonialSlider"),
+  { loading: () => <LoadingFallback /> }
 );
 
-const AutomationShiftSection = dynamic(
-  () => import("@/sections/automationSection/AutomationShiftSection"),
-  { 
-    loading: () => <LoadingFallback />,
-    ssr: false
-  }
-);
-
-const WhoIsThisForSection = dynamic(
-  () => import("@/sections/automationSection/WhoIsThisForSection"),
-  { 
-    loading: () => <LoadingFallback />,
-    ssr: false
-  }
+const ComparisonSection = dynamic(
+  () => import("@/sections/automationSection/ComparisonSection"),
+  { loading: () => <LoadingFallback /> }
 );
 
 const PricingSection = dynamic(
   () => import("@/sections/automationSection/PricingSection"),
-  { 
-    loading: () => <LoadingFallback />,
-    ssr: false
-  }
+  { loading: () => <LoadingFallback /> }
 );
 
-const VSLSection = dynamic(
-  () => import("@/sections/automationSection/VSLSection"),
-  { 
-    loading: () => <LoadingFallback />,
-    ssr: false
-  }
+const WhoIsThisForSection = dynamic(
+  () => import("@/sections/automationSection/WhoIsThisForSection"),
+  { loading: () => <LoadingFallback /> }
 );
 
 const FinalCTASection = dynamic(
   () => import("@/sections/automationSection/FinalCTASection"),
-  { 
-    loading: () => <LoadingFallback />,
-    ssr: false
-  }
+  { loading: () => <LoadingFallback /> }
 );
 
+// Page component with Suspense boundary
 export default function AutomationPage() {
+  const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(Date.now());
+  
+  // Force refresh on mount to clear any cached content
+  useEffect(() => {
+    // Clear browser cache for this page
+    router.refresh();
+    
+    // Update refresh key to force component remounting
+    setRefreshKey(Date.now());
+    
+    // Mark components as loaded after a short delay
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [router]);
+
+  // Define the sections to be rendered
+  const sections = [
+    { Component: AutomationHeroSection, key: 'hero', height: 'h-screen' },
+    { Component: QuizSection, key: 'quiz' },
+    { Component: HowItWorksSection, key: 'how' },
+    { Component: TestimonialSlider, key: 'testimonial' },
+    { Component: ComparisonSection, key: 'comparison' },
+    { Component: WhoIsThisForSection, key: 'who' },
+    { Component: PricingSection, key: 'pricing' },
+    { Component: FinalCTASection, key: 'cta' }
+  ];
+
   return (
     <>
-      {/* Load hero section immediately */}
-      <AutomationHeroSection />
+      {!isLoaded && <LoadingFallback height="h-screen" />}
       
-      {/* Use Intersection Observer via Suspense for below-the-fold content */}
-      <Suspense fallback={<LoadingFallback />}>
-        <WhyAutomationSection />
-      </Suspense>
-      
-      <Suspense fallback={<LoadingFallback />}>
-        <CompareSection />
-      </Suspense>
-      
-      <Suspense fallback={<LoadingFallback />}>
-        <AutomationShiftSection />
-      </Suspense>
-      
-      <Suspense fallback={<LoadingFallback />}>
-        <WhoIsThisForSection />
-      </Suspense>
-      
-      <Suspense fallback={<LoadingFallback />}>
-        <MoneyMachineSection />
-      </Suspense>
-      
-      <Suspense fallback={<LoadingFallback />}>
-        <VSLSection />
-      </Suspense>
-      
-      <Suspense fallback={<LoadingFallback />}>
-        <PricingSection />
-      </Suspense>
-      
-      <Suspense fallback={<LoadingFallback />}>
-        <FinalCTASection />
-      </Suspense>
+      <div style={{ display: isLoaded ? 'block' : 'none' }}>
+        {sections.map(({ Component, key, height }) => (
+          <Suspense key={`${key}-${refreshKey}`} fallback={<LoadingFallback height={height} />}>
+            <Component key={`${key}-component-${refreshKey}`} />
+          </Suspense>
+        ))}
+      </div>
     </>
   );
 }

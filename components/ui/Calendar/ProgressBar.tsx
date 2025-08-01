@@ -76,9 +76,7 @@ export default function ProgressBar({ currentStep, totalSteps }: ProgressBarProp
           </React.Fragment>
         ))}
         
-        {/* Decorative Elements */}
-        <div className="absolute -top-6 -right-6 w-24 h-24 bg-violet-500/10 rounded-full blur-xl pointer-events-none"></div>
-        <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-blue-500/10 rounded-full blur-xl pointer-events-none"></div>
+        {/* No decorative elements */}
       </div>
     </div>
   );

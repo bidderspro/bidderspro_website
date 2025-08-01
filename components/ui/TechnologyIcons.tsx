@@ -152,10 +152,15 @@ const TechnologyIcons: React.FC<TechnologyIconsProps> = ({ technologies, classNa
           return (
             <div 
               key={`${techName}-${index}`}
-              className="group relative bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-4 py-2 text-white transition-all duration-300 hover:bg-white/10"
-              title={techName}
+              className="group relative bg-white/5 backdrop-blur-md border border-white/10 rounded-full p-3 text-white transition-all duration-300 hover:bg-white/10 hover:scale-105"
             >
-              <span className="text-sm font-medium">{techName}</span>
+              <span className="text-sm font-medium">{techName.charAt(0)}</span>
+              
+              {/* Hover tooltip */}
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 whitespace-nowrap">
+                {techName}
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+              </div>
             </div>
           );
         }
@@ -165,14 +170,13 @@ const TechnologyIcons: React.FC<TechnologyIconsProps> = ({ technologies, classNa
         return (
           <div 
             key={`${techName}-${index}`}
-            className="group relative flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-4 py-3 transition-all duration-300 hover:bg-white/10 hover:scale-105"
+            className="group relative bg-white/5 backdrop-blur-md border border-white/10 rounded-full p-3 transition-all duration-300 hover:bg-white/10 hover:scale-105"
           >
             <IconComponent 
               size={20}
               style={{ color: tech.color }}
               className="transition-transform duration-300 group-hover:scale-110"
             />
-            <span className="text-sm font-medium text-white/90">{tech.name}</span>
             
             {/* Hover tooltip */}
             <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 whitespace-nowrap">

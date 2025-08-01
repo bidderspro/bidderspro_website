@@ -157,7 +157,7 @@ export default function CalendarSelector({
         </div>
         
         {/* Simplified decorative elements */}
-        <div className="absolute -top-4 -right-4 w-20 h-20 bg-violet-600/20 rounded-full blur-xl pointer-events-none"></div>
+
       </div>
       
       {/* Days of Week Header */}
